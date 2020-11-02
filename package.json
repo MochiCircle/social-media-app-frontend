@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "api": "json-server json-server/db.json --routes json-server/routes.json --no-cors=true"
+    "api": "json-server json-server/db.json --routes json-server/routes.json --no-cors=true --port 8000"
   },
   "eslintConfig": {
     "extends": [

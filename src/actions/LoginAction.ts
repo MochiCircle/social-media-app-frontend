@@ -7,4 +7,6 @@ export const loginTypes = {
 }
 
 //define below whether you have logged in or not
-export const loginAttempt = () => 
+export const loginAttempt = () => {
+    
+}

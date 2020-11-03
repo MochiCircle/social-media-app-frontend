@@ -1,8 +1,10 @@
 import React from "react";
 import { Form, Input } from "reactstrap";
+import { loginAttempt } from "../actions/LoginAction";
 
 interface IProps{
 
+    loginHandler: (username: string, password:string) => 
 }
 
 export const LoginComp: React.FC<IProps> = (props:IProps) => 
@@ -12,10 +14,11 @@ export const LoginComp: React.FC<IProps> = (props:IProps) =>
 
     return (
     <span>
-        <Form action="login" method="post">
+        <Form method="post">
             <Input type="text" name="username" />
             <Input type="password" name="password" />
-            <Input type="submit" value="LOGIN" name="login" />
+            <Input type="submit" value="LOGIN" name="login" 
+            onSubmit={loginHandler()}/>
         </Form>
     </span>
     )

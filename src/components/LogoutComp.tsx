@@ -7,9 +7,6 @@ interface IProps{
 
 export const LogoutComp: React.FC<IProps> = (props:IProps) => 
 {
-
-
-    
     return (
     <span>
         <Form action="logout" method="post">

@@ -3,7 +3,7 @@ import { loginTypes } from "../actions/LoginAction";
 
 
 const initialState: ILoginState = {
-    isLogged: false,
+    isLogged: false
 }
 
 export const loginReducer = (state = initialState, action:any):ILoginState =>{
@@ -15,5 +15,7 @@ export const loginReducer = (state = initialState, action:any):ILoginState =>{
             return {isLogged: false};
         case loginTypes.WRONG_USERNAME:
             return {isLogged: false};
+        default:
+            return state;
     }
 }

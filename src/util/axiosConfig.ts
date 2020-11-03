@@ -1,5 +1,5 @@
 import Axios from "axios";
 
 export const axiosInstance = Axios.create({
-    baseURL:"https://",
-})
+  baseURL: process.env.REACT_APP_API,
+});

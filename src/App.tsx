@@ -1,13 +1,19 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { Profile } from "./components/profile/Profile";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { Navbar } from 'reactstrap';
+import './App.css';
+import { NavComp } from './components/NavBarComp';
+import { store } from './Store';
 
 function App() {
   return (
-    <div className="App">
-      <Profile />
-    </div>
+    <Provider store={store}>
+      <BrowserRouter basename="/">
+        <NavComp />
+
+      </BrowserRouter>
+    </Provider>
   );
 }
 

@@ -1,14 +1,17 @@
 import React from "react";
+import { Form, Input } from "reactstrap";
 
 interface IProps{
 
 }
 
-const LoginComp: React.FC<IProps> = (props:IProps) => 
+export const LoginComp: React.FC<IProps> = (props:IProps) => 
 {
     return (
-    <div className="container">
-        
-    </div>
+    <span>
+        <Form action="login" method="post">
+            <Input type="text" 
+        </Form>
+    </span>
     )
 }

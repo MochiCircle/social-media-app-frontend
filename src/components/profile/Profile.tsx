@@ -1,13 +1,28 @@
-import React from "react";
-import "./Profile.css";
+import React, { useEffect, useState } from "react";
 import { ProfileInfo } from "./ProfileInfo";
-interface IProps {}
+import { axiosInstance } from "../../util/axiosConfig";
+interface IProps {
+  userId: number;
+}
 
 export const Profile: React.FC<IProps> = (props: IProps) => {
-  return (
-    <div>
-      Profile Page
-      <ProfileInfo firstName="hello" lastName="world" />
-    </div>
-  );
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [profile, setProfile] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+
+  useEffect(() => {
+    axiosInstance.get("/users/" + props.userId).then((response) => {
+      setIsLoaded(true);
+      setProfile(response.data);
+    });
+  }, [props.userId]);
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    return <ProfileInfo {...profile} />;
+  }
 };

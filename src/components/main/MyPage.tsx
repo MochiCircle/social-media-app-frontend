@@ -4,15 +4,15 @@ import MainNavbar from './MainNavbar';
 
 //Profile page will go where all the vanilla html stuff is now as the side bar for the current user
 
-const HomePage = () => {
+const MyPage = () => {
   return (
     <>
-    <MainNavbar/>
+      <MainNavbar/>
       <Row>
         <Col md="4">
         <br></br>
         <br></br>
-        This is where the page with user's profile and all posts will go
+        This is where the page with user's profile and the users/other users' posts will go
         <div className="well">
           <p><a href="#">My Profile</a></p>
             {/* <img src="bird.jpg" className="img-circle" height="65" width="65" alt="Avatar"> */}
@@ -54,5 +54,4 @@ const HomePage = () => {
   );
 }  
 
-export default HomePage;
-
+export default MyPage;

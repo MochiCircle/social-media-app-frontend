@@ -16,12 +16,12 @@ import {
   Form
 } from 'reactstrap';
 
-const LoginNavbar = () => {
+const MainNavbar = () => {
   
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Login Navbar</NavbarBrand>
+        <NavbarBrand href="/">Main Navbar</NavbarBrand>
         <NavbarToggler />
         <Collapse navbar>
           <Nav className="mr-auto" navbar>
@@ -56,4 +56,4 @@ const LoginNavbar = () => {
   );
 }
 
-export default LoginNavbar;
+export default MainNavbar;

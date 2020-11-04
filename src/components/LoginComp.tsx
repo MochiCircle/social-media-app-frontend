@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, Input } from "reactstrap";
-import { loginAttempt } from "../actions/LoginAction";
 
 interface IProps{
 

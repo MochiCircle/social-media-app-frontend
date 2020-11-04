@@ -1,9 +1,12 @@
 import { ILoginState } from ".";
 import { loginTypes } from "../actions/LoginAction";
 
+const user = JSON.stringify(localStorage.getItem("user"));
 
+console.log(user);
 const initialState: ILoginState = {
-    isLogged: false
+    isLogged: false,
+    user:
 }
 
 export const loginReducer = (state = initialState, action:any):ILoginState =>{

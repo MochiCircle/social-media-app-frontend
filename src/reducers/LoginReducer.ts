@@ -7,7 +7,7 @@ export const initialState: ILoginState = {
     isLogged: false,
 }
 
-export const loginReducer = (state = initialState, action:any) =>{
+const loginReducer = (state = initialState, action:any) =>{
     //checks if the right action occured
     switch(action.type){
         case loginTypes.LOGIN_SUCCESSFUL:
@@ -18,3 +18,5 @@ export const loginReducer = (state = initialState, action:any) =>{
             return {isLogged: false};
     }
 }
+
+export default loginReducer;

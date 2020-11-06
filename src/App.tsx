@@ -1,9 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import { NavComp } from './components/NavBarComp';
 import Layout from './Layout';
-import LoginNavbar from './components/main/LoginNavbar';
 import HomePage from './components/main/HomePage';
 import LoginPage from './components/main/LoginPage';
 import MyPage from './components/main/MyPage';

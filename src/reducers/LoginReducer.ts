@@ -1,5 +1,5 @@
 import { ILoginState } from ".";
-import { loginTypes } from "../actions/LoginAction";
+import loginTypes from "../actions/LoginAction";
 // import { loginTypes } from "../actions/LoginAction";
 
 
@@ -16,6 +16,7 @@ const loginReducer = (state = initialState, action:any) =>{
             return {isLogged: false};
         case loginTypes.WRONG_USERNAME:
             return {isLogged: false};
+            default:  return state;
     }
 }
 

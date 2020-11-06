@@ -2,7 +2,7 @@ import axios from "axios";
 
 const URL = "localhost:8000/";
 
-const register = (username:string, password:string, 
+const registerEx = (username:string, password:string, 
     firstName: string, lastName: string, email:string) => {
 
     return axios
@@ -17,7 +17,7 @@ const register = (username:string, password:string,
 }
 
 //define below whether you have logged in or not
-const login = (username:string, password:string) => {
+const loginEx = (username:string, password:string) => {
     return axios
     //sends this user data to the server in a post request
     // using the "/signin" url pattern
@@ -38,13 +38,12 @@ const login = (username:string, password:string) => {
     });  
 }
 
-const logout = () => {
+const logoutEx = () => {
     localStorage.removeItem("user");
 }
 
-
-export default {
-    register,
-    login,
-    logout
-}
+// export default {
+//     register,
+//     login,
+//     logout
+// }

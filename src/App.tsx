@@ -9,6 +9,8 @@ import HomePage from './components/main/HomePage';
 import LoginPage from './components/main/LoginPage';
 import MyPage from './components/main/MyPage';
 import SettingsPage from './components/main/SettingsPage';
+import Post from './components/posts/Posts';
+import avatar from './assets/avatar.png';
 
 function App() {
   return (

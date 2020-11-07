@@ -1,23 +1,22 @@
 import { ILoginState } from ".";
-import { loginTypes } from "../actions/LoginAction";
-
-const initialState: ILoginState = {
-  isLogged: false,
-};
+import { LoginTypes } from "../components/login/LoginActionTypes";
+import { initialLoginState } from "../components/login/LoginInitialState";
 
 export const loginReducer = (
-  state = initialState,
+  state: ILoginState = initialLoginState,
   action: any
-): ILoginState => {
+) => {
   //checks if the right action occured
   switch (action.type) {
-    case loginTypes.LOGIN_SUCCESSFUL:
-      return { isLogged: true };
-    case loginTypes.WRONG_PASSWORD:
-      return { isLogged: false };
-    case loginTypes.WRONG_USERNAME:
-      return { isLogged: false };
+    case LoginTypes.SET_LOGIN_STATE:
+      return {
+        ...state,
+        ...action.payload, //this is what we expect back from the api
+        isLoggedIn: true,
+      };
     default:
-      return { isLogged: false };
+      return state;
   }
 };
+
+export default loginReducer;

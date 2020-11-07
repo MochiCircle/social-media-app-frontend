@@ -1,51 +1,34 @@
 {
 	"users": [
 		{
-			"id": 1,
-			"firstName": "Robert",
+			"userId": 1,
+			"username": "dyl",
+			"password": "bob",
+			"firstName": "Dylan",
 			"lastName": "Schwartz",
-			"email": "rob23@gmail.com",
-			"pic": "https://picsum.photos/200",
-			"status": "sleeping",
-			"bio": "Evil problem solver. Thinker. Internet trailblazer. Typical reader. Troublemaker. Food evangelist. Travelaholic. Zombie guru.",
-			"interests": "Billiards, Miniature Furniture, Tombstone Rubbing"
+			"email": "dylandavidmcdonald@gmail.com",
+			"pic": "http://https://www.4dface.io/wp-content/uploads/2018/10/4DFM_sample2.jpg",
+			"status": "I'm pretty alright",
+			"bio": "Hey there. I'm just some really likeable dude. Like idk even know how, but everyone I meet just loves me within seconds. It's kinda crazy. I guess I'm just gifted or something, idk man.",
+			"interests": "beating up small children, not much else really."
 		},
 		{
-			"id": 3,
-			"firstName": "Anna",
-			"lastName": "Smith",
-			"email": "annasmith23@gmail.com"
-		},
-		{
-			"id": 4,
-			"firstName": "Robert",
-			"lastName": "Brown",
-			"email": "bobbrown432@yahoo.com"
-		},
-		{
-			"id": 5,
-			"firstName": "Roger",
-			"lastName": "Bacon",
-			"email": "rogerbacon12@yahoo.com"
-		},
-		{
-			"id": 6,
+			"userId": 2,
+			"username": "yoyo",
+			"password": "pee",
 			"firstName": "Anna",
 			"lastName": "Smith",
 			"email": "annasmith23@gmail.com",
-			"age": 30
-		},
-		{
-			"firstName": "Anna",
-			"lastName": "Smith",
-			"email": "annasmith23@gmail.com",
-			"id": 7
+			"pic": "https://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/prototypen/w_unsexy_gr.jpg",
+			"status": "I'm terrible :)",
+			"bio": "I'm a horrible human being. Like really bad. :)",
+			"interests": "Hocky, Soccer, Baseball, Strippers, Basketball, Tennis."
 		}
 	],
 	"posts": [
 		{
-			"id": 1,
-			"post": "hello"
+			"postId": 1,
+			"postText": "Why hello there you piece of absolute garbage :)"
 		}
 	]
 }

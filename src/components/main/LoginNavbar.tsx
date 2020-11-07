@@ -26,9 +26,11 @@ interface IProps{
 
 export const LoginNavbar: React.FC<IProps> = (props:IProps) => 
 {
+
+
   return (
     <div>
-      <Navbar color="dark" right expand="md">
+      <Navbar color="dark" dark expand="md">
         <Button href="/">Register
         </Button>
         <LoginComp />

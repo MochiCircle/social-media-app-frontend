@@ -1,17 +1,28 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-// import './App.css';
-import './NewApp.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+//import './App.css';
+import "./components/mochi/mochispin.scss";
 import Layout from './Layout';
 import HomePage from './components/main/HomePage';
 import LoginPage from './components/main/LoginPage';
 import MyPage from './components/main/MyPage';
 import SettingsPage from './components/main/SettingsPage';
+import Post from './components/posts/Posts';
+import MainNavbar from './components/main/MainNavbar';
+import { Provider } from 'react-redux';
+import { store } from '.';
+import RegisterPage from './components/login/RegisterPage';
 
 function App() {
   return (
-    <Layout>
-      <Switch>
+    <Provider store={store}>
+      <BrowserRouter
+      basename="/">
+        <MainNavbar />
+        {/* Alert Component */}
+        {/* Spinny Mochi guy */}
+        <div className="mochi-guy">
+        <Switch>
         {
           <Route
             exact path ="/"
@@ -20,25 +31,33 @@ function App() {
         }
         {
           <Route
-            exact path ="/home-page/:logged-in-user-id"
+            path ="/register"
+            component={RegisterPage}
+          />
+        }
+        {
+          <Route
+            path ="/home"
             component={HomePage}
           />
         }
         {
           <Route
-            exact path ="/my-page/:logged-in-user-or-other-user-id"
+            path ="/my-page"
             //let's make a different page for other users if needed but I don't think it will
             component={MyPage}
           />
         }  
         {
           <Route
-            exact path ="/settings/:logged-in-user-id"
+            exact path ="/settings"
             component={SettingsPage}
           />
         }  
       </Switch>
-    </Layout>
+      </div>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

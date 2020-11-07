@@ -1,5 +1,4 @@
 import React from 'react';
-
  
 import {
   Collapse,
@@ -17,45 +16,41 @@ import {
   Form,
   Button
 } from 'reactstrap';
-import { LogoutComp } from './LogoutComp';
-import { WelcomeMessage } from './WelcomeMessage';
+import { LoginComp } from '../login/LoginComp';
+import './lilMochi.png';
 
 const MainNavbar = () => {
   
   return (
-    <Navbar color="dark" dark expand="md">
-      <ul className='nav navbar-nav navbar-inverse navbar-custom'>
-        <li><Button href="/">MC</Button></li><li><Button href="/">My Profile</Button> </li>       
-        <li>
-          <NavItem>
-            <div className="search-container">
+    <div>
+      <Navbar color="dark" dark expand="md" 
+      style={{ width: "100%", margin:0, zIndex: 2, 
+      position:"fixed", top:0,left:0,right:0, padding: 10}}
+      className='nav justify-content-center'>
+        <span><Button href="/" style={{ margin: 5 }} ><img src={require("./lilMochi.png")} alt="MC"/></Button></span>
+        <span><Button href="/" style={{ margin: 5 }}>My Profile</Button></span>       
+          <NavItem style={{ margin: 5 }}>
+            <span className="search-container">
               <form action="/action_page.php">
-                <input type="text" placeholder="Search.." name="search"></input>
-                <button type="submit"><i className="fa fa-search"></i></button>
+                <input type="text" placeholder="Search.." name="search" 
+                style={{ margin: 5 }}></input>
+                <button type="submit" className="fa fa-search"
+                style={{ margin: 5 }}>search</button>
                 </form>
-            </div>
-          </NavItem></li>
-          <li> 
-            <NavItem>
-              <Button>
-                Settings
+            </span>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/register">
+              <Button style={{ margin: 5 }}>
+              Register
               </Button>
-            </NavItem>
-          </li>
-          <li>
-            <NavItem>
-              <WelcomeMessage/>
-            </NavItem>
-          </li>
-          <li>
-              <NavItem>
-                <Button>
-                <LogoutComp/>
-              </Button>
-              </NavItem>
-          </li>
-        </ul>
-    </Navbar>
+            </NavLink>  
+          </NavItem>
+          <NavItem>
+             <LoginComp/>
+          </NavItem>
+      </Navbar>
+    </div>
   );
 }
 

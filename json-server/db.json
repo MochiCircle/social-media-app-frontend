@@ -1,47 +1,59 @@
 {
-	"users": [
-		{
-			"id": 1,
-			"first_name": "Robert",
-			"last_name": "Schwartz",
-			"email": "rob23@gmail.com"
-		},
-		{
-			"id": 3,
-			"first_name": "Anna",
-			"last_name": "Smith",
-			"email": "annasmith23@gmail.com"
-		},
-		{
-			"id": 4,
-			"first_name": "Robert",
-			"last_name": "Brown",
-			"email": "bobbrown432@yahoo.com"
-		},
-		{
-			"id": 5,
-			"first_name": "Roger",
-			"last_name": "Bacon",
-			"email": "rogerbacon12@yahoo.com"
-		},
-		{
-			"id": 6,
-			"first_name": "Anna",
-			"last_name": "Smith",
-			"email": "annasmith23@gmail.com",
-			"age": 30
-		},
-		{
-			"first_name": "Anna",
-			"last_name": "Smith",
-			"email": "annasmith23@gmail.com",
-			"id": 7
-		}
-	],
-	"posts": [
-		{
-			"id": 1,
-			"post": "hello"
-		}
-	]
+  "users": [
+    {
+      "id": 1,
+      "first_name": "Robert",
+      "last_name": "Schwartz",
+      "email": "rob23@gmail.com"
+    },
+    {
+      "id": 3,
+      "first_name": "Anna",
+      "last_name": "Smith",
+      "email": "annasmith23@gmail.com"
+    },
+    {
+      "id": 4,
+      "first_name": "Robert",
+      "last_name": "Brown",
+      "email": "bobbrown432@yahoo.com"
+    },
+    {
+      "id": 5,
+      "first_name": "Roger",
+      "last_name": "Bacon",
+      "email": "rogerbacon12@yahoo.com"
+    },
+    {
+      "id": 6,
+      "first_name": "Anna",
+      "last_name": "Smith",
+      "email": "annasmith23@gmail.com",
+      "age": 30
+    },
+    {
+      "first_name": "Anna",
+      "last_name": "Smith",
+      "email": "annasmith23@gmail.com",
+      "id": 7
+    },
+    {
+      "id": 8,
+      "email": "test@gmail.com",
+      "username": "carlo",
+      "password": "pass",
+      "first_name": "Carlo",
+      "last_name": "Anselmo",
+      "profile_pic": "http://www.google.com",
+      "status": "I'm alright",
+      "interests": "Coding",
+      "bio": "I am a super cool dude very cool the cool tbh I don't know anyone cooler than me"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "post": "hello"
+    }
+  ]
 }

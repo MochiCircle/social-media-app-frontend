@@ -1,5 +1,6 @@
 import React from 'react';
-// import React, { useState } from 'react';
+
+ 
 import {
   Collapse,
   Navbar,
@@ -13,46 +14,48 @@ import {
   DropdownMenu,
   DropdownItem,
   NavbarText,
-  Form
+  Form,
+  Button
 } from 'reactstrap';
+import { LogoutComp } from './LogoutComp';
+import { WelcomeMessage } from './WelcomeMessage';
 
 const MainNavbar = () => {
   
   return (
-    <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Main Navbar</NavbarBrand>
-        <NavbarToggler />
-        <Collapse navbar>
-          <Nav className="mr-auto" navbar>
+    <Navbar color="dark" dark expand="md">
+      <ul className='nav navbar-nav navbar-inverse navbar-custom'>
+        <li><Button href="/">MC</Button></li><li><Button href="/">My Profile</Button> </li>       
+        <li>
+          <NavItem>
+            <div className="search-container">
+              <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search"></input>
+                <button type="submit"><i className="fa fa-search"></i></button>
+                </form>
+            </div>
+          </NavItem></li>
+          <li> 
             <NavItem>
-              <NavLink href="/components/">Components</NavLink>
+              <Button>
+                Settings
+              </Button>
             </NavItem>
+          </li>
+          <li>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+              <WelcomeMessage/>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          <NavbarText>Simple Text</NavbarText>
-        </Collapse>
-      </Navbar>
-    </div>
+          </li>
+          <li>
+              <NavItem>
+                <Button>
+                <LogoutComp/>
+              </Button>
+              </NavItem>
+          </li>
+        </ul>
+    </Navbar>
   );
 }
 

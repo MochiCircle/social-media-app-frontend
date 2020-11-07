@@ -7,6 +7,7 @@ import HomePage from './components/main/HomePage';
 import LoginPage from './components/main/LoginPage';
 import MyPage from './components/main/MyPage';
 import SettingsPage from './components/main/SettingsPage';
+import Post from './components/posts/Posts';
 import MainNavbar from './components/main/MainNavbar';
 import { Provider } from 'react-redux';
 import { store } from '.';

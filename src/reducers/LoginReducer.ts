@@ -15,3 +15,5 @@ export const loginReducer = (state:ILoginState = initialLoginState, action:any) 
             return state;
     }
 }
+
+export default loginReducer;

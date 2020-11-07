@@ -1,7 +1,10 @@
 .App {
   text-align: center; }
 
-/* Nav Bar SASS */
+/* Nav Bar SASS*/
 .nav-bg {
   background-image: linear-gradient(#222, #444);
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); }
+
+div.form-width {
+  width: 60%; }

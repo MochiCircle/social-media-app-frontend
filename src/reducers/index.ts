@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
-import { user } from "../util/Models";
-import { loginReducer } from "./LoginReducer";
+import loginReducer from "./LoginReducer";
 
 export interface ILoginState{
     isLoggedIn: boolean,
@@ -13,10 +12,9 @@ export interface ILoginState{
 // components
 export interface IState{
     loginState: ILoginState
+    // insert your state here
 }
 
-//This bad boy is the one and only state that encompasses
-// all other component's state and reducers
-export const state = combineReducers<IState>({
-    loginState: loginReducer,
-})
+// export const state = combineReducers<IState>({
+//     // loginState: loginReducer,
+// })

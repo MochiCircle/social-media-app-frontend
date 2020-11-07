@@ -17,14 +17,16 @@ export function login (loginCred: ILoginCred) {
 
     const {username, password} = loginCred;
 
-    console.log("given " + username);
-    console.log("given " + password);
+    //console.log("given " + username);
+    //console.log("given " + password);
+
     return async (dispatch: any) => {
 
         try {
             const response = await axios.post(
                 "localhost:8000/" + "users",
-                //these are the parameters that will be sent to 
+                //these are the parameters that will be sent to the server
+                // "username:" username, "password:" password
                 { username, password }
             );
             const json = response.data;

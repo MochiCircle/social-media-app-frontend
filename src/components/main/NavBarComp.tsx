@@ -20,7 +20,6 @@ const NavBarComp: React.FC<IProps> = (props:IProps) =>
             <Collapse isOpen={isOpen} navbar>
                 <Nav navbar>
                     <NavItem className="justify-right">
-                        
                     </NavItem>
                 </Nav>
             </Collapse>

@@ -5,13 +5,13 @@ import "./components/mochi/mochispin.scss";
 import Layout from "./Layout";
 import HomePage from "./components/main/HomePage";
 import LoginPage from "./components/main/LoginPage";
-import MyPage from "./components/main/MyPage";
 import SettingsPage from "./components/main/SettingsPage";
 import Post from "./components/posts/Posts";
 import MainNavbar from "./components/main/MainNavbar";
 import { Provider } from "react-redux";
 import { store } from ".";
 import RegisterPage from "./components/login/RegisterPage";
+import ProfilePage from "./components/main/ProfilePage";
 
 function App() {
   return (
@@ -27,11 +27,12 @@ function App() {
             {<Route path="/home" component={HomePage} />}
             {
               <Route
-                path="/my-page"
+                path="/profile/:userId"
                 //let's make a different page for other users if needed but I don't think it will
-                component={MyPage}
+                component={ProfilePage}
               />
             }
+            {<Route path="/profile" component={ProfilePage} />}
             {<Route exact path="/settings" component={SettingsPage} />}
           </Switch>
         </div>

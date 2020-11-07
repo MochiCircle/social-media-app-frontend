@@ -1,5 +1,5 @@
 import React from "react";
-import { Profile } from "../../models/Profile";
+import { Profile } from "../../util/Models";
 import "./Profile.css";
 
 export const ProfileInfo: React.FC<Profile> = (props: Profile) => {

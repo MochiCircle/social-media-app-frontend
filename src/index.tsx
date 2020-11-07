@@ -20,22 +20,19 @@ const composeEnhancer = a['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] as typeof comp
 
 const rootReducer = combineReducers({
   LoginReducer
-  // manageJournal,
-  // manageResources
+  // insert your reducers here
 })
 
-let store = createStore(
+export let store = createStore(
   rootReducer,
   composeEnhancer(applyMiddleware(thunk))
 )
 
 ReactDOM.render(
   <>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>    
   </>,
   document.getElementById('root')
 )

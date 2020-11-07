@@ -10,10 +10,14 @@ const LoginPage = () => {
 
   return (
     <>
-    {/* <LoginNavbar/> */}
-    <br></br>
-    <br></br>
-    This is where the login page with the awesome mochicircle dude goes
+      <div style={{marginTop:100}}>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        This is where the login page with the awesome mochicircle dude goes
+      </div>
     </>
   )
 }

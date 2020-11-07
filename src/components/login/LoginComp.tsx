@@ -13,13 +13,15 @@ export const LoginComp: React.FC<IProps> = (props:IProps) =>
     //assign the username and password initial values
     const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) =>{
 
+        event.preventDefault();
+        
         const username = event.currentTarget["username"].value;
         const password = event.currentTarget["password"].value;
 
         login({"username": username, "password": password});
 
         alert("given username: " + username + " password: " + password);
-        event.preventDefault();
+        
     }
 
     return (

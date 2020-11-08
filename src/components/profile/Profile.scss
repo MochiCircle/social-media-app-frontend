@@ -1,0 +1,38 @@
+$text-color: black;
+$background-color: transparent;
+
+.profile {
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  border: 2px solid $text-color;
+  background-color: $background-color;
+  color: $text-color;
+  > div {
+    margin-bottom: 5px;
+  }
+}
+
+.category {
+  font-size: 1.25em;
+  line-height: 1;
+  border-bottom: 1px solid $text-color;
+}
+
+.pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: 10px;
+}

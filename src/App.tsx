@@ -1,50 +1,41 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { store } from ".";
+import RegisterPage from "./components/login/RegisterPage";
 import HomePage from "./components/main/HomePage";
 import LoginPage from "./components/main/LoginPage";
-import MyPage from "./components/main/MyPage";
+import MainNavbar from "./components/main/MainNavbar";
+import ProfilePage from "./components/main/ProfilePage";
 import { SettingsContainer } from "./components/main/settings/SettingsContainer";
-import SettingsPage from "./components/main/SettingsPage";
-import Layout from "./Layout";
-// import './App.css';
-import "./NewApp.css";
+//import './App.css';
+import "./components/mochi/mochispin.scss";
 
 function App() {
   return (
-    <Layout>
-      <Switch>
-        {<Route exact path="/" component={LoginPage} />}
-        {
-          <Route
-            exact
-            path="/home-page/:logged-in-user-id"
-            component={HomePage}
-          />
-        }
-        {
-          <Route
-            exact
-            path="/my-page/:logged-in-user-or-other-user-id"
-            //let's make a different page for other users if needed but I don't think it will
-            component={MyPage}
-          />
-        }
-        {
-          <Route
-            exact
-            path="/settings/:logged-in-user-id"
-            component={SettingsPage}
-          />
-        }
-        {
-          <Route
-            exact
-            path="/settings"
-            component={SettingsContainer}
-          />
-        }
-      </Switch>
-    </Layout>
+    <Provider store={store}>
+      <BrowserRouter basename="/">
+        <MainNavbar />
+        {/* Alert Component */}
+        {/* Spinny Mochi guy */}
+        <div className="mochi-guy">
+          <Switch>
+            {<Route exact path="/" component={LoginPage} />}
+            {<Route path="/register" component={RegisterPage} />}
+            {<Route path="/home" component={HomePage} />}
+            {
+              <Route
+                path="/profile/:userId"
+                //let's make a different page for other users if needed but I don't think it will
+                component={ProfilePage}
+              />
+            }
+            {<Route path="/profile" component={ProfilePage} />}
+            {<Route exact path="/settings" component={SettingsContainer} />}
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

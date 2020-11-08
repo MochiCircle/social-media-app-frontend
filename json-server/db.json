@@ -1,59 +1,34 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "first_name": "Robert",
-      "last_name": "Schwartz",
-      "email": "rob23@gmail.com"
-    },
-    {
-      "id": 3,
-      "first_name": "Anna",
-      "last_name": "Smith",
-      "email": "annasmith23@gmail.com"
-    },
-    {
-      "id": 4,
-      "first_name": "Robert",
-      "last_name": "Brown",
-      "email": "bobbrown432@yahoo.com"
-    },
-    {
-      "id": 5,
-      "first_name": "Roger",
-      "last_name": "Bacon",
-      "email": "rogerbacon12@yahoo.com"
-    },
-    {
-      "id": 6,
-      "first_name": "Anna",
-      "last_name": "Smith",
-      "email": "annasmith23@gmail.com",
-      "age": 30
-    },
-    {
-      "first_name": "Anna",
-      "last_name": "Smith",
-      "email": "annasmith23@gmail.com",
-      "id": 7
-    },
-    {
-      "id": 8,
-      "email": "test@gmail.com",
-      "username": "carlo",
-      "password": "pass",
-      "first_name": "Carlo",
-      "last_name": "Anselmo",
-      "profile_pic": "http://www.google.com",
-      "status": "I'm alright",
-      "interests": "Coding",
-      "bio": "I am a super cool dude very cool the cool tbh I don't know anyone cooler than me"
-    }
-  ],
-  "posts": [
-    {
-      "id": 1,
-      "post": "hello"
-    }
-  ]
+	"users": [
+		{
+			"userId": 1,
+			"username": "dyl",
+			"password": "bob",
+			"firstName": "Dylan",
+			"lastName": "Schwartz",
+			"email": "dylandavidmcdonald@gmail.com",
+			"pic": "http://https://www.4dface.io/wp-content/uploads/2018/10/4DFM_sample2.jpg",
+			"status": "I'm pretty alright",
+			"bio": "Hey there. I'm just some really likeable dude. Like idk even know how, but everyone I meet just loves me within seconds. It's kinda crazy. I guess I'm just gifted or something, idk man.",
+			"interests": "beating up small children, not much else really."
+		},
+		{
+			"userId": 2,
+			"username": "yoyo",
+			"password": "pee",
+			"firstName": "Anna",
+			"lastName": "Smith",
+			"email": "annasmith23@gmail.com",
+			"pic": "https://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/prototypen/w_unsexy_gr.jpg",
+			"status": "I'm terrible :)",
+			"bio": "I'm a horrible human being. Like really bad. :)",
+			"interests": "Hocky, Soccer, Baseball, Strippers, Basketball, Tennis."
+		}
+	],
+	"posts": [
+		{
+			"postId": 1,
+			"postText": "Why hello there you piece of absolute garbage :)"
+		}
+	]
 }

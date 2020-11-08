@@ -25,3 +25,30 @@
 .postFooter {
   font-family: "Helvetica Neue";
   font-size: 18px; }
+
+.postButton {
+  background-color: #1DA1F2;
+  border-radius: 25px;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  font-family: "Helvetica Neue";
+  position: relative;
+  bottom: -10px;
+  left: 310px; }
+
+/*.postCreate {
+
+}*/
+.postForm {
+  background-color: #243447;
+  padding: 20px 20px;
+  width: 430px; }
+
+textarea {
+  background-color: white;
+  padding: 10px 10px;
+  resize: none; }

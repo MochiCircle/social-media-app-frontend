@@ -6,9 +6,9 @@ import { Container, Row, Col } from 'reactstrap';
 const Layout = (props: { children: React.ReactNode; }) => {
 
   return (
-    <Container>
+    <div>
       {props.children}
-    </Container>
+    </div>
   );
 }
 

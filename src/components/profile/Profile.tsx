@@ -12,10 +12,12 @@ export const Profile: React.FC<IProp> = (prop: IProp) => {
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
-    email: "",
   });
 
-  const userId = prop.userId;
+  let userId = prop.userId;
+  if (prop.userId === 0) {
+    //get loginstate's id
+  }
 
   useEffect(() => {
     axiosInstance.get("/users/" + userId).then((response) => {

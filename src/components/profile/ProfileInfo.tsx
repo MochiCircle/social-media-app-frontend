@@ -1,6 +1,6 @@
 import React from "react";
 import { Profile } from "../../util/Models";
-import "./Profile.css";
+import "./Profile.scss";
 
 export const ProfileInfo: React.FC<Profile> = (props: Profile) => {
   if (!props) return <p>No User Found</p>;

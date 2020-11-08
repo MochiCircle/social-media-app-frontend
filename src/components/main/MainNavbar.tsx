@@ -43,7 +43,7 @@ const MainNavbar = () => {
         </Button>
       </span>
       <span>
-        <Button href="/" style={{ margin: 5 }}>
+        <Button href="/profile" style={{ margin: 5 }}>
           My Profile
         </Button>
       </span>

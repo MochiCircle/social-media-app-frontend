@@ -20,7 +20,8 @@
   font-size: 18px; }
 
 .heart {
-  float: right; }
+  float: right;
+  outline: none; }
 
 .postFooter {
   font-family: "Helvetica Neue";
@@ -40,9 +41,6 @@
   bottom: -10px;
   left: 310px; }
 
-/*.postCreate {
-
-}*/
 .postForm {
   background-color: #243447;
   padding: 20px 20px;

@@ -20,6 +20,7 @@ export const LoginComp: React.FC<IProps> = (props:IProps) =>
         const username = event.currentTarget["username"].value;
         const password = event.currentTarget["password"].value;
 
+<<<<<<< Updated upstream
         
         if(login(username, password))
         {
@@ -32,6 +33,10 @@ export const LoginComp: React.FC<IProps> = (props:IProps) =>
         }
         //alert("given username: " + username + " password: " + password);  
     }
+=======
+        const dispatch = useDispatch();
+        dispatch(login(username, password));
+>>>>>>> Stashed changes
 
     function dispatchTrue()
     {

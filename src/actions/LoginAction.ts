@@ -16,6 +16,7 @@ const setLoginStateFalse = () => {
     };
   };
 
+<<<<<<< Updated upstream
 
 
 export function login (username:string,password:string):boolean {
@@ -28,6 +29,17 @@ export function login (username:string,password:string):boolean {
 
 
     axios.post(
+=======
+
+
+export function login (username:string,password:string) {
+
+    console.log("given " + username);
+    console.log("given " + password);
+
+        return (dispatch:any) => { 
+            axios.post(
+>>>>>>> Stashed changes
             "http://localhost:8080/MochiCircle/api/users/validate/" +username+ "+"
             +password
             //these are the parameters that will be sent to the server
@@ -35,6 +47,7 @@ export function login (username:string,password:string):boolean {
             //{ username, password }
         ).then((response) => {
             console.log(response.data);
+<<<<<<< Updated upstream
             setLoginStateTrue(response.data);
             return true;
         })
@@ -47,6 +60,15 @@ export function login (username:string,password:string):boolean {
 
         //just in case it fails right off the bat
         return false;
+=======
+            dispatch(setLoginState(response.data));
+        }).then()
+        .catch ((error) => {
+            alert("Login Failed: An error occured outside of the credentials.");
+            console.log(error);
+        });
+    }
+>>>>>>> Stashed changes
 }
         
             //const json = response;

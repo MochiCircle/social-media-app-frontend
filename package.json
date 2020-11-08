@@ -9,6 +9,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.12",
     "@types/node-sass": "^4.11.1",
+    "api": "^2.4.4",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "json-server": "^0.16.2",
@@ -31,7 +32,7 @@
   "scripts": {
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "api": "json-server json-server/db.json --routes json-server/routes.json --no-cors=false --port 3004",
+    "api": "json-server json-server/db.json --routes json-server/routes.json --no-cors=false --port 8000",
     "start": "react-scripts start",
     "build:": "react-scripts build"
   },

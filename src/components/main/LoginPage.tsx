@@ -10,7 +10,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <div style={{marginTop:100}}>
+      <div>
         <br></br>
         <br></br>
         <br></br>

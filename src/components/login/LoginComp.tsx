@@ -1,7 +1,9 @@
 import React, { SyntheticEvent, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Button, Form, Input } from "reactstrap";
 import { login } from "../../actions/LoginAction";
 import { ILoginState } from "../../reducers";
+import { LoginTypes } from "./LoginActionTypes";
 
 interface IProps{
     
@@ -18,11 +20,26 @@ export const LoginComp: React.FC<IProps> = (props:IProps) =>
         const username = event.currentTarget["username"].value;
         const password = event.currentTarget["password"].value;
 
-        login({"username": username, "password": password});
+        
+        if(login(username, password))
+        {
+            console.log("User Found! Should be dispatched!")
+            dispatchTrue();
+        }
+        else
+        {
 
-        alert("given username: " + username + " password: " + password);
+        }
+        //alert("given username: " + username + " password: " + password);  
+    }
+
+    function dispatchTrue()
+    {
         
     }
+
+    const dispatch = useDispatch();
+    dispatch(LoginTypes.SET_LOGIN_TRUE);
 
     return (
     <span>

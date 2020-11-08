@@ -13,7 +13,7 @@ interface IProps {
     userID: string;
 }
 
-export const PostContainer: React.FC<IProps> = (props: IProps) => {
+const PostContainer: React.FC<IProps> = (props: IProps) => {
 
     const [postArray, setPostArray] = React.useState<Post[]>([]);
 
@@ -27,8 +27,8 @@ export const PostContainer: React.FC<IProps> = (props: IProps) => {
         if(props.userID === "any") {
             url = "url-with-endpoint fetching-all-posts"; //todo replace with actual endpoint
         } else {
-            url = "url-with-endpoint-fetching-single-user-posts"; //todo replace with actual endpoint and do string inerpolation
-        }
+            url = "url-with-endpoint-fetching-single-user-posts"; //todo replace with actual endpoint and do string interpolation
+        }                                                         
         const res = await fetch(url);
         const data = await res.json();
         setPostArray(data);
@@ -42,3 +42,5 @@ export const PostContainer: React.FC<IProps> = (props: IProps) => {
         </div>
     )
 }
+
+export default PostContainer;

@@ -4,7 +4,7 @@ phases:
   pre_build:
     commands:
       #installs dependencies into the node_modules/ directory
-      - npm install
+      - npm install --save
   build:
     commands:
       - echo Build started on `date`
@@ -16,8 +16,6 @@ phases:
 # Include only the files required for your application to run.
 artifacts:
   files:
-    - public/**/*
-    - src/**/*
-    - package.json
-    - appspec.yml
-    - scripts/**/*
+    - "**/*"
+  discard-paths: no
+  base-directory: build

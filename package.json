@@ -33,7 +33,7 @@
     "eject": "react-scripts eject",
     "api": "json-server json-server/db.json --routes json-server/routes.json --no-cors=false --port 3004",
     "start": "react-scripts start",
-    "build:": "react-scripts build"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [

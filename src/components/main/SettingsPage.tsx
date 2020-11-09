@@ -5,7 +5,7 @@ import { Profile } from "../profile/Profile";
 
 //Profile page will go where all the vanilla html stuff is now as the side bar for the current user
 
-const HomePage = () => {
+const SettingsPage = () => {
   return (
     <>
       <MainNavbar />
@@ -18,13 +18,11 @@ const HomePage = () => {
         <Col md="8">
           <br></br>
           <br></br>
-          All Posts Column ... will have one route for all posts from all users
-          and one route for just posts from current user ... with conditional
-          logic of course :)
+          Settings feature
         </Col>
       </Row>
     </>
   );
 };
 
-export default HomePage;
+export default SettingsPage;

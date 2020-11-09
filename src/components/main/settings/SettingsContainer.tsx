@@ -9,22 +9,23 @@ import { PictureForm } from "./forms/PictureForm";
 import './settings.css';
 
 interface IProps {
-  id: number;
-  email: string;
-  username: string;
-  password: string;
-  firstnate: string;
-  lastname: string;
-  profile_pic: string;
-  status: string;
-  interests: string;
-  bio: string;
+  userId: number,
+  username: string,
+  password: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  pic: string,
+  status: string,
+  bio: string,
+  interests: string
 }
+
+// Will either update the state, or just let users know their changes will be visible next time they log in
 
 export const SettingsContainer: React.FC<any> = (props: any) => {
   return (
     <div>
-      <MainNavbar />
       <h1 className="font-weight-bold">Settings</h1>
       <br/>
       <Container>

@@ -1,16 +1,28 @@
 import React, { SyntheticEvent, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useStore } from "react-redux";
 import { Button, Form, Input } from "reactstrap";
-import { login } from "../../actions/LoginAction";
+import { connect } from "react-redux";
 import { ILoginState } from "../../reducers";
+import { loadUser } from "../../reducers/LoginReducer";
 import { LoginTypes } from "./LoginActionTypes";
 
 interface IProps{
-    
+    userId:number,
+    firstname:string,
+    lastname:string
 }
 
-export const LoginComp: React.FC<IProps> = (props:IProps) => 
+const LoginComp: React.FC<IProps> = (props:IProps) => 
 {
+    
+    console.log("user data as props: " + props.userId + " " + props.firstname );
+
+    //You need to use this right inside the 
+    const dispatch = useDispatch();
+
+    const onLoadUser = (username:string, pass:string) => {
+        dispatch(loadUser(username, pass));
+    }
 
     //assign the username and password initial values
     const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) =>{
@@ -20,31 +32,8 @@ export const LoginComp: React.FC<IProps> = (props:IProps) =>
         const username = event.currentTarget["username"].value;
         const password = event.currentTarget["password"].value;
 
-<<<<<<< Updated upstream
-        
-        if(login(username, password))
-        {
-            console.log("User Found! Should be dispatched!")
-            dispatchTrue();
-        }
-        else
-        {
-
-        }
-        //alert("given username: " + username + " password: " + password);  
+        onLoadUser(username,password);
     }
-=======
-        const dispatch = useDispatch();
-        dispatch(login(username, password));
->>>>>>> Stashed changes
-
-    function dispatchTrue()
-    {
-        
-    }
-
-    const dispatch = useDispatch();
-    dispatch(LoginTypes.SET_LOGIN_TRUE);
 
     return (
     <span>
@@ -56,3 +45,19 @@ export const LoginComp: React.FC<IProps> = (props:IProps) =>
     </span>
     )
 }
+
+//move this to the main navbar component tomorrow and work with conditional rendering
+// (if the userId = 0 then render the LoginComp and register button, otherwise load
+// the LogoutComp with the home and my profile button)
+
+//recieves these values from the app's store
+const mapStateToProps = (appState:any) => {
+    return {
+        userId: appState.loginState.id,
+        firstname: appState.loginState.firstname,
+        lastname: appState.loginState.lastname,
+    }
+}
+
+//HRO export right here
+export default connect<IProps>(mapStateToProps)(LoginComp);

@@ -1,6 +1,7 @@
 
 export const LoginTypes = {
-    SET_LOGIN_TRUE: "SET_LOGIN_TRUE",
-    SET_LOGIN_FALSE: "SET_LOGIN_FALSE",
+    type:{
+        SET_LOGIN: "SET_LOGIN",
+        ADD_USER: "ADD_USER"
+    }
 }
-

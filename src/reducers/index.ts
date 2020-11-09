@@ -2,17 +2,21 @@ import { combineReducers } from "redux";
 import loginReducer from "./LoginReducer";
 
 export interface ILoginState{
-    isLoggedIn: boolean,
-    userId: number,
-    expiresOn:string,
-    token: string,
-    refreshToken: string,
-    data: string
-    //possibly data returns an object
+    id: number,
+    username: string,
+    password: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+    picUrl: string,
+    status: string,
+    bio: string,
+    interests: string,
+    posts: any,
+    likedPosts: any
 }
 
-//All of the different states from the different
-// components
+//All of the different states being tracked go here:
 export interface IState{
     loginState: ILoginState
     // insert your state here

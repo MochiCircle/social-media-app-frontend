@@ -8,23 +8,21 @@ import LoginPage from "./components/main/LoginPage";
 import SettingsPage from "./components/main/SettingsPage";
 import Post from "./components/posts/Posts";
 import MainNavbar from "./components/main/MainNavbar";
-import { Provider } from "react-redux";
-import { store } from ".";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import RegisterPage from "./components/login/RegisterPage";
 import ProfilePage from "./components/main/ProfilePage";
 
 function App() {
+
   return (
-    <Provider store={store}>
       <BrowserRouter basename="/">
         <MainNavbar />
-        {/* Alert Component */}
+        {/* Alert Component should go here*/}
         {/* Spinny Mochi guy */}
         <div className="mochi-guy">
           <Switch>
-            {<Route exact path="/" component={LoginPage} />}
             {<Route path="/register" component={RegisterPage} />}
-            {<Route path="/home" component={HomePage} />}
+            {<Route exact path="/" component={HomePage} />}
             {
               <Route
                 path="/profile/:userId"
@@ -37,7 +35,6 @@ function App() {
           </Switch>
         </div>
       </BrowserRouter>
-    </Provider>
   );
 }
 

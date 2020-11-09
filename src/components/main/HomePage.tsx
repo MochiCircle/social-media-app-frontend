@@ -8,7 +8,6 @@ import { Profile } from "../profile/Profile";
 const HomePage = () => {
   return (
     <>
-      <MainNavbar />
       <Row>
         <Col md="4">
           <br></br>

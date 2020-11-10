@@ -1,14 +1,22 @@
 import axios from "axios";
-import React, { SyntheticEvent } from "react";
-import { Form, Input } from "reactstrap";
+import React, { SyntheticEvent, useEffect } from "react";
+import { Form, Input, Spinner } from "reactstrap";
+import { user } from "../../../../util/Models";
 import "../settings.scss";
+import { getCurrentUserInfo } from "./GetCurrentUserInfo";
 // import { axiosInstance } from "../../../../util/axiosConfig";
 
-export const BasicInfoForm: React.FC<any> = () => {
+export const BasicInfoForm: React.FC<user> = (props: user) => {
   
-  // useEffect();
-
   // let currentUser;
+
+  // useEffect(() => {
+  //   // You need to restrict it at some point
+  //   // This is just dummy code and should be replaced by actual
+  //   alert("does this worK?");
+  //   currentUser = getCurrentUserInfo('5');
+  // }, []);
+
   // getCurrentUserInfo('5').then((response) => {currentUser=response);
   // const text = JSON.stringify(currentUser);
   // console.log(currentUser);
@@ -39,7 +47,7 @@ export const BasicInfoForm: React.FC<any> = () => {
 
     const json = response.data;
     if(json.username===usernameF) {
-      alert("Username successfully changed!");
+      alert("Info successfully updated!");
     } else {
       alert("Sorry, but it seems like that username is already taken!");
     }
@@ -50,7 +58,7 @@ export const BasicInfoForm: React.FC<any> = () => {
 
   return (
     <div>
-      <h3>Basic Info</h3>
+      <h3>Basic Info{/* <Spinner color='warning' /> */}</h3>
       <Form onSubmit={updateBasicInfo} className="settingsBox" method="POST">
         <div className="whiteText">Username</div>
         <Input
@@ -65,7 +73,7 @@ export const BasicInfoForm: React.FC<any> = () => {
           type="text"
           name="firstName"
           required
-          placeholder="current first name"
+          placeholder={"current first name"}
         />
         <br />
         <div className="whiteText">Last Name</div>

@@ -65,3 +65,15 @@ export const PasswordForm: React.FC = () => {
   </div>
   );
 };
+
+// //recieves these values from the app's store
+// const mapStateToProps = (appState:any) => {
+//   return {
+//       userId: appState.loginState.id,
+//       firstname: appState.loginState.firstname,
+//       lastname: appState.loginState.lastname,
+//   }
+// }
+
+// //HRO export right here
+// export default connect<IProps>(mapStateToProps)(LoginComp);

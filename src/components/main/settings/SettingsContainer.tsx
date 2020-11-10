@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import MainNavbar from "../MainNavbar";
 import { BasicInfoForm } from "./forms/BasicInfoForm";
@@ -23,7 +23,21 @@ interface IProps {
 
 // Will either update the state, or just let users know their changes will be visible next time they log in
 
-export const SettingsContainer: React.FC<any> = (props: any) => {
+export const SettingsContainer: React.FC<IProps> = (props: IProps) => {
+
+  const [user, setUser] = useState({
+    userId: 0,
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    pic: "",
+    status: "",
+    bio: "",
+    interests: ""
+  });
+
   return (
     <div>
       <h1 className="font-weight-bold">Settings</h1>
@@ -34,7 +48,7 @@ export const SettingsContainer: React.FC<any> = (props: any) => {
             <PictureForm />
           </Col>
           <Col>
-            <BasicInfoForm />
+            <BasicInfoForm {...user} />
           </Col>
           <Col>
             <EmailForm />

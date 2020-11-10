@@ -10,6 +10,7 @@ import ProfilePage from "./components/main/ProfilePage";
 import { SettingsContainer } from "./components/main/settings/SettingsContainer";
 //import './App.css';
 import "./components/mochi/mochispin.scss";
+import { ProfileInfo } from "./components/profile/ProfileInfo";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
                 component={ProfilePage}
               />
             }
-            {<Route path="/profile" component={ProfilePage} />}
+            {<Route path="/profile" component={ProfileInfo} />}
             {<Route exact path="/settings" component={SettingsContainer} />}
           </Switch>
         </div>

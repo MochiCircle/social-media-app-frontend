@@ -12,7 +12,7 @@ const HomePage = () => {
         <Col md="4">
           <br></br>
           <br></br>
-          <Profile userId={1} />
+          <Profile userId={1} ownProfile={true} />
         </Col>
         <Col md="8">
           <br></br>

@@ -1,5 +1,7 @@
 
 export const LoginTypes = {
-    SET_LOGIN_STATE: "SET_LOGIN_STATE",
+    type:{
+        SET_LOGIN: "SET_LOGIN",
+        ADD_USER: "ADD_USER"
+    }
 }
-

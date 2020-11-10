@@ -1,17 +1,15 @@
 import axios from "axios";
-import React, { SyntheticEvent, useEffect } from "react";
+import React, { SyntheticEvent } from "react";
 import { connect } from "react-redux";
-import { Form, Input, Spinner } from "reactstrap";
-import { user } from "../../../../util/Models";
+import { Form, Input } from "reactstrap";
 import "../settings.scss";
-import { getCurrentUserInfo } from "./GetCurrentUserInfo";
 // import { axiosInstance } from "../../../../util/axiosConfig";
 
 interface IProps {
   userId: number
 }
 
-export const BasicInfoForm: React.FC<IProps> = (props: IProps) => {
+const BasicInfoForm: React.FC<IProps> = (props: IProps) => {
   
   // let currentUser;
 
@@ -37,7 +35,7 @@ export const BasicInfoForm: React.FC<IProps> = (props: IProps) => {
     const response = await axios.post(
       "http://localhost:8080/MochiCircle/api/users/updateBasic/",
       {
-        userId: props.userId, // Get this from session or store or something
+        userId: props.userId,
         username: usernameF,
         password: null,
         firstName: firstNameF,
@@ -98,7 +96,7 @@ export const BasicInfoForm: React.FC<IProps> = (props: IProps) => {
 //recieves these values from the app's store
 const mapStateToProps = (appState:any) => {
   return {
-      userId: appState.loginState.id
+    userId: appState.loginState.id
   }
 }
 

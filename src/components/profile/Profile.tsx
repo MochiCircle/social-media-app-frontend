@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { ProfileInfo } from "./ProfileInfo";
 import { axiosInstance } from "../../util/axiosConfig";
 import { Col, Row } from "reactstrap";
+import ProfileInfo from "./ProfileInfo";
 
 interface IProp {
   userId: number;

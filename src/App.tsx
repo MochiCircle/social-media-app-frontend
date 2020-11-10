@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { store } from ".";
 import HomePage from "./components/main/HomePage";
 import LoginPage from "./components/main/LoginPage";
 import MainNavbar from "./components/main/MainNavbar";
@@ -10,7 +9,7 @@ import ProfilePage from "./components/main/ProfilePage";
 import { SettingsContainer } from "./components/main/settings/SettingsContainer";
 //import './App.css';
 import "./components/mochi/mochispin.scss";
-import { ProfileInfo } from "./components/profile/ProfileInfo";
+import ProfileInfo from "./components/profile/ProfileInfo";
 
 function App() {
 

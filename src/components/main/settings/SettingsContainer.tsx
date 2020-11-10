@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import MainNavbar from "../MainNavbar";
-import { BasicInfoForm } from "./forms/BasicInfoForm";
+import BasicInfoForm from "./forms/BasicInfoForm";
 import { BioForm } from "./forms/BioForm";
 import { EmailForm } from "./forms/EmailForm";
 import { PasswordForm } from "./forms/PasswordForm";
@@ -48,7 +48,7 @@ export const SettingsContainer: React.FC<IProps> = (props: IProps) => {
             <PictureForm />
           </Col>
           <Col>
-            <BasicInfoForm {...user} />
+            <BasicInfoForm />
           </Col>
           <Col>
             <EmailForm />

@@ -1,27 +1,36 @@
-import React, { SyntheticEvent, useState } from "react";
-import { Form, Input } from "reactstrap";
 import axios from 'axios';
-import '../settings.css';
+import React, { SyntheticEvent } from "react";
+import { Form, Input } from "reactstrap";
+import '../settings.scss';
 
 export const EmailForm: React.FC = () => {
 
-  const [modal, setModal] = useState(false);
-
   const updateEmail = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const fScore = event.currentTarget["scoreSelector"].value;
-    const fComment = event.currentTarget["judgeComment"].value;
-    const fEmail = event.currentTarget["emailForm"].value;
+    const emailF = event.currentTarget["email"].value;
 
-    console.log("you should see dis bruh");
+    const response = await axios.post(
+      "http://localhost:8080/MochiCircle/api/users/updateEmail/",
+      {
+        userId: 5, // Get this from session or store or something
+        username: null,
+        password: null,
+        firstName: null,
+        lastName: null,
+        email: emailF,
+        pic: null,
+        status: null,
+        bio: null,
+        interests: null,
+      }
+    );
 
-    axios.post("http://localhost:3004/post", {
-      id: null,
-      likes: 0,
-      comment: fComment,
-      week: fScore,
-      userEmail: fEmail,
-    });
+    const json = response.data;
+    if(json.email===emailF) {
+      alert("Email successfully changed!");
+    } else {
+      alert("Something has gone awry.");
+    }
   };
 
   return (

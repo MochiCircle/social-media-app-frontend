@@ -6,7 +6,7 @@ import { BioForm } from "./forms/BioForm";
 import { EmailForm } from "./forms/EmailForm";
 import { PasswordForm } from "./forms/PasswordForm";
 import { PictureForm } from "./forms/PictureForm";
-import './settings.css';
+import './settings.scss';
 
 interface IProps {
   userId: number,

@@ -1,21 +1,17 @@
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
-import { Form, Input } from "reactstrap";
 import axios from "axios";
-import "../settings.css";
-import Axios from "axios";
-import { axiosInstance } from "../../../../util/axiosConfig";
+import React, { SyntheticEvent } from "react";
+import { Form, Input } from "reactstrap";
+import "../settings.scss";
+// import { axiosInstance } from "../../../../util/axiosConfig";
 
 export const BasicInfoForm: React.FC<any> = () => {
+  
+  // useEffect();
 
-  const getCurrentUserInfo = async (input: string) => {
-    const pid = "http://localhost:8080/MochiCircle/api/users/find/" + input;
-    console.log(pid);
-    const response = await axiosInstance.get("" + pid);
-    // document.getElementById('asd').value="asd";
-    const text = JSON.stringify(response);
-    alert(text);
-  };
-  getCurrentUserInfo('5');
+  // let currentUser;
+  // getCurrentUserInfo('5').then((response) => {currentUser=response);
+  // const text = JSON.stringify(currentUser);
+  // console.log(currentUser);
 
   const updateBasicInfo = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -23,8 +19,8 @@ export const BasicInfoForm: React.FC<any> = () => {
     const firstNameF = event.currentTarget["firstName"].value;
     const lastNameF = event.currentTarget["lastName"].value;
 
-    console.log("inside updating info area");
-
+    // <Spinner color='success' />
+    // document.getElementById("reimbTableBody").append(tr);
     const response = await axios.post(
       "http://localhost:8080/MochiCircle/api/users/updateBasic/",
       {
@@ -42,8 +38,14 @@ export const BasicInfoForm: React.FC<any> = () => {
     );
 
     const json = response.data;
-    console.log(json);
-    console.log("test");
+    if(json.username===usernameF) {
+      alert("Username successfully changed!");
+    } else {
+      alert("Sorry, but it seems like that username is already taken!");
+    }
+    
+    // console.log(json);
+    // console.log("test");
   };
 
   return (
@@ -54,7 +56,6 @@ export const BasicInfoForm: React.FC<any> = () => {
         <Input
           type="text"
           name="username"
-          id="asd"
           required
           placeholder="current username"
         />

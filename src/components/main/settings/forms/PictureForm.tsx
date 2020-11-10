@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
 import { Form, Input, Label } from "reactstrap";
 import axios from 'axios';
-import '../settings.css';
+import '../settings.scss';
 
 export const PictureForm: React.FC = () => {
 

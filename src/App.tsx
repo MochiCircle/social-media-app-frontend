@@ -1,17 +1,16 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-//import './App.css';
-import "./components/mochi/mochispin.scss";
-import Layout from "./Layout";
-import HomePage from "./components/main/HomePage";
-import LoginPage from "./components/main/LoginPage";
-import SettingsPage from "./components/main/SettingsPage";
-import Post from "./components/posts/Posts";
-import MainNavbar from "./components/main/MainNavbar";
 import { Provider } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { store } from ".";
 import RegisterPage from "./components/login/RegisterPage";
+import HomePage from "./components/main/HomePage";
+import LoginPage from "./components/main/LoginPage";
+import MainNavbar from "./components/main/MainNavbar";
 import ProfilePage from "./components/main/ProfilePage";
+import { SettingsContainer } from "./components/main/settings/SettingsContainer";
+//import './App.css';
+import "./components/mochi/mochispin.scss";
+import { ProfileInfo } from "./components/profile/ProfileInfo";
 
 function App() {
   return (
@@ -32,8 +31,8 @@ function App() {
                 component={ProfilePage}
               />
             }
-            {<Route path="/profile" component={ProfilePage} />}
-            {<Route exact path="/settings" component={SettingsPage} />}
+            {<Route path="/profile" component={ProfileInfo} />}
+            {<Route exact path="/settings" component={SettingsContainer} />}
           </Switch>
         </div>
       </BrowserRouter>

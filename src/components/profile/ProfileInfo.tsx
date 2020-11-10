@@ -8,6 +8,7 @@ import {
   faSave as save,
 } from "@fortawesome/free-regular-svg-icons";
 import { Button, Form, Input } from "reactstrap";
+import axios from "axios";
 
 export const ProfileInfo: React.FC<Profile> = (props: Profile) => {
   const [statusEditor, setStatusEditor] = useState(false);
@@ -18,12 +19,27 @@ export const ProfileInfo: React.FC<Profile> = (props: Profile) => {
     setStatusEditor(!statusEditor);
   };
 
-  const saveStatus = (event: React.SyntheticEvent<HTMLFormElement>) => {
+  const saveStatus = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newStatus = event.currentTarget["status"].value;
     console.log(newStatus);
-    props.status = newStatus;
-    //implement axios
+    // props.status = newStatus; // You can't just change props afaik
+
+    const response = await axios.post(
+      "http://localhost:8080/MochiCircle/api/users/status/",
+      {
+        userId: 5, // Get this from session or store or something
+        username: null,
+        password: null,
+        firstName: null,
+        lastName: null,
+        email: null,
+        pic: null,
+        status: newStatus,
+        bio: null,
+        interests: null
+      }
+    );
 
     setStatus(newStatus);
     setStatusEditor(false);

@@ -3,7 +3,6 @@ import React, { SyntheticEvent } from 'react';
 import { Form, Input, Label } from 'reactstrap';
 import "./loginStyling.scss";
 interface IProps {
-  text: string;
 }
 
 const RegisterPage: React.FC = () => {
@@ -26,7 +25,14 @@ const RegisterPage: React.FC = () => {
         {
           //definitely edit this to work with the backend
           Axios.post("http://localhost:8080/api/users/create/"+
-           username+"+"+password+"+"+fName+"+"+lName+"+"+eMail)
+           username+"+"+password+"+"+fName+"+"+lName+"+"+eMail).then(()=>{
+              window.location.href = "/";
+           }
+            
+           ).catch((error) => {
+             console.log(error);
+              alert("Register Error: Unable to register this user.")
+           })
         }
       }
 

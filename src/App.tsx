@@ -11,6 +11,7 @@ import MainNavbar from "./components/main/MainNavbar";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import RegisterPage from "./components/login/RegisterPage";
 import ProfilePage from "./components/main/ProfilePage";
+import SpinPage from "./components/login/SpinPage";
 
 function App() {
 
@@ -19,8 +20,9 @@ function App() {
         <MainNavbar />
         {/* Alert Component should go here*/}
         {/* Spinny Mochi guy */}
-        <div className="mochi-guy">
+        
           <Switch>
+            {<Route path="/spin" component={SpinPage} />}
             {<Route path="/register" component={RegisterPage} />}
             {<Route exact path="/" component={HomePage} />}
             {
@@ -33,7 +35,6 @@ function App() {
             {<Route path="/profile" component={ProfilePage} />}
             {<Route exact path="/settings" component={SettingsPage} />}
           </Switch>
-        </div>
       </BrowserRouter>
   );
 }

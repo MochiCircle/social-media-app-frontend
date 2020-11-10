@@ -1,29 +1,27 @@
 import React from "react";
-import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { store } from ".";
-import RegisterPage from "./components/login/RegisterPage";
 import HomePage from "./components/main/HomePage";
 import LoginPage from "./components/main/LoginPage";
 import MainNavbar from "./components/main/MainNavbar";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import RegisterPage from "./components/login/RegisterPage";
 import ProfilePage from "./components/main/ProfilePage";
 import { SettingsContainer } from "./components/main/settings/SettingsContainer";
 //import './App.css';
 import "./components/mochi/mochispin.scss";
-import { ProfileInfo } from "./components/profile/ProfileInfo";
+import ProfileInfo from "./components/profile/ProfileInfo";
 
 function App() {
+
   return (
-    <Provider store={store}>
       <BrowserRouter basename="/">
         <MainNavbar />
-        {/* Alert Component */}
+        {/* Alert Component should go here*/}
         {/* Spinny Mochi guy */}
         <div className="mochi-guy">
           <Switch>
-            {<Route exact path="/" component={LoginPage} />}
             {<Route path="/register" component={RegisterPage} />}
-            {<Route path="/home" component={HomePage} />}
+            {<Route exact path="/" component={HomePage} />}
             {
               <Route
                 path="/profile/:userId"
@@ -36,7 +34,6 @@ function App() {
           </Switch>
         </div>
       </BrowserRouter>
-    </Provider>
   );
 }
 

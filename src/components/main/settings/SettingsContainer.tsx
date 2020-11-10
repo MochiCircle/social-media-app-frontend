@@ -5,7 +5,7 @@ import BasicInfoForm from "./forms/BasicInfoForm";
 import { BioForm } from "./forms/BioForm";
 import { EmailForm } from "./forms/EmailForm";
 import { PasswordForm } from "./forms/PasswordForm";
-import { PictureForm } from "./forms/PictureForm";
+import PictureForm from "./forms/PictureForm";
 import './settings.scss';
 
 interface IProps {

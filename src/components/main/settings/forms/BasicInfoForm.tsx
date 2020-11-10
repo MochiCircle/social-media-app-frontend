@@ -11,19 +11,6 @@ interface IProps {
 
 const BasicInfoForm: React.FC<IProps> = (props: IProps) => {
   
-  // let currentUser;
-
-  // useEffect(() => {
-  //   // You need to restrict it at some point
-  //   // This is just dummy code and should be replaced by actual
-  //   alert("does this worK?");
-  //   currentUser = getCurrentUserInfo('5');
-  // }, []);
-
-  // getCurrentUserInfo('5').then((response) => {currentUser=response);
-  // const text = JSON.stringify(currentUser);
-  // console.log(currentUser);
-
   const updateBasicInfo = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const usernameF = event.currentTarget["username"].value;
@@ -33,7 +20,7 @@ const BasicInfoForm: React.FC<IProps> = (props: IProps) => {
     // <Spinner color='success' />
     // document.getElementById("reimbTableBody").append(tr);
     const response = await axios.post(
-      "http://localhost:8080/MochiCircle/api/users/updateBasic/",
+      "http://localhost:8080/MochiCircle/api/users/",
       {
         userId: props.userId,
         username: usernameF,

@@ -13,7 +13,8 @@ export interface ILoginState{
     bio: string,
     interests: string,
     posts: any,
-    likedPosts: any
+    likedPosts: any,
+    verified: boolean
 }
 
 //All of the different states being tracked go here:

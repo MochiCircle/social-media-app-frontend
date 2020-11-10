@@ -1,4 +1,5 @@
 import React from "react";
+import { connect, useDispatch } from "react-redux";
 
 import {
   Collapse,
@@ -17,21 +18,42 @@ import {
   Button,
 } from "reactstrap";
 import LoginComp from "../login/LoginComp";
-import "../mochi/mochiVectorLogo.svg";
+import mochiLogo from "../../assets/mochiVectorLogo_smaller.svg";
+import "../login/loginStyling.scss";
+import { setLoginState } from "../../actions/LoginAction";
+import { initialLoginState } from "../login/LoginInitialState";
 
 interface IProps{
-
+    userId:number,
+    firstname:string,
+    lastname:string,
+    picUrl:string
 }
 
-const MainNavbar: React.FC = (props:IProps) => {
-  return (
+const MainNavbar: React.FC<IProps> = (props:IProps) => {
+
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(setLoginState(initialLoginState));
+  }
+
+  //If logged in, then these components will render
+  if (props.userId > 0)
+  {
+    return (
       <Navbar color="dark" dark expand="md" 
       style={{ width: "100%", margin:0, zIndex: 2, 
       position:"sticky", top:0,left:0,right:0, padding: 10}}
       className='nav justify-content-center'>
-        <span><Button href="/" style={{ margin: 5 }} ><img src={"../mochi/mochiVectorLogo.svg"} alt="MC"/></Button></span>
-        <span><Button href="/profile" style={{ margin: 5 }}><img src="" alt="Pic" className="shrunk-img"/>  
-        's Profile</Button></span>       
+
+        
+        <span><Button className="btn pull-left" href="/" style={{ margin: 5 }} ><img className="logo-vec" src={mochiLogo} alt="MC"/></Button></span>
+        <span><Button className="btn pull-left" href="/profile" style={{ margin: 5 }}><img src={props.picUrl} alt="Prof Pic" 
+        className="prof-img"/> {props.firstname}'s Profile</Button></span>
+
+
+         {/*     Search Bar
           <NavItem style={{ margin: 5 }}>
             <span className="search-container">
               <form action="/action_page.php">
@@ -42,18 +64,49 @@ const MainNavbar: React.FC = (props:IProps) => {
                 </form>
             </span>
           </NavItem>
-          <NavItem>
+         */}
+
+         
+         <span><Button onClick={onLogout} style={{ height: 44, margin: 5 }} className="btn pull-right">Logout</Button></span> 
+      </Navbar>
+    );
+  }
+  //If not logged in, these components will render...
+  else
+  {
+    return (
+      <Navbar color="dark" dark expand="md" 
+      style={{ width: "100%", margin:0, zIndex: 2, 
+      position:"sticky", top:0,left:0,right:0, padding: 10}}
+      className='nav justify-content-center'>
+
+        <div className="row justify-content-between">
+          <NavItem className="col-2">
             <NavLink href="/register">
               <Button style={{ margin: 5 }}>
               Register
               </Button>
             </NavLink>  
           </NavItem>
-          <NavItem>
-             <LoginComp />
+          <NavItem className="col-7">
+            <LoginComp /> {/* What actually allows you to login */}
           </NavItem>
-      </Navbar>
-  );
-};
+        </div>
+    </Navbar>
+  
+    );
+  }
+}
 
-export default MainNavbar;
+//recieves these values from the app's store
+const mapStateToProps = (appState:any) => {
+  return {
+      userId: appState.loginState.id,
+      firstname: appState.loginState.firstname,
+      lastname: appState.loginState.lastname,
+      picUrl: appState.loginState.picUrl
+  }
+}
+
+//HOC export right here babyyy
+export default connect<IProps>(mapStateToProps)(MainNavbar);

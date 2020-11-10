@@ -12,5 +12,6 @@ export const initialLoginState:ILoginState = {
     bio: "",
     interests: "",
     posts: null,
-    likedPosts: null
+    likedPosts: null,
+    verified: false
 }

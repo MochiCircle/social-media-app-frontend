@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { axiosInstance } from "../../util/axiosConfig";
-import { Col, Row } from "reactstrap";
 import ProfileInfo from "./ProfileInfo";
 import { ProfileInfoOther } from "./ProfileInfoOther";
 

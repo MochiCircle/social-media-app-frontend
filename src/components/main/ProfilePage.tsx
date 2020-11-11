@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Col, Row } from "reactstrap";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { Profile } from "../profile/Profile";
 import { connect } from "react-redux";
 import { user } from "../../util/Models";
 import PostContainer from "../posts/PostContainer";
+import PostCreate from "../posts/PostCreate";
 
 interface MatchParams {
   userId?: string;
@@ -26,6 +27,7 @@ const ProfilePage: React.FC<IProp> = (props: IProp) => {
         <Profile userId={userId} ownProfile={ownProfile} />
       </Col>
       <Col md="8">
+        {ownProfile && <PostCreate />}
         <PostContainer loadType={false} userId={userId} />
       </Col>
     </Row>

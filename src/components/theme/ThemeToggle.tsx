@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, ButtonToggle } from "reactstrap";
+import { Button } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb, faMoon } from "@fortawesome/free-regular-svg-icons";
 import "./Theme.scss";

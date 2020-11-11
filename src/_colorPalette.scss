@@ -1,0 +1,20 @@
+$themes: (
+  light: (
+    primary: white,
+    secondary: black,
+    accent: #0000ff33,
+    accent-2: #9500ff,
+    background-1: #cccdfb,
+    border-1: 2px solid black,
+    underline: 1px solid black,
+  ),
+  dark: (
+    primary: #2a2a2e,
+    secondary: white,
+    accent: #0000ff33,
+    accent-2: #9500ff,
+    background-1: #2a2a2e,
+    border-1: 2px solid #3a444c,
+    underline: 1px solid white,
+  ),
+);

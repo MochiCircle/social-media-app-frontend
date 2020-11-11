@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import { Form, Input, Label } from "reactstrap";
 import { setLoginState } from "../../../../actions/LoginAction";
 import { axiosInstance } from "../../../../util/axiosConfig";
-import { user, userCorrected } from "../../../../util/Models";
+import { userCorrected } from "../../../../util/Models";
 import "../settings.scss";
 
 const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
@@ -20,6 +20,7 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
   const [lastnameS, setlastnameS] = useState(props.lastname);
   const [bioS, setbioS] = useState(props.bio);
   const [interestsS, setinterestsS] = useState(props.interests);
+  const [pic, setPic] = useState(props.picUrl);
 
   const updateBasicInfo = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -73,6 +74,12 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
       }
   };
 
+  const imagePreview = (event: SyntheticEvent<HTMLInputElement>) => {
+    if (event.currentTarget.files !== null) {
+      setPic(URL.createObjectURL(event.currentTarget.files[0]));
+    }
+  };
+
   function handleUsername(e: any) {
     setUsernameS(e.target.value);
   }
@@ -96,6 +103,7 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
         {props.picUrl && (
           <img className="picView" src={props.picUrl} alt="Profile Pic"></img>
         )}
+        {pic && <img className="pic" src={pic} alt="Profile Pic"></img>}
         <br />
         <Label className="whiteText">Select a new profile picture:</Label>
         <Input
@@ -103,6 +111,7 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
           type="file"
           name="imageF"
           id="exampleFile"
+          onChange={imagePreview}
         />
         <br />
         <div className="whiteText">Username</div>

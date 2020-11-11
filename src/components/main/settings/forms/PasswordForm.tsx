@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React, { SyntheticEvent } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { connect } from 'react-redux';
-import { Form, Input } from "reactstrap";
+import { Form, Input, Spinner } from "reactstrap";
 import { axiosInstance } from '../../../../util/axiosConfig';
 import '../settings.scss';
 
@@ -12,8 +12,11 @@ interface IProps {
 
 const PasswordForm: React.FC<IProps> = (props: IProps) => {
 
+  const [showSpinner, setSpinner] = useState(false);
+
   const updatePassword = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSpinner(true);
     const userId = props.id;
     const username = props.username;
     const oldPassF = event.currentTarget["currentPass"].value;
@@ -23,31 +26,17 @@ const PasswordForm: React.FC<IProps> = (props: IProps) => {
     const verifyPassword = await axiosInstance.post(
       "/users/validate/",
       {
-        userId: userId,
         username: username,
         password: oldPassF,
-        firstName: null,
-        lastName: null,
-        email: null,
-        pic: null,
-        status: null,
-        bio: null,
-        interests: null,
       }
     );
 
-    console.log(verifyPassword.data.username);
-
-    if(true) {
-      // Get current password
-      // Compare inputted password and current password
-      // If similar, continue, if different, fail
-    } else {
-      // This'll probably need to be attached to the if else logic below
-    }
-
     if (newPassF !== newPass2F) {
-      alert("Passwords do not match.")
+      alert("Passwords do not match.");
+      setSpinner(false);
+    } else if(verifyPassword.data.username!==props.username) {
+      alert("Your password was incorrect.");
+      setSpinner(false);
     } else {
     const response = await axiosInstance.post(
       "/users/update/",
@@ -65,6 +54,8 @@ const PasswordForm: React.FC<IProps> = (props: IProps) => {
       }
     );
 
+    setSpinner(false);
+
     const json = response.data;
     if(json.password===newPass2F) {
       alert("Password successfully changed!");
@@ -76,7 +67,7 @@ const PasswordForm: React.FC<IProps> = (props: IProps) => {
     
   return (
     <div>
-      <h3>Password</h3>
+      <h3>Password {showSpinner ? <Spinner color="primary"/> : <span/>}</h3>
       <Form onSubmit={updatePassword} className="settingsBox" method="POST">
         <div className="whiteText" >Current Password</div>
         <Input type='password' name='currentPass' required placeholder='••••' />

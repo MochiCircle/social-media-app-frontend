@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {user} from "../../util/Models"
-import { axiosInstance} from "../../util/axiosConfig"
+import {user} from "../../util/Models";
+import { axiosInstance} from "../../util/axiosConfig";
 import {connect} from "react-redux";
 import "./Posts.scss";
 
-import unliked from '../../assets/emptyheart.png'
-import liked from '../../assets/fullheart.png'
+import unliked from '../../assets/emptyheart.png';
+import liked from '../../assets/fullheart.png';
 
 interface IProps {
     id: number,  //postID of post
@@ -13,12 +13,9 @@ interface IProps {
     username:string, //username of poster
     picurl:string,    //avatar of poster
     post_text:string, //post content
-//    likes:number     //number of likes post has
-//    likeStatus: boolean //whether post is liked or not
-    //todo prop for datetime goes here
 }
 
-const Post:React.FC<IProps> = (props: any) => {
+const Post:React.FC<any> = (props: any) => {
 
     const [heart, setHeart] = useState(false);
     const [likes, setLikes] = useState(0);

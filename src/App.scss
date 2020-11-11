@@ -30,6 +30,8 @@ html {
 .mainPage {
   width: 100%;
   max-width: 1200px;
+  min-height: 100%;
   overflow: hidden;
   position: relative;
+  margin: 0 auto;
 }

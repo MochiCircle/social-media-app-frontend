@@ -1,17 +1,19 @@
-.mochi-guy {
+.mochi-guy::after {
   width: 100%;
   max-width: 600px;
   max-height: 600px;
   height: 100%;
-  left: 0;
-  top: 0;
   margin: auto;
-
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
   z-index: -1;
   position: absolute;
   content: "";
   background-image: url("mochiSpin3.png");
   background-size: cover;
+  background-position: center;
   animation-name: mochi-spin;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
@@ -29,39 +31,35 @@
   -moz-animation-duration: 30s;
 }
 
-.mochi-guy::after {
-  content: "";
-}
-
 @keyframes mochi-spin {
   from {
-    transform: rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
     transform-origin: 50% 50% 0;
   }
   to {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
     transform-origin: 50% 50% 0;
   }
 }
 
 @-moz-keyframes mochi-spin {
   from {
-    -moz-transform: rotate(0deg);
+    -moz-transform: translate(-50%, -50%) rotate(0deg);
     -moz-transform-origin: 50% 50% 0;
   }
   to {
-    -moz-transform: rotate(360deg);
+    -moz-transform: translate(-50%, -50%) rotate(360deg);
     -moz-transform-origin: 50% 50% 0;
   }
 }
 
 @-webkit-keyframes mochi-spin {
   from {
-    -webkit-transform: rotate(0deg);
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
     -webkit-transform-origin: 50% 50% 0;
   }
   to {
-    -webkit-transform: rotate(360deg);
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
     -webkit-transform-origin: 50% 50% 0;
   }
 }

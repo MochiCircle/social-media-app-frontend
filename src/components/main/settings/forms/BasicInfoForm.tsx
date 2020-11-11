@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import { Form, Input, Label } from "reactstrap";
 import { setLoginState } from "../../../../actions/LoginAction";
 import { axiosInstance } from "../../../../util/axiosConfig";
-import { user, userCorrected } from "../../../../util/Models";
+import { userCorrected } from "../../../../util/Models";
 import "../settings.scss";
 
 const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
@@ -20,6 +20,7 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
   const [lastnameS, setlastnameS] = useState(props.lastname);
   const [bioS, setbioS] = useState(props.bio);
   const [interestsS, setinterestsS] = useState(props.interests);
+  const [pic, setPic] = useState(props.picUrl);
 
   const updateBasicInfo = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,7 +56,7 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
         firstname: firstNameF,
         lastname: lastNameF,
         email: props.email,
-        picUrl: props.picUrl,
+        picUrl: response.data.picUrl,
         status: props.status,
         bio: userBioF,
         interests: userInterestsF,
@@ -71,6 +72,12 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
       } else {
         alert("Sorry, but it seems like that username is already taken!");
       }
+    }
+  };
+
+  const imagePreview = (event: SyntheticEvent<HTMLInputElement>) => {
+    if (event.currentTarget.files !== null) {
+      setPic(URL.createObjectURL(event.currentTarget.files[0]));
     }
   };
 
@@ -94,9 +101,7 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
     <div>
       <h3>Basic Info{/* <Spinner color='warning' /> */}</h3>
       <Form onSubmit={updateBasicInfo} className="settingsBox" method="POST">
-        {props.picUrl && (
-          <img className="pic" src={props.picUrl} alt="Profile Pic"></img>
-        )}
+        {pic && <img className="pic" src={pic} alt="Profile Pic"></img>}
         <br />
         <Label className="whiteText">Select a new profile picture:</Label>
         <Input
@@ -104,6 +109,7 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
           type="file"
           name="imageF"
           id="exampleFile"
+          onChange={imagePreview}
         />
         <br />
         <div className="whiteText">Username</div>

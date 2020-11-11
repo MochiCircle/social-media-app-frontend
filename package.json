@@ -3,16 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-brands-svg-icons": "^5.15.1",
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.12",
     "@types/node-sass": "^4.11.1",
+    "api": "^2.4.4",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "json-server": "^0.16.2",
-    "moment": "^2.29.1",
-    "node-sass": "^4.14.1",
     "material-ui-icons": "^1.0.0-beta.36",
     "material-ui-search-bar": "^1.0.0",
     "node-sass": "^4.14.1",
     "npm-run-all": "^4.1.5",
+    "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-datetime": "^3.0.4",
     "react-dom": "^17.0.1",
@@ -28,13 +33,9 @@
   "scripts": {
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "api": "json-server json-server/db.json --routes json-server/routes.json --no-cors=true --port 8000",
-    "build:css": "node-sass src/ -o src/",
-    "watch:css": "npm run build:css && node-sass src/ -o src/ -w -r",
-    "start:ts": "react-scripts start",
-    "start": "npm-run-all -p watch:css start:ts",
-    "build:ts": "react-scripts build",
-    "build": "npm-run-all build:*"
+    "api": "json-server json-server/db.json --routes json-server/routes.json --no-cors=false --port 8000",
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [

@@ -1,8 +1,17 @@
 import { ILoginState } from "../../reducers";
 
 export const initialLoginState:ILoginState = {
-    isLoggedIn: false,
-    userId: 0,
-    token: "",
-    data: ""
+    id: 0,
+    username: "",
+    password: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    picUrl: "",
+    status: "",
+    bio: "",
+    interests: "",
+    posts: null,
+    likedPosts: null,
+    verified: false
 }

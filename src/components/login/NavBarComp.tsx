@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {Collapse, Nav, Navbar, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { LoginComp } from "./LoginComp";
 
 interface IProps{
 

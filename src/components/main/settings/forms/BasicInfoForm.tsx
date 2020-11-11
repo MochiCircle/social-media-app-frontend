@@ -3,10 +3,10 @@ import { connect, useDispatch } from "react-redux";
 import { Form, Input, Label } from "reactstrap";
 import { setLoginState } from "../../../../actions/LoginAction";
 import { axiosInstance } from "../../../../util/axiosConfig";
-import { user } from "../../../../util/Models";
+import { user, userCorrected } from "../../../../util/Models";
 import "../settings.scss";
 
-const BasicInfoForm: React.FC<user> = (props: user) => {
+const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
   // Setting the state
   const updateState = (user: any) => {
     dispatch(setLoginState(user));
@@ -16,15 +16,15 @@ const BasicInfoForm: React.FC<user> = (props: user) => {
   // end
 
   const [usernameS, setUsernameS] = useState(props.username);
-  const [firstnameS, setfirstnameS] = useState(props.firstName);
-  const [lastnameS, setlastnameS] = useState(props.lastName);
+  const [firstnameS, setfirstnameS] = useState(props.firstname);
+  const [lastnameS, setlastnameS] = useState(props.lastname);
   const [bioS, setbioS] = useState(props.bio);
   const [interestsS, setinterestsS] = useState(props.interests);
 
   const updateBasicInfo = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("userId", `${props.userId}`);
+    formData.append("userId", `${props.id}`);
     formData.append("image", event.currentTarget["imageF"].files[0]);
 
     const usernameF = event.currentTarget["username"].value;
@@ -48,14 +48,14 @@ const BasicInfoForm: React.FC<user> = (props: user) => {
       // document.getElementById("reimbTableBody").append(tr);
       response = await axiosInstance.post("/users/updateBasic", formData);
 
-      const userObject: user = {
-        userId: props.userId,
+      const userObject: userCorrected = {
+        id: props.id,
         username: usernameF,
         password: props.password,
-        firstName: firstNameF,
-        lastName: lastNameF,
+        firstname: firstNameF,
+        lastname: lastNameF,
         email: props.email,
-        pic: props.pic,
+        picUrl: props.picUrl,
         status: props.status,
         bio: userBioF,
         interests: userInterestsF,
@@ -94,8 +94,8 @@ const BasicInfoForm: React.FC<user> = (props: user) => {
     <div>
       <h3>Basic Info{/* <Spinner color='warning' /> */}</h3>
       <Form onSubmit={updateBasicInfo} className="settingsBox" method="POST">
-        {props.pic && (
-          <img className="pic" src={props.pic} alt="Profile Pic"></img>
+        {props.picUrl && (
+          <img className="pic" src={props.picUrl} alt="Profile Pic"></img>
         )}
         <br />
         <Label className="whiteText">Select a new profile picture:</Label>
@@ -168,13 +168,13 @@ const BasicInfoForm: React.FC<user> = (props: user) => {
 //recieves these values from the app's store
 const mapStateToProps = (appState: any) => {
   return {
-    userId: appState.loginState.id,
+    id: appState.loginState.id,
     username: appState.loginState.username,
     password: appState.loginState.password,
-    firstName: appState.loginState.firstname,
-    lastName: appState.loginState.lastname,
+    firstname: appState.loginState.firstname,
+    lastname: appState.loginState.lastname,
     email: appState.loginState.email,
-    pic: appState.loginState.picUrl,
+    picUrl: appState.loginState.picUrl,
     status: appState.loginState.status,
     bio: appState.loginState.bio,
     interests: appState.loginState.interests,
@@ -183,4 +183,4 @@ const mapStateToProps = (appState: any) => {
 };
 
 //HRO export right here
-export default connect<user>(mapStateToProps)(BasicInfoForm);
+export default connect<userCorrected>(mapStateToProps)(BasicInfoForm);

@@ -20,7 +20,8 @@
   font-size: 18px; }
 
 .heart {
-  float: right; }
+  float: right;
+  outline: none; }
 
 .postFooter {
   font-family: "Helvetica Neue";

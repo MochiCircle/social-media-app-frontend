@@ -29,8 +29,17 @@ export const loadUser = (username:string, password:string) => async (dispatch:an
     
     ).then((response) => {
       console.log(response.data);
-      alert("**SUCCESSFUL LOGIN** as: " + response.data.firstname + 
-      response.data.lastname);
+
+      if (response.data.id != null)
+      {
+        alert("**SUCCESSFUL LOGIN** as: " + response.data.firstname + 
+        response.data.lastname);
+      }
+      else
+      {
+        alert("Login Failed: Credentials Error.");
+      }
+      
       return response.data;    
     })
       .catch ((error) => {
@@ -43,6 +52,7 @@ export const loadUser = (username:string, password:string) => async (dispatch:an
     if(user != null)
     {
       dispatch(setLoginState(user));
+      window.location.href = "/profile";
     }
     //if no user data was returned then revert back to initial unloggedin state
     else

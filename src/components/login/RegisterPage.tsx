@@ -1,11 +1,13 @@
 import Axios from 'axios';
 import React, { SyntheticEvent } from 'react';
+import { connect } from 'react-redux';
 import { Form, Input, Label } from 'reactstrap';
 import "./loginStyling.scss";
 interface IProps {
+  userId:number
 }
 
-const RegisterPage: React.FC = () => {
+const RegisterPage: React.FC<IProps> = (props:IProps) => {
 
     const handleSubmit = async (event:SyntheticEvent<HTMLFormElement>) => {
   
@@ -25,15 +27,21 @@ const RegisterPage: React.FC = () => {
         {
           //definitely edit this to work with the backend
           Axios.post("http://localhost:8080/api/users/create/"+
-           username+"+"+password+"+"+fName+"+"+lName+"+"+eMail).then(()=>{
-              window.location.href = "/";
-           }
+           username+"+"+password+"+"+fName+"+"+lName+"+"+eMail)
+           //.then(()=>{
+              //window.location.href = "/";
+           //}
             
-           ).catch((error) => {
+           .catch((error) => {
              console.log(error);
               alert("Register Error: Unable to register this user.")
            })
         }
+      }
+
+      if(props.userId > 0)
+      {
+        window.location.href = "/profile";
       }
 
     return (
@@ -94,4 +102,12 @@ const RegisterPage: React.FC = () => {
       )
 }
 
-export default RegisterPage;
+//recieves these values from the app's store
+const mapStateToProps = (appState:any) => {
+  return {
+      userId: appState.loginState.id
+  }
+}
+
+//HOC export right here babyyy
+export default connect<IProps>(mapStateToProps)(RegisterPage);

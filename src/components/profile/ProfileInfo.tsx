@@ -28,7 +28,6 @@ const ProfileInfo: React.FC<user> = (props: user) => {
   };
 
   const dispatch = useDispatch();
-
   // end
 
   const saveStatus = async (event: React.SyntheticEvent<HTMLFormElement>) => {

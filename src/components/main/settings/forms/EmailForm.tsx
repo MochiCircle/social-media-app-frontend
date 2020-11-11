@@ -40,7 +40,7 @@ export const EmailForm: React.FC = () => {
         <div className="whiteText" >Email</div>
         <Input type='email' name='email' required placeholder='Email address' />
         <br/>
-        <Input type='submit' value='Send email' className="btn btn-primary" />
+        <Input type='submit' value='Send email' className="btn btn-primary col-6" />
       </Form>
   </div>
   );

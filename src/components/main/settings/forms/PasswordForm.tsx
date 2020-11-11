@@ -52,15 +52,15 @@ export const PasswordForm: React.FC = () => {
       <h3>Password</h3>
       <Form onSubmit={updatePassword} className="settingsBox" method="POST">
         <div className="whiteText" >Current Password</div>
-        <Input type='password' name='currentPass' required placeholder='current password' />
+        <Input type='password' name='currentPass' required placeholder='current' />
         <br/>
         <div className="whiteText" >New Password</div>
-        <Input type='password' name='newPass' required placeholder='new password' />
+        <Input type='password' name='newPass' required placeholder='new' />
         <br/>
         <div className="whiteText" >Confirm New Password</div>
-        <Input type='password' name='newPassConfirm' required placeholder='reenter new password' />
+        <Input type='password' name='newPassConfirm' required placeholder='confirm new' />
         <br/>
-        <Input type='submit' value='Update password' className="btn btn-success" />
+        <Input type='submit' value='Update password' className="btn btn-success col-6" />
       </Form>
   </div>
   );

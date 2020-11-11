@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {user} from "../../util/Models"
-import { axiosInstance} from "../../util/axiosConfig"
+import {user} from "../../util/Models";
+import { axiosInstance} from "../../util/axiosConfig";
 import {connect} from "react-redux";
 import "./Posts.scss";
 
-interface IProps {
-    userID: number
-}
-
-const PostCreate:React.FC<IProps> = (props:any) => {
+const PostCreate:React.FC<any> = (props:any) => {
     const [value, setValue] = useState(''); //value is state of text in textarea
     const [postText, setPostText] = useState('');
 
@@ -27,13 +23,7 @@ const PostCreate:React.FC<IProps> = (props:any) => {
 
     //Sends the post text and the userID to the endpoint to update the back-end
     const postData = async () => {
-        /*fetch('endpoint-for-creating-posts', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({post: {postText}, userID: props.userID})
-        });*/
-        axiosInstance.get("update/").then((response) => {
-
+        axiosInstance.get("update/" + props.userId + "+" + postText).then((response) => {
         });
     }
 

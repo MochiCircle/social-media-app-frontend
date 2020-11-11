@@ -1,0 +1,37 @@
+@import "./mixin";
+
+.App {
+  //@include theme-aware("background-color", "background-color");
+  text-align: center;
+}
+
+/* Nav Bar SASS*/
+.nav-bg {
+  background-image: linear-gradient(#222, #444);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+div.form-width {
+  width: 60%;
+}
+
+body,
+html {
+  @include theme-aware("background-color", "background-1");
+  @include theme-aware("color", "secondary");
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.mainPage {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}

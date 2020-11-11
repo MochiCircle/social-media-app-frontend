@@ -1,15 +1,42 @@
 import axios from 'axios';
 import React, { SyntheticEvent } from "react";
+import { connect } from 'react-redux';
 import { Form, Input } from "reactstrap";
+import { axiosInstance } from '../../../../util/axiosConfig';
 import '../settings.scss';
 
-export const PasswordForm: React.FC = () => {
+interface IProps {
+  id: number;
+  username: string;
+}
+
+const PasswordForm: React.FC<IProps> = (props: IProps) => {
 
   const updatePassword = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const userId = props.id;
+    const username = props.username;
     const oldPassF = event.currentTarget["currentPass"].value;
     const newPassF = event.currentTarget["newPass"].value;
     const newPass2F = event.currentTarget["newPassConfirm"].value;
+
+    const verifyPassword = await axiosInstance.post(
+      "/users/validate/",
+      {
+        userId: userId,
+        username: username,
+        password: oldPassF,
+        firstName: null,
+        lastName: null,
+        email: null,
+        pic: null,
+        status: null,
+        bio: null,
+        interests: null,
+      }
+    );
+
+    console.log(verifyPassword.data.username);
 
     if(true) {
       // Get current password
@@ -22,10 +49,10 @@ export const PasswordForm: React.FC = () => {
     if (newPassF !== newPass2F) {
       alert("Passwords do not match.")
     } else {
-    const response = await axios.post(
-      "http://localhost:8080/MochiCircle/api/users/update/",
+    const response = await axiosInstance.post(
+      "/users/update/",
       {
-        userId: 5, // Get this from session or store or something
+        userId: userId,
         username: null,
         password: newPass2F,
         firstName: null,
@@ -52,28 +79,27 @@ export const PasswordForm: React.FC = () => {
       <h3>Password</h3>
       <Form onSubmit={updatePassword} className="settingsBox" method="POST">
         <div className="whiteText" >Current Password</div>
-        <Input type='password' name='currentPass' required placeholder='current password' />
+        <Input type='password' name='currentPass' required placeholder='••••' />
         <br/>
         <div className="whiteText" >New Password</div>
-        <Input type='password' name='newPass' required placeholder='new password' />
+        <Input type='password' name='newPass' required placeholder='••••' />
         <br/>
         <div className="whiteText" >Confirm New Password</div>
-        <Input type='password' name='newPassConfirm' required placeholder='reenter new password' />
+        <Input type='password' name='newPassConfirm' required placeholder='••••' />
         <br/>
-        <Input type='submit' value='Update password' className="btn btn-success" />
+        <Input type='submit' value='Update password' className="btn btn-success col-6" />
       </Form>
   </div>
   );
 };
 
-// //recieves these values from the app's store
-// const mapStateToProps = (appState:any) => {
-//   return {
-//       userId: appState.loginState.id,
-//       firstname: appState.loginState.firstname,
-//       lastname: appState.loginState.lastname,
-//   }
-// }
+//recieves these values from the app's store
+const mapStateToProps = (appState:any) => {
+  return {
+      id: appState.loginState.id,
+      username: appState.loginState.username
+  }
+}
 
-// //HRO export right here
-// export default connect<IProps>(mapStateToProps)(LoginComp);
+//HRO export right here
+export default connect<IProps>(mapStateToProps)(PasswordForm);

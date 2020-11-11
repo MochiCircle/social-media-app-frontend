@@ -25,7 +25,6 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("userId", `${props.id}`);
-    formData.append("image", event.currentTarget["imageF"].files[0]);
 
     const usernameF = event.currentTarget["username"].value;
     const firstNameF = event.currentTarget["firstName"].value;
@@ -41,9 +40,10 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
 
     let response: any;
 
-    if (event.currentTarget["imageF"].files[0] === undefined) {
-      alert("Please update your image.");
-    } else {
+    if (event.currentTarget["imageF"].files[0] !== undefined) {
+      formData.append("image", event.currentTarget["imageF"].files[0])
+    }
+    
       // <Spinner color='success' />
       // document.getElementById("reimbTableBody").append(tr);
       response = await axiosInstance.post("/users/updateBasic", formData);
@@ -55,7 +55,7 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
         firstname: firstNameF,
         lastname: lastNameF,
         email: props.email,
-        picUrl: props.picUrl,
+        picUrl: response.data.picUrl,
         status: props.status,
         bio: userBioF,
         interests: userInterestsF,
@@ -71,7 +71,6 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
       } else {
         alert("Sorry, but it seems like that username is already taken!");
       }
-    }
   };
 
   function handleUsername(e: any) {
@@ -95,7 +94,7 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
       <h3>Basic Info{/* <Spinner color='warning' /> */}</h3>
       <Form onSubmit={updateBasicInfo} className="settingsBox" method="POST">
         {props.picUrl && (
-          <img className="pic" src={props.picUrl} alt="Profile Pic"></img>
+          <img className="picView" src={props.picUrl} alt="Profile Pic"></img>
         )}
         <br />
         <Label className="whiteText">Select a new profile picture:</Label>

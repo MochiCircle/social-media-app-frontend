@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { axiosInstance } from "../../util/axiosConfig";
 import ProfileInfo from "./ProfileInfo";
 import { ProfileInfoOther } from "./ProfileInfoOther";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 interface IProp {
   userId: number;
@@ -11,13 +13,13 @@ interface IProp {
 export const Profile: React.FC<IProp> = (prop: IProp) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [profile, setProfile] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
-    userId: 0,
+    id: 0,
     username: "",
     password: "",
-    pic: "",
+    picUrl: "",
     status: "",
     bio: "",
     interests: "",
@@ -39,7 +41,7 @@ export const Profile: React.FC<IProp> = (prop: IProp) => {
       ) : isLoaded ? (
         <ProfileInfoOther {...profile} />
       ) : (
-        "Loading Profile"
+        <FontAwesomeIcon icon={faSpinner} spin />
       )}
     </>
   );

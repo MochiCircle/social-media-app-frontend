@@ -31,12 +31,3 @@ export interface post {
   postText: string;
   likes: number;
 }
-
-export interface Profile {
-  firstName: string;
-  lastName: string;
-  pic?: string;
-  status?: string;
-  bio?: string;
-  interests?: string;
-}

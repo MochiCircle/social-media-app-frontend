@@ -1,15 +1,12 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomePage from "./components/main/HomePage";
-import LoginPage from "./components/main/LoginPage";
 import MainNavbar from "./components/main/MainNavbar";
-import { Provider, useDispatch, useSelector } from "react-redux";
 import RegisterPage from "./components/login/RegisterPage";
 import ProfilePage from "./components/main/ProfilePage";
 import { SettingsContainer } from "./components/main/settings/SettingsContainer";
-//import './App.css';
+import "./App.scss";
 import "./components/mochi/mochispin.scss";
-import ProfileInfo from "./components/profile/ProfileInfo";
 
 function App() {
   return (
@@ -17,7 +14,8 @@ function App() {
       <MainNavbar />
       {/* Alert Component should go here*/}
       {/* Spinny Mochi guy */}
-      <div className="mochi-guy">
+      <div className="mochi-guy" />
+      <div className="mainPage">
         <Switch>
           {<Route path="/register" component={RegisterPage} />}
           {<Route exact path="/" component={HomePage} />}

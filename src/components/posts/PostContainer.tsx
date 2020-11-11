@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import {connect} from "react-redux";
-import {user} from "../../util/Models"
+import {user} from "../../util/Models";
 import Post from './Posts';
-import { axiosInstance} from "../../util/axiosConfig"
+import { axiosInstance} from "../../util/axiosConfig";
 
 interface Post {
     id: number,  //postID of post
@@ -10,16 +10,15 @@ interface Post {
     username:string, //username of poster
     picurl:string,    //avatar of poster
     post_text:string, //post content
-//    likes:number     //number of likes post has
-//    likeStatus: boolean //whether post is liked or not
-    //todo prop for datetime goes here
 }
 
 interface IProps {
-    loadType: boolean //true loads all posts, false loads posts associated with userID
+    userId: number,
+    loadType: boolean //true loads all posts regardless of user 
+                      //false loads posts associated with userId
 }
 
-const PostContainer: React.FC<IProps> = (props: any) => {
+const PostContainer: React.FC<IProps> = (props: IProps) => {
 
     const [postArray, setPostArray] = React.useState<Post[]>([]);
 
@@ -50,20 +49,5 @@ const PostContainer: React.FC<IProps> = (props: any) => {
         </div>
     )
 }
-const mapStateToProps = (appState: any, ownProps: any) => {
-    return {
-        userId: appState.loginState.id,
-        username: appState.loginState.username,
-        password: appState.loginState.password,
-        firstName: appState.loginState.firstname,
-        lastName: appState.loginState.lastname,
-        email: appState.loginState.email,
-        pic: appState.loginState.picUrl,
-        status: appState.loginState.status,
-        bio: appState.loginState.bio,
-        interests: appState.loginState.interests,
-        verified: appState.loginState.verified,
-    };
-};
 
-export default connect<user>(mapStateToProps)(PostContainer);
+export default PostContainer;

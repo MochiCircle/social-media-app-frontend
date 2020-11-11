@@ -9,6 +9,7 @@ export interface user {
   status: string;
   bio: string;
   interests: string;
+  verified: boolean;
 }
 
 export interface post {

@@ -15,8 +15,9 @@
     "json-server": "^0.16.2",
     "material-ui-icons": "^1.0.0-beta.36",
     "material-ui-search-bar": "^1.0.0",
-    "moment": "^2.29.1",
     "node-sass": "^4.14.1",
+    "npm-run-all": "^4.1.5",
+    "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-datetime": "^3.0.4",
     "react-dom": "^17.0.1",
@@ -34,7 +35,7 @@
     "eject": "react-scripts eject",
     "api": "json-server json-server/db.json --routes json-server/routes.json --no-cors=false --port 8000",
     "start": "react-scripts start",
-    "build:": "react-scripts build"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [

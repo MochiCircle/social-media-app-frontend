@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ProfileInfo } from "./ProfileInfo";
 import { axiosInstance } from "../../util/axiosConfig";
 import { Col, Row } from "reactstrap";
+import ProfileInfo from "./ProfileInfo";
+import { ProfileInfoOther } from "./ProfileInfoOther";
 
 interface IProp {
   userId: number;
+  ownProfile: boolean;
 }
 
 export const Profile: React.FC<IProp> = (prop: IProp) => {
@@ -12,19 +14,34 @@ export const Profile: React.FC<IProp> = (prop: IProp) => {
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
+    email: "",
+    userId: 0,
+    username: "",
+    password: "",
+    pic: "",
+    status: "",
+    bio: "",
+    interests: "",
+    verified: false,
   });
+  const ownProfile = prop.ownProfile;
 
-  let userId = prop.userId;
-  if (prop.userId === 0) {
-    //get loginstate's id
-  }
-
-  useEffect(() => {
-    axiosInstance.get("/users/" + userId).then((response) => {
+  if (!ownProfile) {
+    axiosInstance.get("/users/find/" + prop.userId).then((response) => {
       setIsLoaded(true);
       setProfile(response.data[0]);
     });
-  }, [userId]);
+  }
 
-  return <>{isLoaded ? <ProfileInfo {...profile} /> : "loading..."}</>;
+  return (
+    <>
+      {ownProfile ? (
+        <ProfileInfo />
+      ) : isLoaded ? (
+        <ProfileInfoOther {...profile} />
+      ) : (
+        "Loading Profile"
+      )}
+    </>
+  );
 };

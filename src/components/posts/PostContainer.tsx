@@ -1,21 +1,25 @@
 import React, { useEffect } from 'react';
+import {connect} from "react-redux";
+import {user} from "../../util/Models"
 import Post from './Posts';
+import { axiosInstance} from "../../util/axiosConfig"
 
 interface Post {
-    username:string,
-    image:string,
-    postText:string,
-    likes:number
-    likeStatus: boolean
+    id: number,  //postID of post
+    userid: number,  //userID of user that created the post
+    username:string, //username of poster
+    picurl:string,    //avatar of poster
+    post_text:string, //post content
+//    likes:number     //number of likes post has
+//    likeStatus: boolean //whether post is liked or not
     //todo prop for datetime goes here
 }
 
 interface IProps {
-    userID: string,
     loadType: boolean //true loads all posts, false loads posts associated with userID
 }
 
-const PostContainer: React.FC<IProps> = (props: IProps) => {
+const PostContainer: React.FC<IProps> = (props: any) => {
 
     const [postArray, setPostArray] = React.useState<Post[]>([]);
 
@@ -26,28 +30,40 @@ const PostContainer: React.FC<IProps> = (props: IProps) => {
 
     const fetchItems = async () => {
         let url;
-        if(props.loadType) {
-            url = "url-with-endpoint fetching-all-posts"; //todo replace with actual endpoint
-        } else {
-            url = "url-with-endpoint-fetching-single-user-posts"; //todo replace with actual endpoint and do string interpolation
-        }                                                         
-        const res = await fetch(url, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({userID: props.userID, loadType: props.loadType})
+        if(props.loadType) { //if loadtype is true, load all posts
+            url = "/postview/";
+        } else {            //if loadtype is false, load posts associated with logged in userid
+            url = "/postview/find/" + props.userId; 
+        }                                        
+
+        axiosInstance.get(url).then((response) => {
+            setPostArray(response.data);
         });
         
-        const data = await res.json();
-        setPostArray(data);
     }
 
     return (
         <div className="postContainer">
             {postArray.map(e => (
-              <Post username={e.username} image={e.image} postText={e.postText} likes={e.likes} likeStatus= {e.likeStatus}/>
+              <Post {...e}/>
           ))}
         </div>
     )
 }
+const mapStateToProps = (appState: any, ownProps: any) => {
+    return {
+        userId: appState.loginState.id,
+        username: appState.loginState.username,
+        password: appState.loginState.password,
+        firstName: appState.loginState.firstname,
+        lastName: appState.loginState.lastname,
+        email: appState.loginState.email,
+        pic: appState.loginState.picUrl,
+        status: appState.loginState.status,
+        bio: appState.loginState.bio,
+        interests: appState.loginState.interests,
+        verified: appState.loginState.verified,
+    };
+};
 
-export default PostContainer;
+export default connect<user>(mapStateToProps)(PostContainer);

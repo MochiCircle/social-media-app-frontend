@@ -3,6 +3,7 @@ import { LoginTypes } from "../components/login/LoginActionTypes";
 import { initialLoginState } from "../components/login/LoginInitialState";
 import axios from 'axios';
 import { setLoginState, SET_USER } from "../actions/LoginAction";
+import { axiosInstance } from "../util/axiosConfig";
 
 export const loginReducer = (
   state: ILoginState = initialLoginState,
@@ -23,10 +24,12 @@ export const loginReducer = (
 export const loadUser = (username:string, password:string) => async (dispatch:any, getState:any) => {
   
   //gets the user from the backend using the passed in username and password
-  const user = await axios.post(
-    "http://localhost:8080/MochiCircle/api/users/validate/" +username+ "+"
-    +password
-    
+  const user = await axiosInstance.post(
+    "/users/validate/",
+    {
+      username: username,
+      password: password
+    }
     ).then((response) => {
       console.log(response.data);
       alert("**SUCCESSFUL LOGIN** as: " + response.data.firstname + 

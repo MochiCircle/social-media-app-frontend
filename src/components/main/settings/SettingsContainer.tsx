@@ -3,7 +3,7 @@ import { Col, Container, Row } from "reactstrap";
 import MainNavbar from "../MainNavbar";
 import BasicInfoForm from "./forms/BasicInfoForm";
 import { EmailForm } from "./forms/EmailForm";
-import { PasswordForm } from "./forms/PasswordForm";
+import PasswordForm from "./forms/PasswordForm";
 import "./settings.scss";
 
 interface IProps {

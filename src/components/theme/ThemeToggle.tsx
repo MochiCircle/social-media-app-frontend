@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ButtonToggle } from "reactstrap";
+import { Button, ButtonToggle } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb, faMoon } from "@fortawesome/free-regular-svg-icons";
 import "./Theme.scss";
@@ -19,13 +19,13 @@ const ThemeToggle: React.FC = () => {
   };
 
   return (
-    <ButtonToggle className="theme-toggler" onClick={changeTheme}>
+    <Button className="theme-toggler" onClick={changeTheme}>
       {theme === "light" ? (
         <FontAwesomeIcon icon={faMoon} fixedWidth />
       ) : (
         <FontAwesomeIcon icon={faLightbulb} fixedWidth />
       )}
-    </ButtonToggle>
+    </Button>
   );
 };
 

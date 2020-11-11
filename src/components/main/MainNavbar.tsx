@@ -95,7 +95,9 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
             Logout
           </Button>
         </span>
-        <ThemeToggle />
+        <span>
+          <ThemeToggle />
+        </span>
       </Navbar>
     );
   }

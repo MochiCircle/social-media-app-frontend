@@ -4,7 +4,7 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import { Profile } from "../profile/Profile";
 import { connect } from "react-redux";
 import { user } from "../../util/Models";
-import { axiosInstance } from "../../util/axiosConfig";
+import PostContainer from "../posts/PostContainer";
 
 interface MatchParams {
   userId?: string;
@@ -26,9 +26,7 @@ const ProfilePage: React.FC<IProp> = (props: IProp) => {
         <Profile userId={userId} ownProfile={ownProfile} />
       </Col>
       <Col md="8">
-        All Posts Column ... will have one route for all posts from all users
-        and one route for just posts from current user ... with conditional
-        logic of course :)
+        <PostContainer loadType={false} userId={userId} />
       </Col>
     </Row>
   );

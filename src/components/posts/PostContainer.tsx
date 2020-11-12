@@ -47,7 +47,10 @@ const PostContainer: React.FC<IProps> = (props: IProps) => {
     return (
         <div className="postContainer">
             {postArray.map(e => (
-              <Post {...e}/>
+                <>
+                    <Post {...e}/>
+                    <br></br>
+                </>
           ))}
         </div>
     )

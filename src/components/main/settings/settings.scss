@@ -1,11 +1,36 @@
+@import "../../../mixin";
+
 body {
-  background: #0000ff33; }
+  background: #0000ff33;
+}
 
 .settingsBox {
   background: #9500ff;
-  background: linear-gradient(160deg, #9500ff99 0%, #001aff99 100%);
-  padding: 10px;
-  border-radius: 10px; }
+  padding: 15px 20px 15px;
+  border-radius: 30px;
+  @include theme-aware("background", "settings-boxes");
+}
+
+.textEntry {
+  @include theme-aware("color", "secondary");
+  @include theme-aware("background", "settings-text-bg");
+  @include theme-aware("border", "settings-text-bg");
+}
 
 .whiteText {
-  color: white; }
+  color: white;
+}
+
+.redText {
+  color: #ff0000;
+}
+
+.greenText {
+  color: rgba(98, 179, 105, 0);
+}
+
+.picView {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}

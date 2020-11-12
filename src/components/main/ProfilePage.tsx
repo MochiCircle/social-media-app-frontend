@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Col, Row } from "reactstrap";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { Profile } from "../profile/Profile";
 import { connect } from "react-redux";
-import { user } from "../../util/Models";
-import { axiosInstance } from "../../util/axiosConfig";
+import { userCorrected } from "../../util/Models";
+import PostContainer from "../posts/PostContainer";
+import PostCreate from "../posts/PostCreate";
 
 interface MatchParams {
   userId?: string;
 }
 
-interface IProp extends RouteComponentProps<MatchParams>, user {}
+interface IProp extends RouteComponentProps<MatchParams>, userCorrected {}
 
 const ProfilePage: React.FC<IProp> = (props: IProp) => {
   let userId = parseInt(props.match.params.userId || "0") || 0;
   let ownProfile: boolean = false;
   if (userId === 0) {
-    userId = props.userId;
+    userId = props.id;
     ownProfile = true;
   }
 
@@ -26,9 +27,8 @@ const ProfilePage: React.FC<IProp> = (props: IProp) => {
         <Profile userId={userId} ownProfile={ownProfile} />
       </Col>
       <Col md="8">
-        All Posts Column ... will have one route for all posts from all users
-        and one route for just posts from current user ... with conditional
-        logic of course :)
+        {ownProfile && <PostCreate />}
+        <PostContainer loadType={false} userId={userId} />
       </Col>
     </Row>
   );
@@ -36,13 +36,13 @@ const ProfilePage: React.FC<IProp> = (props: IProp) => {
 
 const mapStateToProps = (appState: any) => {
   return {
-    userId: appState.loginState.id,
+    id: appState.loginState.id,
     username: appState.loginState.username,
     password: appState.loginState.password,
-    firstName: appState.loginState.firstname,
-    lastName: appState.loginState.lastname,
+    firstname: appState.loginState.firstname,
+    lastname: appState.loginState.lastname,
     email: appState.loginState.email,
-    pic: appState.loginState.picUrl,
+    picUrl: appState.loginState.picUrl,
     status: appState.loginState.status,
     bio: appState.loginState.bio,
     interests: appState.loginState.interests,
@@ -50,4 +50,4 @@ const mapStateToProps = (appState: any) => {
   };
 };
 
-export default withRouter(connect<user>(mapStateToProps)(ProfilePage));
+export default withRouter(connect<userCorrected>(mapStateToProps)(ProfilePage));

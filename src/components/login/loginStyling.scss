@@ -1,5 +1,10 @@
+@import "../../_mixin";
+
 .entry
 {
+    @include theme-aware("color", "secondary");
+    @include theme-aware("background", "settings-text-bg");
+    @include theme-aware("border", "settings-text-bg");
     transition: 0.4s;
     -webkit-transition: 0.4s;
     -moz-transition: 0.4s;
@@ -92,4 +97,9 @@
 {
     max-width: 30px;
     max-height: 30px;
+}
+
+.nav
+{
+    @include theme-aware("background", "settings-boxes");
 }

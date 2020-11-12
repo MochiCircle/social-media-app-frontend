@@ -1,5 +1,4 @@
-$text-color: black;
-$background-color: transparent;
+@import "../../mixin";
 
 .profile {
   width: 100%;
@@ -10,9 +9,11 @@ $background-color: transparent;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  border: 2px solid $text-color;
-  background-color: $background-color;
-  color: $text-color;
+  /*  */
+  @include theme-aware("border", "border-1");
+  @include theme-aware("background", "primary");
+  @include theme-aware("color", "secondary");
+  @include theme-aware("background-image", "mochi-guy");
   > div {
     margin-bottom: 5px;
   }
@@ -21,10 +22,10 @@ $background-color: transparent;
 .category {
   font-size: 1.25em;
   line-height: 1;
-  border-bottom: 1px solid $text-color;
+  @include theme-aware("border-bottom", "underline");
 }
 
-.pic {
+.profile-pic {
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -35,4 +36,9 @@ $background-color: transparent;
   font-weight: bold;
   line-height: 1;
   margin-top: 10px;
+}
+
+.profile-username {
+  font-size: 1.25em;
+  line-height: 1;
 }

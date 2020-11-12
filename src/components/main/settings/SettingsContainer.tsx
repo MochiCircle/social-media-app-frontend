@@ -1,69 +1,46 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Col, Container, Row } from "reactstrap";
 import MainNavbar from "../MainNavbar";
 import BasicInfoForm from "./forms/BasicInfoForm";
-import { BioForm } from "./forms/BioForm";
-import { EmailForm } from "./forms/EmailForm";
-import { PasswordForm } from "./forms/PasswordForm";
-import { PictureForm } from "./forms/PictureForm";
-import './settings.scss';
+import EmailForm from "./forms/EmailForm";
+import PasswordForm from "./forms/PasswordForm";
+import "./settings.scss";
 
 interface IProps {
-  userId: number,
-  username: string,
-  password: string,
-  firstName: string,
-  lastName: string,
-  email: string,
-  pic: string,
-  status: string,
-  bio: string,
-  interests: string
+  id: number;
 }
 
 // Will either update the state, or just let users know their changes will be visible next time they log in
 
-export const SettingsContainer: React.FC<IProps> = (props: IProps) => {
-
-  const [user, setUser] = useState({
-    userId: 0,
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    pic: "",
-    status: "",
-    bio: "",
-    interests: ""
-  });
-
-  return (
-    <div>
-      <h1 className="font-weight-bold">Settings</h1>
-      <br/>
-      <Container>
-        <Row>
-          <Col>
-            <PictureForm />
-          </Col>
-          <Col>
-            <BasicInfoForm />
-          </Col>
-          <Col>
-            <EmailForm />
-          </Col>
-        </Row>
+const SettingsContainer: React.FC<IProps> = (props: IProps) => {
+  if (props.id > 0) {
+    return (
+      <div className="container-fluid">
+        <BasicInfoForm />
         <br />
-        <Row>
-          <Col>
-            <PasswordForm />
-          </Col>
-          <Col>
-            <BioForm />
-          </Col>
-        </Row>
-      </Container>
+        <PasswordForm />
+        <br />
+        <EmailForm />
+      </div>
+    );
+  } else {
+    return (
+    <div>
+      <br />
+      <br />
+      <h1 className="redText">Stop snooping around and log in already!</h1>
     </div>
-  );
+    );
+  }
 };
+
+//recieves these values from the app's store
+const mapStateToProps = (appState: any) => {
+  return {
+    id: appState.loginState.id,
+  };
+};
+
+//HRO export right here
+export default connect(mapStateToProps)(SettingsContainer);

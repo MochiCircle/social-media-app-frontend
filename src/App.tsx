@@ -1,15 +1,14 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomePage from "./components/main/HomePage";
-import LoginPage from "./components/main/LoginPage";
 import MainNavbar from "./components/main/MainNavbar";
-import { Provider, useDispatch, useSelector } from "react-redux";
 import RegisterPage from "./components/login/RegisterPage";
 import ProfilePage from "./components/main/ProfilePage";
-import { SettingsContainer } from "./components/main/settings/SettingsContainer";
-//import './App.css';
+import Alert from "./components/alert/alert";
+import "./App.scss";
 import "./components/mochi/mochispin.scss";
-import ProfileInfo from "./components/profile/ProfileInfo";
+import SettingsContainer from "./components/main/settings/SettingsContainer";
+import SpinPage from "./components/login/SpinPage";
 
 function App() {
   return (
@@ -17,7 +16,9 @@ function App() {
       <MainNavbar />
       {/* Alert Component should go here*/}
       {/* Spinny Mochi guy */}
-      <div className="mochi-guy">
+      <div className="mochi-guy" />
+      <Alert />
+      <div className="mainPage">
         <Switch>
           {<Route path="/register" component={RegisterPage} />}
           {<Route exact path="/" component={HomePage} />}
@@ -30,6 +31,7 @@ function App() {
           }
           {<Route path="/profile" component={ProfilePage} />}
           {<Route exact path="/settings" component={SettingsContainer} />}
+          <Route component={SpinPage} />
         </Switch>
       </div>
     </BrowserRouter>

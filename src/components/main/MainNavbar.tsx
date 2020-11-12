@@ -8,6 +8,7 @@ import "../login/loginStyling.scss";
 import { setLoginState } from "../../actions/LoginAction";
 import { initialLoginState } from "../login/LoginInitialState";
 import ThemeToggle from "../theme/ThemeToggle";
+import { Search } from "../search/Search";
 
 interface IProps {
   userId: number;
@@ -21,6 +22,7 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
 
   const onLogout = () => {
     dispatch(setLoginState(initialLoginState));
+    window.location.href="/spin";
   };
 
   //If logged in, then these components will render
@@ -33,13 +35,13 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
         style={{
           width: "100%",
           margin: 0,
-          marginBottom: "30px",
           zIndex: 2,
           position: "sticky",
           top: 0,
           left: 0,
           right: 0,
           padding: 10,
+          marginBottom: 30
         }}
         className="nav justify-content-center"
       >
@@ -59,18 +61,9 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
           </Button>
         </span>
 
-        {/*     Search Bar
-          <NavItem style={{ margin: 5 }}>
-            <span className="search-container">
-              <form action="/action_page.php">
-                <input type="text" placeholder="Search.." name="search" 
-                style={{ margin: 5 }}></input>
-                <button type="submit" className="fa fa-search"
-                style={{ margin: 5 }}>search</button>
-                </form>
-            </span>
-          </NavItem>
-         */}
+        <span>
+          <Search />
+        </span>
 
         <span>
           <Button

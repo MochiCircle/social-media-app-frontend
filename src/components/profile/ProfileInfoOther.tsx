@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { userCorrected } from "../../util/Models";
 import "./Profile.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,11 +13,8 @@ export const ProfileInfoOther: React.FC<userCorrected> = (
       {props.picUrl && (
         <img className="profile-pic" src={props.picUrl} alt="Profile Pic"></img>
       )}
-      <div className="name">
-        {" "}
-        <FontAwesomeIcon icon={users} pull="left" />{" "}
-        {props.firstname + " " + props.lastname}
-      </div>
+      <div className="name">{props.firstname + " " + props.lastname}</div>
+      <span className="profile-username">@{props.username}</span>
       <div className="status">{props.status}</div>
 
       <div className="category">Bio</div>

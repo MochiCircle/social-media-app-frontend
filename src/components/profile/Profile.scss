@@ -9,9 +9,11 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
+  /*  */
   @include theme-aware("border", "border-1");
   @include theme-aware("background", "primary");
   @include theme-aware("color", "secondary");
+  @include theme-aware("background-image", "mochi-guy");
   > div {
     margin-bottom: 5px;
   }
@@ -34,4 +36,9 @@
   font-weight: bold;
   line-height: 1;
   margin-top: 10px;
+}
+
+.profile-username {
+  font-size: 1.25em;
+  line-height: 1;
 }

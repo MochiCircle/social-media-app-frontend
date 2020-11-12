@@ -59,17 +59,14 @@ const ProfileInfo: React.FC<userCorrected> = (props: userCorrected) => {
     setStatusEditor(false);
   };
 
-  if (!props) return <p>No User Found</p>;
+  if (props.id === 0) return <p>No User Found</p>;
   return (
     <div className="profile">
       {props.picUrl && (
         <img className="profile-pic" src={props.picUrl} alt="Profile Pic"></img>
       )}
-      <div className="name">
-        {" "}
-        <FontAwesomeIcon icon={users} pull="left" />{" "}
-        {props.firstname + " " + props.lastname}
-      </div>
+      <div className="name">{props.firstname + " " + props.lastname}</div>
+      <span className="profile-username">@{props.username}</span>
       <div className="status">
         {!statusEditor ? (
           props.status

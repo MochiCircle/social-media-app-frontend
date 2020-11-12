@@ -1,20 +1,23 @@
 import Axios from 'axios';
 import React, { SyntheticEvent } from 'react';
+import { connect } from 'react-redux';
 import { Form, Input, Label } from 'reactstrap';
+import { setAlert } from '../../actions/AlertAction';
+import { axiosInstance } from '../../util/axiosConfig';
 import "./loginStyling.scss";
 interface IProps {
-  text: string;
+  userId:number
 }
 
-const RegisterPage: React.FC = () => {
+const RegisterPage: React.FC<IProps> = (props:IProps) => {
 
     const handleSubmit = async (event:SyntheticEvent<HTMLFormElement>) => {
   
         event.preventDefault();
         const username = event.currentTarget["username"].value;
-        const fName = event.currentTarget["firstName"].value;
-        const lName = event.currentTarget["lastName"].value;
-        const eMail = event.currentTarget["email"].value;
+        const firstname = event.currentTarget["firstName"].value;
+        const lastname = event.currentTarget["lastName"].value;
+        const email = event.currentTarget["email"].value;
         const password = event.currentTarget["password"].value;
         const current = event.currentTarget["confirm"].value;
     
@@ -24,10 +27,39 @@ const RegisterPage: React.FC = () => {
         }
         else
         {
-          //definitely edit this to work with the backend
-          Axios.post("http://localhost:8080/api/users/create/"+
-           username+"+"+password+"+"+fName+"+"+lName+"+"+eMail)
+            axiosInstance.post("users/create/",
+            {
+              username: username,
+              password: password,
+              firstname: firstname,
+              lastname: lastname,
+              email: email,
+            })
+            .then(()=>{
+              setAlert(
+                "**SUCCESSFUL REGISTERY** as: " +
+                  firstname +
+                  lastname + "! Please verify your email.",
+                "success",
+                20000
+              )
+               window.location.href = "/";
+            })
+            .catch((error) => {
+             console.log(error);
+             setAlert(
+              "ERROR: Unable to register your account at the moment.",
+              "danger",
+              20000
+            )
+              alert("Register Error: Unable to register this user.");
+           })  
         }
+      }
+
+      if(props.userId > 0)
+      {
+        window.location.href = "/profile";
       }
 
     return (
@@ -80,12 +112,18 @@ const RegisterPage: React.FC = () => {
                 style={{padding:10,fontSize:20,fontWeight:"bolder"}}/>
             </div>
             
-            
-            
           </Form>
         </>
     
       )
 }
 
-export default RegisterPage;
+//recieves these values from the app's store
+const mapStateToProps = (appState:any) => {
+  return {
+      userId: appState.loginState.id
+  }
+}
+
+//HOC export right here babyyy
+export default connect<IProps>(mapStateToProps)(RegisterPage);

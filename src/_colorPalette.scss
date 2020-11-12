@@ -5,8 +5,11 @@ $themes: (
     accent: #0000ff33,
     accent-2: #9500ff,
     background-1: #cccdfb,
+    settings-boxes: linear-gradient(160deg, #9500ff99 0%, #001aff99 100%),
+    settings-text-bg: white,
     border-1: 2px solid black,
     underline: 1px solid black,
+    mochi-guy: url("./assets/mochiSpinCool3.png"),
   ),
   dark: (
     //primary: #2a2a2e,
@@ -15,7 +18,10 @@ $themes: (
     accent: #0000ff33,
     accent-2: #9500ff,
     background-1: #2a2a2e,
+    settings-boxes: linear-gradient(160deg, rgba(147,0,195,0.7623249983587185) 0%, rgba(0,65,182,0.7595238779105392) 100%),
+    settings-text-bg: #303030,
     border-1: 2px solid #3a444c,
     underline: 1px solid white,
+    mochi-guy: url("./assets/mochiSpin3.png"),
   ),
 );

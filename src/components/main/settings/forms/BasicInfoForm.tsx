@@ -19,6 +19,7 @@ const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
   // end
 
   const [showSpinner, setSpinner] = useState(false);
+  // const [isVerified, setVerified] = useState(true);
   const [usernameS, setUsernameS] = useState(props.username);
   const [firstnameS, setfirstnameS] = useState(props.firstname);
   const [lastnameS, setlastnameS] = useState(props.lastname);
@@ -50,8 +51,6 @@ const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
       formData.append("image", event.currentTarget["imageF"].files[0]);
     }
 
-    // <Spinner color='success' />
-    // document.getElementById("reimbTableBody").append(tr);
     response = await axiosInstance.post("/users/updateBasic", formData);
 
     const userObject: userCorrected = {
@@ -75,12 +74,14 @@ const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
     console.log(json);
     if (json.username === usernameF) {
       props.setAlert("Info successfully updated!", "success", 10000);
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
     } else {
       props.setAlert(
         "Sorry, but it seems like that username is already taken!",
         "warning",
         10000
       );
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
   };
 
@@ -108,7 +109,18 @@ const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
 
   return (
     <div>
-      <h3>Basic Info {showSpinner ? <Spinner color="primary" /> : <span />}</h3>
+      <h3>
+        {props.verified ? (
+          <span className="greenText">
+            <b>This user is verified!</b>
+          </span>
+        ) : (
+          <span className="redText">
+            <b>Please verify your account!</b>
+          </span>
+        )}{" "}
+        {showSpinner ? <Spinner color="primary" /> : <span />}
+      </h3>
       <Form onSubmit={updateBasicInfo} className="settingsBox" method="POST">
         {pic && <img className="picView" src={pic} alt="Profile Pic"></img>}
         <br />
@@ -125,6 +137,7 @@ const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
         <Input
           type="text"
           name="username"
+          className="textEntry"
           required
           placeholder="username"
           value={usernameS}
@@ -135,6 +148,7 @@ const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
         <Input
           type="text"
           name="firstName"
+          className="textEntry"
           required
           placeholder={"first name"}
           value={firstnameS}
@@ -145,6 +159,7 @@ const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
         <Input
           type="text"
           name="lastName"
+          className="textEntry"
           required
           placeholder="last name"
           value={lastnameS}
@@ -155,6 +170,7 @@ const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
         <Input
           type="text"
           name="userInterests"
+          className="textEntry"
           placeholder="List some cool interests, comma separated"
           value={interestsS}
           onChange={handleInterests}
@@ -165,6 +181,7 @@ const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
           type="textarea"
           rows={4}
           name="userBio"
+          className="textEntry"
           placeholder="Tell us about yourself!"
           value={bioS}
           onChange={handleBio}

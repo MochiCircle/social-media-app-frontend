@@ -4,9 +4,12 @@ import { Form, Input, Label, Spinner } from "reactstrap";
 import { setLoginState } from "../../../../actions/LoginAction";
 import { axiosInstance } from "../../../../util/axiosConfig";
 import { userCorrected } from "../../../../util/Models";
+import { setAlert, ISetAlert } from "../../../../actions/AlertAction";
 import "../settings.scss";
 
-const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
+const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
+  props: userCorrected & ISetAlert
+) => {
   // Setting the state
   const updateState = (user: any) => {
     dispatch(setLoginState(user));
@@ -72,9 +75,13 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
     const json = response.data;
     console.log(json);
     if (json.username === usernameF) {
-      alert("Info successfully updated!");
+      props.setAlert("Info successfully updated!", "success", 10000);
     } else {
-      alert("Sorry, but it seems like that username is already taken!");
+      props.setAlert(
+        "Sorry, but it seems like that username is already taken!",
+        "warning",
+        10000
+      );
     }
   };
 
@@ -201,5 +208,9 @@ const mapStateToProps = (appState: any) => {
   };
 };
 
+const mapDispatchToProps = {
+  setAlert: setAlert,
+};
+
 //HRO export right here
-export default connect<userCorrected>(mapStateToProps)(BasicInfoForm);
+export default connect(mapStateToProps, mapDispatchToProps)(BasicInfoForm);

@@ -2,21 +2,24 @@ import axios from 'axios';
 import React, { SyntheticEvent, useState } from "react";
 import { connect, useDispatch } from 'react-redux';
 import { Form, Input, Spinner } from "reactstrap";
+import { ISetAlert, setAlert } from '../../../../actions/AlertAction';
 import { setLoginState } from '../../../../actions/LoginAction';
 import { axiosInstance } from '../../../../util/axiosConfig';
 import { userCorrected } from '../../../../util/Models';
 import '../settings.scss';
 
-const EmailForm: React.FC<userCorrected> = (props: userCorrected) => {
-    // Setting the state
-    const updateState = (user: any) => {
-      dispatch(setLoginState(user));
-    };
-  
-    const dispatch = useDispatch();
-    // end
+const EmailForm: React.FC<userCorrected & ISetAlert> = (
+  props: userCorrected & ISetAlert
+) => {
+  // Setting the state
+  const updateState = (user: any) => {
+    dispatch(setLoginState(user));
+  };
 
-    const [showSpinner, setSpinner] = useState(false);
+  const dispatch = useDispatch();
+  // end
+
+  const [showSpinner, setSpinner] = useState(false);
 
   const updateEmail = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -57,10 +60,10 @@ const EmailForm: React.FC<userCorrected> = (props: userCorrected) => {
     updateState(userObject);
 
     const json = response.data;
-    if(json.email===emailF) {
-      alert("Email successfully changed!");
+    if (json.email === emailF) {
+      props.setAlert("Email successfully changed!", "success", 10000);
     } else {
-      alert("Sorry, but it seems like that email is in use!");
+      props.setAlert("Sorry, but it seems like that email is in use!", "danger", 10000);
     }
   };
 
@@ -68,12 +71,16 @@ const EmailForm: React.FC<userCorrected> = (props: userCorrected) => {
     <div>
       <h3>Email {showSpinner ? <Spinner color="primary"/> : <span/>}</h3>
       <Form onSubmit={updateEmail} className="settingsBox" method="POST">
-        <div className="whiteText" >Email</div>
-        <Input type='email' name='email' required placeholder='Email address' />
-        <br/>
-        <Input type='submit' value='Send email' className="btn btn-primary col-6" />
+        <div className="whiteText">Email</div>
+        <Input type="email" name="email" required placeholder="Email address" />
+        <br />
+        <Input
+          type="submit"
+          value="Send email"
+          className="btn btn-primary col-6"
+        />
       </Form>
-  </div>
+    </div>
   );
 };
 
@@ -94,5 +101,11 @@ const mapStateToProps = (appState:any) => {
   };
 }
 
+const mapDispatchToProps = {
+  setAlert: setAlert,
+};
+
 //HRO export right here
-export default connect<userCorrected>(mapStateToProps)(EmailForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EmailForm);
+
+

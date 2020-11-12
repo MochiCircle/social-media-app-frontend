@@ -40,9 +40,9 @@ export const SettingsContainer: React.FC<IProps> = (props: IProps) => {
       <br/>
       <br/>
       <BasicInfoForm />
-      <br/>
+      <br />
       <PasswordForm />
-      <br/>
+      <br />
       <EmailForm />
     </div>
   );

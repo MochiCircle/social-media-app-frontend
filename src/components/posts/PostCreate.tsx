@@ -7,6 +7,7 @@ import "./Posts.scss";
 const PostCreate:React.FC<any> = (props:any) => {
     const [value, setValue] = useState(''); //value is state of text in textarea
     const [postText, setPostText] = useState('');
+    const [imageFile, setImageFile] = useState(null);
 
     const initialRender = useRef(true); //keep track of when component is initially rendered
 
@@ -18,7 +19,8 @@ const PostCreate:React.FC<any> = (props:any) => {
 
     //Triggered everytime the user hits post
     const getText = (e: React.FormEvent<HTMLFormElement>) => {
-        setPostText(value);
+        setImageFile(e.currentTarget["imageF"].files[0])
+        setPostText(value); //this triggers sending the post in postData or postDataPhoto
     }
 
     //Sends the post text and the userID to the endpoint to update the back-end
@@ -27,12 +29,21 @@ const PostCreate:React.FC<any> = (props:any) => {
         });
     }
 
+    const postDataPhoto = async () => {
+        axiosInstance.post("/updatePhoto/", {
+            "userid": props.userId,
+            "postText": postText,
+            "image": imageFile
+        });
+    }
+
     //triggered when postText is updated (when user hits submit button)
     useEffect(() =>{
         if(initialRender.current) { //check whether component was just rendered
             initialRender.current = false;
         } else { //only submit post data when user presses submit button, not on initial render
-            postData();
+            //postData();
+            postDataPhoto();
         }
     }, [postText]);
 
@@ -40,6 +51,7 @@ const PostCreate:React.FC<any> = (props:any) => {
         <div className="postCreate" >
             <form className="postForm" onSubmit={getText}>
                 <textarea value={value} cols={50} rows={3} onChange={updateText} placeholder="What's on your mind?"/>
+                <input type="file" id="imageUpload" name="imageF"/>
                 <button className="postButton" type="submit">
                     Post
                 </button>

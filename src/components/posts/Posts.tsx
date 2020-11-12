@@ -37,7 +37,7 @@ const Post:React.FC<any> = (props: any) => {
     //triggers on load
     useEffect(() => {
         //get whether user has liked this post from the back-end
-        axiosInstance.get("likes/status/" + props.userId + "+" + props.id).then((response) => {
+        axiosInstance.get("/likes/status/" + props.userId + "+" + props.id).then((response) => {
             setHeart(response.data); //response.data is either 0 or 1, 0 if user hasn't
                                      //liked post, 1 if user did like post
         });

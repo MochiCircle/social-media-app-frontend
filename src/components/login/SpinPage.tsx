@@ -7,11 +7,11 @@ const SpinPage: React.FC<userCorrected> = (props: userCorrected) => {
     window.location.href = "/";
   }
 
-  return (
-    <div className="mochi-guy">
-      <h3>Look at him go!</h3>
+  return(
+    <div>
+      
     </div>
-  );
+  )
 };
 
 const mapStateToProps = (appState: any) => {

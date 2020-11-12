@@ -21,7 +21,7 @@ const HomePage: React.FC<IProps> = (props:IProps) => {
     <>
       <Row>
         <Col md="4">
-          <Profile userId={1} ownProfile={true} />
+          <Profile userId={-1} ownProfile={true} />
         </Col>
         <Col md="8">
           <PostContainer loadType={true} userId={1} />

@@ -26,11 +26,6 @@ export const SettingsContainer: React.FC<IProps> = (props: IProps) => {
 
   return (
     <div className="container-fluid">
-      {/* <div className="row">
-        <div className="col-1"></div>
-        <div className="col-10"></div>
-        <div className="col-1"></div>
-      </div> */}
       <BasicInfoForm />
       <br />
       <PasswordForm />

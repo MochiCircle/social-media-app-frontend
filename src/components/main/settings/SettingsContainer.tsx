@@ -22,23 +22,9 @@ interface IProps {
 // Will either update the state, or just let users know their changes will be visible next time they log in
 
 export const SettingsContainer: React.FC<IProps> = (props: IProps) => {
-  const [user, setUser] = useState({
-    userId: 0,
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    pic: "",
-    status: "",
-    bio: "",
-    interests: "",
-  });
 
   return (
     <div className="container-fluid">
-      <br/>
-      <br/>
       <BasicInfoForm />
       <br />
       <PasswordForm />

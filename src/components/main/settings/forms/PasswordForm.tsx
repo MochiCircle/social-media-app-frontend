@@ -9,6 +9,7 @@ import "../settings.scss";
 interface IProps extends ISetAlert {
   id: number;
   username: string;
+  email: string;
 }
 
 const PasswordForm: React.FC<IProps> = (props: IProps) => {
@@ -17,7 +18,6 @@ const PasswordForm: React.FC<IProps> = (props: IProps) => {
   const updatePassword = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSpinner(true);
-    const userId = props.id;
     const username = props.username;
     const oldPassF = event.currentTarget["currentPass"].value;
     const newPassF = event.currentTarget["newPass"].value;
@@ -36,18 +36,12 @@ const PasswordForm: React.FC<IProps> = (props: IProps) => {
       setSpinner(false);
     } else {
       const response = await axiosInstance.post("/users/update/", {
-        userId: userId,
-        username: null,
+        userId: props.id,
         password: newPass2F,
-        firstName: null,
-        lastName: null,
-        email: null,
-        pic: null,
-        status: null,
-        bio: null,
-        interests: null,
+        email: props.email,
       });
 
+      window.scrollTo(0, 0);
       setSpinner(false);
 
       const json = response.data;
@@ -64,15 +58,16 @@ const PasswordForm: React.FC<IProps> = (props: IProps) => {
       <h3>Password {showSpinner ? <Spinner color="primary" /> : <span />}</h3>
       <Form onSubmit={updatePassword} className="settingsBox" method="POST">
         <div className="whiteText">Current Password</div>
-        <Input type="password" name="currentPass" required placeholder="••••" />
+        <Input type="password" name="currentPass" className="textEntry" required placeholder="••••" />
         <br />
         <div className="whiteText">New Password</div>
-        <Input type="password" name="newPass" required placeholder="••••" />
+        <Input type="password" name="newPass" className="textEntry" required placeholder="••••" />
         <br />
         <div className="whiteText">Confirm New Password</div>
         <Input
           type="password"
           name="newPassConfirm"
+          className="textEntry"
           required
           placeholder="••••"
         />
@@ -92,6 +87,7 @@ const mapStateToProps = (appState: any) => {
   return {
     id: appState.loginState.id,
     username: appState.loginState.username,
+    email: appState.loginState.email,
   };
 };
 

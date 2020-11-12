@@ -30,15 +30,8 @@ const EmailForm: React.FC<userCorrected & ISetAlert> = (
       "/users/updateEmail/",
       {
         userId: props.id,
-        username: null,
-        password: null,
-        firstName: null,
-        lastName: null,
         email: emailF,
-        pic: null,
-        status: null,
-        bio: null,
-        interests: null,
+        oldEmail: props.email
       }
     );
 
@@ -61,8 +54,10 @@ const EmailForm: React.FC<userCorrected & ISetAlert> = (
 
     const json = response.data;
     if (json.email === emailF) {
+      window.scrollTo(0,0);
       props.setAlert("Email successfully changed!", "success", 10000);
     } else {
+      window.scrollTo(0,0);
       props.setAlert("Sorry, but it seems like that email is in use!", "danger", 10000);
     }
   };
@@ -72,7 +67,7 @@ const EmailForm: React.FC<userCorrected & ISetAlert> = (
       <h3>Email {showSpinner ? <Spinner color="primary"/> : <span/>}</h3>
       <Form onSubmit={updateEmail} className="settingsBox" method="POST">
         <div className="whiteText">Email</div>
-        <Input type="email" name="email" required placeholder="Email address" />
+        <Input type="email" name="email" className="textEntry" required placeholder="Email address" />
         <br />
         <Input
           type="submit"
@@ -80,6 +75,7 @@ const EmailForm: React.FC<userCorrected & ISetAlert> = (
           className="btn btn-primary col-6"
         />
       </Form>
+      <br/><br/>
     </div>
   );
 };

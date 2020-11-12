@@ -9,6 +9,8 @@ import { setLoginState } from "../../actions/LoginAction";
 import { initialLoginState } from "../login/LoginInitialState";
 import ThemeToggle from "../theme/ThemeToggle";
 import { Search } from "../search/Search";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog } from "@fortawesome/free-solid-svg-icons";
 
 interface IProps {
   userId: number;
@@ -22,7 +24,7 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
 
   const onLogout = () => {
     dispatch(setLoginState(initialLoginState));
-    window.location.href="/spin";
+    window.location.href = "/spin";
   };
 
   //If logged in, then these components will render
@@ -41,7 +43,7 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
           left: 0,
           right: 0,
           padding: 10,
-          marginBottom: 30
+          marginBottom: 30,
         }}
         className="nav justify-content-center"
       >
@@ -62,13 +64,33 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
         </span>
 
         <span>
+          <Button
+            color="transparent"
+            href="/settings"
+            style={{
+              margin: "0px -5px 0px -10px",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faCog}
+              style={{
+                display: "inline",
+                cursor: "pointer",
+                color: "#CCCCCC",
+              }}
+              href="/settings"
+            />
+          </Button>
+        </span>
+
+        <span>
           <Search />
         </span>
 
         <span>
           <Button
             onClick={onLogout}
-            style={{ height: 44, margin: 5 }}
+            style={{ height: 38, margin: 5 }}
             className="btn pull-right"
           >
             Logout

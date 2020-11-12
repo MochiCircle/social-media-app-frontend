@@ -24,19 +24,17 @@ const Post: React.FC<any> = (props: any) => {
   const [heart, setHeart] = useState(false);
   const [likes, setLikes] = useState(0);
 
-  const imagesPath = {
-    liked: liked,
-    unliked: unliked,
-  };
-
-  const toggleImage = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    e.preventDefault();
-    axiosInstance
-      .get("/likes/update/" + heart + "+" + props.id + "+" + props.userId)
-      .then((response) => {
+    const imagesPath = {
+        liked: liked,
+        unliked: unliked
+    }
+    
+    const toggleImage = (e:React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+        e.preventDefault();
         setHeart(!heart); //toggle heart image
-      });
-  };
+        axiosInstance.get("/likes/update/" + heart + "+" + props.id + "+" + props.userId).then((response) => {
+        });
+    }
 
   const getImageName = () => (heart ? "liked" : "unliked");
 

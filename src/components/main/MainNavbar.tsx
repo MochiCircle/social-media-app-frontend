@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect, useDispatch } from "react-redux";
-
 import { Navbar, NavItem, NavLink, Button } from "reactstrap";
 import LoginComp from "../login/LoginComp";
 import mochiLogo from "../../assets/mochiVectorLogo_smaller.svg";
@@ -11,6 +10,9 @@ import ThemeToggle from "../theme/ThemeToggle";
 import { Search } from "../search/Search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
+import ForgotPassComp from "../login/ForgotPassComp";
+import Alert from "../alert/alert";
+import RegisterPage from "../login/RegisterPage";
 
 interface IProps {
   userId: number;
@@ -20,6 +22,20 @@ interface IProps {
 }
 
 const MainNavbar: React.FC<IProps> = (props: IProps) => {
+  
+  const [showReg, setShowReg] = useState(false);
+
+  const toggleRegComp = () => 
+  {
+    if(showReg == false){
+      setShowReg(true);
+    }
+    else{
+      setShowReg(false);
+    }
+
+  }
+
   const dispatch = useDispatch();
 
   const onLogout = () => {
@@ -30,6 +46,7 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
   //If logged in, then these components will render
   if (props.userId > 0) {
     return (
+      <>
       <Navbar
         color="dark"
         dark
@@ -96,15 +113,20 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
             Logout
           </Button>
         </span>
-        <span>
+        <span style={{margin:5}}>
           <ThemeToggle />
         </span>
       </Navbar>
+     <Alert />
+     </>
     );
   }
   //If not logged in, these components will render...
-  else {
+  else 
+  {
+
     return (
+      <>
       <Navbar
         color="dark"
         dark
@@ -122,18 +144,24 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
         }}
         className="nav justify-content-center"
       >
-        <div className="row justify-content-between">
+        <div className=" row justify-content-between">
           <NavItem className="col-2">
-            <NavLink href="/register">
-              <Button style={{ margin: 5 }}>Register</Button>
-            </NavLink>
+            <Button onClick={toggleRegComp} className="btn" style={{ margin: 5 }}>Register</Button>
           </NavItem>
           <NavItem className="col-7">
             <LoginComp /> {/* What actually allows you to login */}
           </NavItem>
+          <NavItem >
+            <ForgotPassComp /> 
+          </NavItem>
         </div>
-        <ThemeToggle />
+        <span style={{margin:5}}>
+          <ThemeToggle />
+        </span>
       </Navbar>
+      <Alert />
+        {showReg ? <RegisterPage /> : <span/> }
+      </>
     );
   }
 };

@@ -15,7 +15,7 @@ it("renders LoginComp when the Main Navbar is rendered", () => {
 
   const fakeStore = configureStore([]);
   const store = fakeStore({
-    id: 0,
+    id: 5,
     username: "",
     password: "",
     firstname: "",
@@ -36,5 +36,5 @@ it("renders LoginComp when the Main Navbar is rendered", () => {
 
   const actualMainNav = mainNav();
   const mainNavActual = shallow(<Provider store={store} ><MainNavbar /></Provider>);
-  expect(mainNavActual.contains(<ForgotPassComp/>)).toEqual(true);
+  expect(mainNavActual.contains(<ForgotPassComp/>)).toEqual(false);
 });

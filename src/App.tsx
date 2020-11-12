@@ -7,6 +7,7 @@ import ProfilePage from "./components/main/ProfilePage";
 import "./App.scss";
 import "./components/mochi/mochispin.scss";
 import SettingsContainer from "./components/main/settings/SettingsContainer";
+import SpinPage from "./components/login/SpinPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           }
           {<Route path="/profile" component={ProfilePage} />}
           {<Route exact path="/settings" component={SettingsContainer} />}
+          <Route component={SpinPage} />
         </Switch>
       </div>
     </BrowserRouter>

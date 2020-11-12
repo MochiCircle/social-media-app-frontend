@@ -9,17 +9,17 @@ import liked from "../../assets/fullheart.png";
 import { Link } from "react-router-dom";
 
 interface IProps {
-  id: number; //postID of post
-  userId: number; //userID of user that created the post
-  username: string; //username of poster
-  picurl: string; //avatar of poster
-  post_text: string; //post content
-  image: string; //image on post
+    post_firstname: string,
+    post_lastname: string,
+    post_username: string,
+    post_picurl: string,
+    id: number,
+    post_text:string,
+    image: string,
+    likes: number
 }
 
-const Post: React.FC<any> = (props: any) => {
-  const [heart, setHeart] = useState(false);
-  const [likes, setLikes] = useState(0);
+const Post:React.FC<any> = (props:any) => {
 
   const imagesPath = {
     liked: liked,
@@ -52,30 +52,27 @@ const Post: React.FC<any> = (props: any) => {
     });
   }, []);
 
-  return (
-    <div className="border">
-      <Link to={`/profile/${props.userid}`}>
-        <img src={props.picurl} className="pic"></img>
+
+    return (
+        <div className="border">
+    <Link to={`/profile/${props.userId}`}>
+            <img src={props.post_picurl} className="pic"></img>
       </Link>
-      <div className="body">
-        <Link to={`/profile/${props.userid}`}>
-          <span className="username">{props.username}</span>
-        </Link>
-        <div className="postText">{props.post_text}</div>
-        <img src={props.image} className="image"></img>
-      </div>
-      <div className="postFooter">
-        <span>{heart ? likes + 1 : likes} likes</span>
-        <input
-          type="image"
-          className="heart"
-          src={imagesPath[getImageName()]}
-          onClick={toggleImage}
-        />
-      </div>
-    </div>
-  );
-};
+            <div className="body">
+              <Link to={`/profile/${props.userId}`}>
+                <span className="username">{props.post_firstname} {props.post_lastname} (@{props.post_username})</span>
+              </Link>
+                <div className="postText">{props.post_text}</div>
+                <img src={props.image} className="image"></img>
+            </div>
+            <div className="postFooter">
+                <span>{heart ? props.likes + 1 : props.likes} likes</span>
+                <input type="image" className="heart" src={imagesPath[getImageName()]} onClick={toggleImage}/>
+            </div>
+        </div>
+    )
+
+}
 
 const mapStateToProps = (appState: any, ownProps: any) => {
   return {

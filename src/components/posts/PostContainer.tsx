@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { user } from "../../util/Models";
-import Post from "./Posts";
-import { axiosInstance } from "../../util/axiosConfig";
 
-interface IPost {
-  id: number; //postID of post
-  userId: number; //userID of user that created the post
-  username: string; //username of poster
-  picurl: string; //avatar of poster
-  post_text: string; //post content
+import React, { useEffect } from 'react';
+import {connect} from "react-redux";
+import {user} from "../../util/Models";
+import Post from './Posts';
+import { axiosInstance} from "../../util/axiosConfig";
+
+interface Post {
+    post_firstname: string,
+    post_lastname: string,
+    post_username: string,
+    post_picurl: string,
+    id: number,
+    post_text:string,
+    image: string,
+    likes: number
 }
 
 interface IProps {

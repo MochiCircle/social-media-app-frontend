@@ -45,19 +45,25 @@ const LoginComp: React.FC<IProps> = (props:IProps) =>
         }
     }
 
-    const sendEmail = (ev:any) => {
-        const email = ev.currentTarget["emailF"].value;
+    const sendEmail = (ev:SyntheticEvent<HTMLFormElement>) => {
 
+        ev.preventDefault();
+
+        setSpinner(true);
+        const email = ev.currentTarget["emailF"].value;
+        console.log(email);
         axiosInstance.post("users/forgot/", {email:email})
         .then((resp) => {
-            if (resp.data == "sent")
+            if (resp.data === "sent")
             {
+                setSpinner(false);
                 dispatch(setAlert(
-                    "Sent recovery email with new password",
+                    "Sent a recovery email with new temporary password",
                     "success",20000));
             }
             else
             {
+                setSpinner(false);
                 dispatch(
                     setAlert(
                       "ERROR: Email failed to send",
@@ -80,6 +86,7 @@ const LoginComp: React.FC<IProps> = (props:IProps) =>
                 <Button onClick={toggleForgotPass} id="fpass" className="col-2">Forgot Password?</Button>
             </Form> 
         : 
+        <>
             <Form onSubmit={handleSubmit} className="row">
                 {/* Shows the spinner */}
                 <h2>{showSpinner ? <Spinner color="primary" /> : <span />}</h2>
@@ -87,11 +94,12 @@ const LoginComp: React.FC<IProps> = (props:IProps) =>
                 <input type="password" className="col-4" placeholder="**********" name="password" style={{ margin: 5 }} maxLength={20} />
                 <input type="submit" name="log-btn" value="LOGIN" className="col-2 log-btn" style={{ margin: 5 }} />
                 <Button onClick={toggleForgotPass} id="fpass" className="col-2">Forgot Password?</Button>
-                <Form onSubmit={sendEmail}>
-                    <input style={{margin:5}} type="email" name="emailF" placeholder="email"/>
-                    <input style={{margin:5}} type="submit" className="" value="send password" />
-                </Form>
             </Form>
+            <Form onSubmit={sendEmail}>
+            <input style={{margin:5}} type="email" name="emailF" placeholder="email"/>
+            <input style={{margin:5}} type="submit" className="" value="reset password" />
+            </Form>
+        </>
                 }
     </span>
     )

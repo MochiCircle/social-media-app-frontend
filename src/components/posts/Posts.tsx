@@ -30,8 +30,8 @@ const Post:React.FC<any> = (props:any) => {
     
     const toggleImage = (e:React.MouseEvent<HTMLInputElement, MouseEvent>) => {
         e.preventDefault();
+        setHeart(!heart); //toggle heart image
         axiosInstance.get("/likes/update/" + heart + "+" + props.id + "+" + props.userId).then((response) => {
-            setHeart(!heart); //toggle heart image
         });
     }
 
@@ -56,7 +56,9 @@ const Post:React.FC<any> = (props:any) => {
             <div className="body">
                 <span className="username">{props.post_firstname} {props.post_lastname} (@{props.post_username})</span>
                 <div className="postText">{props.post_text}</div>
-                <img src={props.image} className="image"></img>
+                <div className="imageContainer">
+                    <img src={props.image} className="image"></img>
+                </div>
             </div>
             <div className="postFooter">
                 <span>{heart ? props.likes + 1 : props.likes} likes</span>

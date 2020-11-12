@@ -16,6 +16,7 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
   // end
 
   const [showSpinner, setSpinner] = useState(false);
+  const [isVerified, setVerified] = useState(true);
   const [usernameS, setUsernameS] = useState(props.username);
   const [firstnameS, setfirstnameS] = useState(props.firstname);
   const [lastnameS, setlastnameS] = useState(props.lastname);
@@ -44,37 +45,37 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
     let response: any;
 
     if (event.currentTarget["imageF"].files[0] !== undefined) {
-      formData.append("image", event.currentTarget["imageF"].files[0])
+      formData.append("image", event.currentTarget["imageF"].files[0]);
     }
-    
-      // <Spinner color='success' />
-      // document.getElementById("reimbTableBody").append(tr);
-      response = await axiosInstance.post("/users/updateBasic", formData);
 
-      const userObject: userCorrected = {
-        id: props.id,
-        username: usernameF,
-        password: props.password,
-        firstname: firstNameF,
-        lastname: lastNameF,
-        email: props.email,
-        picUrl: response.data.picUrl,
-        status: props.status,
-        bio: userBioF,
-        interests: userInterestsF,
-        verified: props.verified,
-      };
+    // <Spinner color='success' />
+    // document.getElementById("reimbTableBody").append(tr);
+    response = await axiosInstance.post("/users/updateBasic", formData);
 
-      setSpinner(false);
-      updateState(userObject);
+    const userObject: userCorrected = {
+      id: props.id,
+      username: usernameF,
+      password: props.password,
+      firstname: firstNameF,
+      lastname: lastNameF,
+      email: props.email,
+      picUrl: response.data.picUrl,
+      status: props.status,
+      bio: userBioF,
+      interests: userInterestsF,
+      verified: props.verified,
+    };
 
-      const json = response.data;
-      console.log(json);
-      if (json.username === usernameF) {
-        alert("Info successfully updated!");
-      } else {
-        alert("Sorry, but it seems like that username is already taken!");
-      }
+    setSpinner(false);
+    updateState(userObject);
+
+    const json = response.data;
+    console.log(json);
+    if (json.username === usernameF) {
+      alert("Info successfully updated!");
+    } else {
+      alert("Sorry, but it seems like that username is already taken!");
+    }
   };
 
   const imagePreview = (event: SyntheticEvent<HTMLInputElement>) => {
@@ -101,7 +102,15 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
 
   return (
     <div>
-      <h3>Basic Info  {showSpinner ? <Spinner color="primary"/> : <span/>}</h3>
+      <h3>
+        Basic Info:{" "}
+        {props.verified ? (
+          <span className="greenText"><b>This user is verified!</b></span>
+        ) : (
+          <span className="redText"><b>Please verify your account!</b></span>
+        )}{" "}
+        {showSpinner ? <Spinner color="primary" /> : <span />}
+      </h3>
       <Form onSubmit={updateBasicInfo} className="settingsBox" method="POST">
         {pic && <img className="picView" src={pic} alt="Profile Pic"></img>}
         <br />
@@ -167,7 +176,9 @@ const BasicInfoForm: React.FC<userCorrected> = (props: userCorrected) => {
           type="submit"
           value={"Save changes"}
           className="btn btn-success col-6"
-        /><span> </span>{showSpinner ? <Spinner color="success"/> : <span/>}
+        />
+        <span> </span>
+        {showSpinner ? <Spinner color="success" /> : <span />}
       </Form>
     </div>
   );

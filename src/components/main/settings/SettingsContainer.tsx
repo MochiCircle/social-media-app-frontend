@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import MainNavbar from "../MainNavbar";
 import BasicInfoForm from "./forms/BasicInfoForm";
-import { EmailForm } from "./forms/EmailForm";
+import EmailForm from "./forms/EmailForm";
 import PasswordForm from "./forms/PasswordForm";
 import "./settings.scss";
 
@@ -37,11 +37,6 @@ export const SettingsContainer: React.FC<IProps> = (props: IProps) => {
 
   return (
     <div className="container-fluid">
-      {/* <div className="row">
-        <div className="col-1"></div>
-        <div className="col-10"></div>
-        <div className="col-1"></div>
-      </div> */}
       <br/>
       <br/>
       <BasicInfoForm />

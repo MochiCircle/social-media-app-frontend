@@ -22,6 +22,7 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
 
   const onLogout = () => {
     dispatch(setLoginState(initialLoginState));
+    window.location.href="/spin";
   };
 
   //If logged in, then these components will render
@@ -34,13 +35,13 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
         style={{
           width: "100%",
           margin: 0,
-          marginBottom: "30px",
           zIndex: 2,
           position: "sticky",
           top: 0,
           left: 0,
           right: 0,
           padding: 10,
+          marginBottom: 30
         }}
         className="nav justify-content-center"
       >

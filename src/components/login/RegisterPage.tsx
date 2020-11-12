@@ -64,10 +64,10 @@ const RegisterPage: React.FC<IProps> = (props:IProps) => {
 
     return (
         <>
-          <Form onSubmit={handleSubmit} method="POST" className="container" >
+          <Form onSubmit={handleSubmit} method="POST" className="container reg-box" >
 
             <div className="row justify-content-center" style={{margin:10}}>
-                <Input type='reset' value='Reset Fields' className="reset-btn" 
+                <Input type='reset' value='Reset Fields' className="btn reset-btn" 
                 style={{padding:7,fontSize:15,fontWeight:"bold"}}/>
             </div>
 
@@ -108,7 +108,7 @@ const RegisterPage: React.FC<IProps> = (props:IProps) => {
             </div>
             
             <div className="row justify-content-center" style={{margin:10}}>
-                <Input type='submit' value='Register' className="submit-btn" 
+                <Input type='submit' value='Register' className="log-btn" 
                 style={{padding:10,fontSize:20,fontWeight:"bolder"}}/>
             </div>
             

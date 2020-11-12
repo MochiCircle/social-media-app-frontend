@@ -3,6 +3,7 @@
 .entry
 {
     @include theme-aware("color", "secondary");
+    @include theme-aware("text-shadow", "text-shad");
     @include theme-aware("background", "settings-text-bg");
     @include theme-aware("border", "settings-text-bg");
     transition: 0.4s;
@@ -28,6 +29,33 @@
     transition: 0.1s;
     -webkit-transition: 0.1s;
     -moz-transition: 0.1s;
+}
+
+.btn
+{
+    @include theme-aware("background-image", "btn-grad");
+    @include theme-aware("color", "secondary");
+    @include theme-aware("text-shadow", "text-shad");
+    transition: 0.4s;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+}
+
+.btn:hover
+{
+    @include theme-aware("background-image", "btn-grad-hover");
+    @include theme-aware("color", "secondary");
+    @include theme-aware("text-shadow", "text-shad");
+    transition: 0.4s;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+}
+
+.reg-box
+{
+    padding: 15px 20px 15px;
+    border-radius: 30px;
+    @include theme-aware("background", "settings-boxes");
 }
 
 .submit-btn
@@ -67,7 +95,8 @@
 
 .log-btn
 {
-    color: #fefefe;
+    @include theme-aware("color", "secondary");
+    @include theme-aware("text-shadow", "text-shad");
     background-image: linear-gradient(122deg, #22aa22, #008800);
     border-radius: 6px;
     border: 3px #117711;
@@ -79,7 +108,8 @@
 
 .log-btn:hover
 {
-    color: #000;
+    @include theme-aware("color", "secondary");
+    @include theme-aware("text-shadow", "text-shad");
     background-image: linear-gradient(122deg, #66c966, #88da88);
     border-radius: 0px;
     border: 0px;

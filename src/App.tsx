@@ -4,10 +4,10 @@ import HomePage from "./components/main/HomePage";
 import MainNavbar from "./components/main/MainNavbar";
 import RegisterPage from "./components/login/RegisterPage";
 import ProfilePage from "./components/main/ProfilePage";
-import { SettingsContainer } from "./components/main/settings/SettingsContainer";
 import Alert from "./components/alert/alert";
 import "./App.scss";
 import "./components/mochi/mochispin.scss";
+import SettingsContainer from "./components/main/settings/SettingsContainer";
 
 function App() {
   return (

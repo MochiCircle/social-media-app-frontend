@@ -33,6 +33,7 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
         style={{
           width: "100%",
           margin: 0,
+          marginBottom: "30px",
           zIndex: 2,
           position: "sticky",
           top: 0,
@@ -96,6 +97,7 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
         style={{
           width: "100%",
           margin: 0,
+          marginBottom: "30px",
           zIndex: 2,
           position: "sticky",
           top: 0,

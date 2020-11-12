@@ -4,7 +4,6 @@ import HomePage from "./components/main/HomePage";
 import MainNavbar from "./components/main/MainNavbar";
 import RegisterPage from "./components/login/RegisterPage";
 import ProfilePage from "./components/main/ProfilePage";
-import Alert from "./components/alert/alert";
 import "./App.scss";
 import "./components/mochi/mochispin.scss";
 import SettingsContainer from "./components/main/settings/SettingsContainer";
@@ -16,10 +15,8 @@ function App() {
       {/* Alert Component should go here*/}
       {/* Spinny Mochi guy */}
       <div className="mochi-guy" />
-      <Alert />
       <div className="mainPage">
         <Switch>
-          {<Route path="/register" component={RegisterPage} />}
           {<Route exact path="/" component={HomePage} />}
           {
             <Route

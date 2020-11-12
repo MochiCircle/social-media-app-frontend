@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect, useDispatch } from "react-redux";
 
 import { Navbar, NavItem, NavLink, Button } from "reactstrap";
@@ -10,6 +10,8 @@ import { initialLoginState } from "../login/LoginInitialState";
 import ThemeToggle from "../theme/ThemeToggle";
 import { Search } from "../search/Search";
 import ForgotPassComp from "../login/ForgotPassComp";
+import Alert from "../alert/alert";
+import RegisterPage from "../login/RegisterPage";
 
 interface IProps {
   userId: number;
@@ -19,6 +21,20 @@ interface IProps {
 }
 
 const MainNavbar: React.FC<IProps> = (props: IProps) => {
+  
+  const [showReg, setShowReg] = useState(false);
+
+  const toggleRegComp = () => 
+  {
+    if(showReg == false){
+      setShowReg(true);
+    }
+    else{
+      setShowReg(false);
+    }
+
+  }
+
   const dispatch = useDispatch();
 
   const onLogout = () => {
@@ -29,6 +45,7 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
   //If logged in, then these components will render
   if (props.userId > 0) {
     return (
+      <>
       <Navbar
         color="dark"
         dark
@@ -79,11 +96,16 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
           <ThemeToggle />
         </span>
       </Navbar>
+     <Alert />
+     </>
     );
   }
   //If not logged in, these components will render...
-  else {
+  else 
+  {
+
     return (
+      <>
       <Navbar
         color="dark"
         dark
@@ -103,9 +125,7 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
       >
         <div className=" row justify-content-between">
           <NavItem className="col-2">
-            <NavLink href="/register">
-              <Button className="btn" style={{ margin: 5 }}>Register</Button>
-            </NavLink>
+            <Button onClick={toggleRegComp} className="btn" style={{ margin: 5 }}>Register</Button>
           </NavItem>
           <NavItem className="col-7">
             <LoginComp /> {/* What actually allows you to login */}
@@ -118,6 +138,9 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
           <ThemeToggle />
         </span>
       </Navbar>
+      <Alert />
+        {showReg ? <RegisterPage /> : <span/> }
+      </>
     );
   }
 };

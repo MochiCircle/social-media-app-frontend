@@ -13,6 +13,7 @@ interface IProps {
     username:string, //username of poster
     picurl:string,    //avatar of poster
     post_text:string, //post content
+    image:string      //image on post
 }
 
 const Post:React.FC<any> = (props: any) => {
@@ -42,7 +43,7 @@ const Post:React.FC<any> = (props: any) => {
                                      //liked post, 1 if user did like post
         });
         //Get amount of likes for this post from back-end
-        axiosInstance.get("/likes/" + props.id).then((response) => {
+        axiosInstance.get("/likes/find/" + props.id).then((response) => {
             setLikes(response.data);
         });
     }, []);
@@ -53,6 +54,7 @@ const Post:React.FC<any> = (props: any) => {
             <div className="body">
                 <span className="username">{props.username}</span>
                 <div className="postText">{props.post_text}</div>
+                <img src={props.image} className="image"></img>
             </div>
             <div className="postFooter">
                 <span>{heart ? likes + 1 : likes} likes</span>
@@ -60,8 +62,6 @@ const Post:React.FC<any> = (props: any) => {
             </div>
         </div>
     )
-
-
 
 }
 

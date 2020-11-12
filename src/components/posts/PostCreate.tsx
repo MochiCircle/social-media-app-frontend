@@ -7,7 +7,7 @@ import "./Posts.scss";
 const PostCreate:React.FC<any> = (props:any) => {
     const [value, setValue] = useState(''); //value is state of text in textarea
     const [postText, setPostText] = useState('');
-    const [imageFile, setImageFile] = useState(null);
+    const [imageFile, setImageFile] = useState("");
 
     const initialRender = useRef(true); //keep track of when component is initially rendered
 
@@ -25,16 +25,21 @@ const PostCreate:React.FC<any> = (props:any) => {
 
     //Sends the post text and the userID to the endpoint to update the back-end
     const postData = async () => {
-        axiosInstance.get("update/" + props.userId + "+" + postText).then((response) => {
+        axiosInstance.get("/posts/update/" + props.userId + "+" + postText).then((response) => {
         });
     }
 
     const postDataPhoto = async () => {
-        axiosInstance.post("/updatePhoto/", {
+        const formData = new FormData();
+        formData.append("userid", props.userId);
+        formData.append("postText", postText);
+        formData.append("image", imageFile);
+        axiosInstance.post("/posts/updatePhoto/", formData);
+        /*axiosInstance.post("/posts/updatePhoto/", {
             "userid": props.userId,
             "postText": postText,
             "image": imageFile
-        });
+        });*/
     }
 
     //triggered when postText is updated (when user hits submit button)

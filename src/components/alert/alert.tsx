@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Alert } from "reactstrap";
 
 interface IAlert {
   id: string;
@@ -8,29 +9,30 @@ interface IAlert {
 }
 
 interface IProp {
-  alerts: Array<IAlert>;
+  alerts: IAlert[];
 }
 
-const Alert: React.FC<IProp> = (props: IProp) => {
+const AlertComp: React.FC<IProp> = (props: IProp) => {
   const { alerts } = props;
   if (alerts !== null && alerts.length > 0) {
-    let alertsList;
-    alertsList = alerts.map((alert) => {
-      return (
-        <div key={alert.id} className={`alert alert-${alert.alertType}`}>
-          {alert.msg}
-        </div>
-      );
-    });
-
-    return alertsList;
+    return (
+      <>
+        {alerts.map((alert) => {
+          return (
+            <Alert color={alert.alertType} key={alert.id}>
+              {alert.msg}
+            </Alert>
+          );
+        })}
+      </>
+    );
   } else {
     return null;
   }
 };
 
-const mapStateToProps = (state) => ({
-  alerts: state.alert,
-});
+const mapStateToProps = (state: any) => {
+  return { alerts: state.alertStates };
+};
 
-export default connect(mapStateToProps)(Alert);
+export default connect(mapStateToProps)(AlertComp);

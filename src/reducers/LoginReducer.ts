@@ -2,6 +2,8 @@ import { ILoginState } from ".";
 import { initialLoginState } from "../components/login/LoginInitialState";
 import { setLoginState, SET_USER } from "../actions/LoginAction";
 import { axiosInstance } from "../util/axiosConfig";
+import { useDispatch } from "react-redux";
+import { setAlert } from "../actions/AlertAction";
 
 export const loginReducer = (
   state: ILoginState = initialLoginState,
@@ -30,19 +32,25 @@ export const loadUser = (username: string, password: string) => async (
       password: password,
     })
     .then((response) => {
-      console.log(response.data);
-      alert(
-        "**SUCCESSFUL LOGIN** as: " +
-          response.data.firstname +
-          response.data.lastname
-      );
-      return response.data;
+      if (response.data === "") {
+        dispatch(setAlert("Login Failed: Credentials Error.", "danger", 10000));
+        console.log(response);
+        return null;
+      } else {
+        console.log(response.data);
+        dispatch(
+          setAlert(
+            "**SUCCESSFUL LOGIN** as: " +
+              response.data.firstname +
+              response.data.lastname,
+            "success",
+            20000
+          )
+        );
+        return response.data;
+      }
     })
-    .catch((error) => {
-      alert("Login Failed: Credentials Error.");
-      console.log(error);
-      return null;
-    });
+    .catch((error) => {});
 
   //if no user data was returned then revert back to initial unloggedin state
   if (user != null) {

@@ -2,7 +2,6 @@ import { ILoginState } from ".";
 import { initialLoginState } from "../components/login/LoginInitialState";
 import { setLoginState, SET_USER } from "../actions/LoginAction";
 import { axiosInstance } from "../util/axiosConfig";
-import { useDispatch } from "react-redux";
 import { setAlert } from "../actions/AlertAction";
 
 export const loginReducer = (

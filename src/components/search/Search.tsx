@@ -1,10 +1,9 @@
 import { Autocomplete } from "@material-ui/lab";
 import { TextField } from "@material-ui/core";
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../../util/axiosConfig";
 import { userCorrected } from "../../util/Models";
 import { Button } from "reactstrap";
-import { useHistory } from "react-router-dom";
 
 //"/users"
 
@@ -23,7 +22,6 @@ export const Search: React.FC = () => {
     lastname: "",
   });
   const loading = open && options.length === 0;
-  const history = useHistory();
   useEffect(() => {
     let active = true;
 

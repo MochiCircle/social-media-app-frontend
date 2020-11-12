@@ -1,74 +1,134 @@
-import axios from "axios";
-import React, { SyntheticEvent } from "react";
-import { connect } from "react-redux";
-import { Form, Input } from "reactstrap";
+import React, { SyntheticEvent, useState } from "react";
+import { connect, useDispatch } from "react-redux";
+import { Form, Input, Label, Spinner } from "reactstrap";
+import { setLoginState } from "../../../../actions/LoginAction";
+import { axiosInstance } from "../../../../util/axiosConfig";
+import { userCorrected } from "../../../../util/Models";
+import { setAlert, ISetAlert } from "../../../../actions/AlertAction";
 import "../settings.scss";
-// import { axiosInstance } from "../../../../util/axiosConfig";
 
-interface IProps {
-  userId: number
-}
+const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
+  props: userCorrected & ISetAlert
+) => {
+  // Setting the state
+  const updateState = (user: any) => {
+    dispatch(setLoginState(user));
+  };
 
-const BasicInfoForm: React.FC<IProps> = (props: IProps) => {
-  
-  // let currentUser;
+  const dispatch = useDispatch();
+  // end
 
-  // useEffect(() => {
-  //   // You need to restrict it at some point
-  //   // This is just dummy code and should be replaced by actual
-  //   alert("does this worK?");
-  //   currentUser = getCurrentUserInfo('5');
-  // }, []);
-
-  // getCurrentUserInfo('5').then((response) => {currentUser=response);
-  // const text = JSON.stringify(currentUser);
-  // console.log(currentUser);
+  const [showSpinner, setSpinner] = useState(false);
+  const [usernameS, setUsernameS] = useState(props.username);
+  const [firstnameS, setfirstnameS] = useState(props.firstname);
+  const [lastnameS, setlastnameS] = useState(props.lastname);
+  const [bioS, setbioS] = useState(props.bio);
+  const [interestsS, setinterestsS] = useState(props.interests);
+  const [pic, setPic] = useState(props.picUrl);
 
   const updateBasicInfo = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSpinner(true);
+    const formData = new FormData();
+    formData.append("userId", `${props.id}`);
+
     const usernameF = event.currentTarget["username"].value;
     const firstNameF = event.currentTarget["firstName"].value;
     const lastNameF = event.currentTarget["lastName"].value;
+    const userBioF = event.currentTarget["userBio"].value;
+    const userInterestsF = event.currentTarget["userInterests"].value;
+
+    formData.append("username", usernameF);
+    formData.append("firstName", firstNameF);
+    formData.append("lastName", lastNameF);
+    formData.append("bio", userBioF);
+    formData.append("interests", userInterestsF);
+
+    let response: any;
+
+    if (event.currentTarget["imageF"].files[0] !== undefined) {
+      formData.append("image", event.currentTarget["imageF"].files[0]);
+    }
 
     // <Spinner color='success' />
     // document.getElementById("reimbTableBody").append(tr);
-    const response = await axios.post(
-      "http://localhost:8080/MochiCircle/api/users/updateBasic/",
-      {
-        userId: props.userId,
-        username: usernameF,
-        password: null,
-        firstName: firstNameF,
-        lastName: lastNameF,
-        email: null,
-        pic: null,
-        status: null,
-        bio: null,
-        interests: null,
-      }
-    );
+    response = await axiosInstance.post("/users/updateBasic", formData);
+
+    const userObject: userCorrected = {
+      id: props.id,
+      username: usernameF,
+      password: props.password,
+      firstname: firstNameF,
+      lastname: lastNameF,
+      email: props.email,
+      picUrl: response.data.picUrl,
+      status: props.status,
+      bio: userBioF,
+      interests: userInterestsF,
+      verified: props.verified,
+    };
+
+    setSpinner(false);
+    updateState(userObject);
 
     const json = response.data;
-    if(json.username===usernameF) {
-      alert("Info successfully updated!");
+    console.log(json);
+    if (json.username === usernameF) {
+      props.setAlert("Info successfully updated!", "success", 10000);
     } else {
-      alert("Sorry, but it seems like that username is already taken!");
+      props.setAlert(
+        "Sorry, but it seems like that username is already taken!",
+        "warning",
+        10000
+      );
     }
-    
-    // console.log(json);
-    // console.log("test");
   };
+
+  const imagePreview = (event: SyntheticEvent<HTMLInputElement>) => {
+    if (event.currentTarget.files !== null) {
+      setPic(URL.createObjectURL(event.currentTarget.files[0]));
+    }
+  };
+
+  function handleUsername(e: any) {
+    setUsernameS(e.target.value);
+  }
+  function handleFirstname(e: any) {
+    setfirstnameS(e.target.value);
+  }
+  function handleLastname(e: any) {
+    setlastnameS(e.target.value);
+  }
+  function handleBio(e: any) {
+    setbioS(e.target.value);
+  }
+  function handleInterests(e: any) {
+    setinterestsS(e.target.value);
+  }
 
   return (
     <div>
-      <h3>Basic Info{/* <Spinner color='warning' /> */}</h3>
+      <h3>Basic Info {showSpinner ? <Spinner color="primary" /> : <span />}</h3>
       <Form onSubmit={updateBasicInfo} className="settingsBox" method="POST">
+        {pic && <img className="picView" src={pic} alt="Profile Pic"></img>}
+        <br />
+        <Label className="whiteText">Select a new profile picture:</Label>
+        <Input
+          className="greenText"
+          type="file"
+          name="imageF"
+          id="exampleFile"
+          onChange={imagePreview}
+        />
+        <br />
         <div className="whiteText">Username</div>
         <Input
           type="text"
           name="username"
           required
-          placeholder="current username"
+          placeholder="username"
+          value={usernameS}
+          onChange={handleUsername}
         />
         <br />
         <div className="whiteText">First Name</div>
@@ -76,7 +136,9 @@ const BasicInfoForm: React.FC<IProps> = (props: IProps) => {
           type="text"
           name="firstName"
           required
-          placeholder={"current first name"}
+          placeholder={"first name"}
+          value={firstnameS}
+          onChange={handleFirstname}
         />
         <br />
         <div className="whiteText">Last Name</div>
@@ -84,21 +146,62 @@ const BasicInfoForm: React.FC<IProps> = (props: IProps) => {
           type="text"
           name="lastName"
           required
-          placeholder="current last name"
+          placeholder="last name"
+          value={lastnameS}
+          onChange={handleLastname}
         />
         <br />
-        <Input type="submit" value="Update info" className="btn btn-success" />
+        <div className="whiteText">Interests</div>
+        <Input
+          type="text"
+          name="userInterests"
+          placeholder="List some cool interests, comma separated"
+          value={interestsS}
+          onChange={handleInterests}
+        />
+        <br />
+        <div className="whiteText">Bio</div>
+        <Input
+          type="textarea"
+          rows={4}
+          name="userBio"
+          placeholder="Tell us about yourself!"
+          value={bioS}
+          onChange={handleBio}
+        />
+        <br />
+        <Input
+          type="submit"
+          value={"Save changes"}
+          className="btn btn-success col-6"
+        />
+        <span> </span>
+        {showSpinner ? <Spinner color="success" /> : <span />}
       </Form>
     </div>
   );
 };
 
 //recieves these values from the app's store
-const mapStateToProps = (appState:any) => {
+const mapStateToProps = (appState: any) => {
   return {
-    userId: appState.loginState.id
-  }
-}
+    id: appState.loginState.id,
+    username: appState.loginState.username,
+    password: appState.loginState.password,
+    firstname: appState.loginState.firstname,
+    lastname: appState.loginState.lastname,
+    email: appState.loginState.email,
+    picUrl: appState.loginState.picUrl,
+    status: appState.loginState.status,
+    bio: appState.loginState.bio,
+    interests: appState.loginState.interests,
+    verified: appState.loginState.verified,
+  };
+};
+
+const mapDispatchToProps = {
+  setAlert: setAlert,
+};
 
 //HRO export right here
-export default connect<IProps>(mapStateToProps)(BasicInfoForm);
+export default connect(mapStateToProps, mapDispatchToProps)(BasicInfoForm);

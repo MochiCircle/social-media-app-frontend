@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { userCorrected } from "../../util/Models";
 import "./Profile.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

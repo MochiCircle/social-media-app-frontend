@@ -27,7 +27,7 @@ const ProfilePage: React.FC<IProp> = (props: IProp) => {
         <Profile userId={userId} ownProfile={ownProfile} />
       </Col>
       <Col md="8">
-        {ownProfile && <PostCreate />}
+        {ownProfile && userId === 0 && <PostCreate />}
         <PostContainer loadType={false} userId={userId} />
       </Col>
     </Row>

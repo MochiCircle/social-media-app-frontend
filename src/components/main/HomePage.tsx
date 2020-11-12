@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import MainNavbar from "./MainNavbar";
 import { Profile } from "../profile/Profile";
 
 //Profile page will go where all the vanilla html stuff is now as the side bar for the current user

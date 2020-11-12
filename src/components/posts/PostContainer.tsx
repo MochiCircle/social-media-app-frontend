@@ -31,7 +31,7 @@ const PostContainer: React.FC<IProps> = (props: IProps) => {
         let url;
         if(props.loadType) { //if loadtype is true, load all posts
             url = "/postview/";
-        } else {            //if loadtype is false, load posts associated with logged in userid
+        } else {            //if loadtype is false, load posts associated with userid
             url = "/postview/find/" + props.userId; 
         }                                        
 

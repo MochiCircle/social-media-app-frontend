@@ -5,7 +5,6 @@ import alertReducer from "./reducers/AlertReducer";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
-import { BrowserRouter as Router } from "react-router-dom";
 import thunk from "redux-thunk";
 import { combineReducers } from "redux";
 import "bootstrap/dist/css/bootstrap.min.css";

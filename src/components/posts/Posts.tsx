@@ -8,15 +8,17 @@ import unliked from '../../assets/emptyheart.png';
 import liked from '../../assets/fullheart.png';
 
 interface IProps {
-    id: number,  //postID of post
-    userid: number,  //userID of user that created the post
-    username:string, //username of poster
-    picurl:string,    //avatar of poster
-    post_text:string, //post content
-    image:string      //image on post
+    post_firstname: string,
+    post_lastname: string,
+    post_username: string,
+    post_picurl: string,
+    id: number,
+    post_text:string,
+    image: string,
+    likes: number
 }
 
-const Post:React.FC<any> = (props: any) => {
+const Post:React.FC<any> = (props:any) => {
 
     const [heart, setHeart] = useState(false);
     const [likes, setLikes] = useState(0);
@@ -50,14 +52,14 @@ const Post:React.FC<any> = (props: any) => {
 
     return (
         <div className="border">
-            <img src={props.picurl} className="pic"></img>
+            <img src={props.post_picurl} className="pic"></img>
             <div className="body">
-                <span className="username">{props.username}</span>
+                <span className="username">{props.post_firstname} {props.post_lastname} (@{props.post_username})</span>
                 <div className="postText">{props.post_text}</div>
                 <img src={props.image} className="image"></img>
             </div>
             <div className="postFooter">
-                <span>{heart ? likes + 1 : likes} likes</span>
+                <span>{heart ? props.likes + 1 : props.likes} likes</span>
                 <input type="image" className="heart" src={imagesPath[getImageName()]} onClick={toggleImage}/>
             </div>
         </div>

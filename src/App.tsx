@@ -16,8 +16,8 @@ function App() {
       {/* Alert Component should go here*/}
       {/* Spinny Mochi guy */}
       <div className="mochi-guy" />
+      <Alert />
       <div className="mainPage">
-        <Alert />
         <Switch>
           {<Route path="/register" component={RegisterPage} />}
           {<Route exact path="/" component={HomePage} />}

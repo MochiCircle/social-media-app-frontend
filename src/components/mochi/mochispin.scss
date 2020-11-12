@@ -1,3 +1,5 @@
+@import "../../mixin";
+
 .mochi-guy::after {
   width: 100%;
   max-width: 600px;
@@ -11,7 +13,7 @@
   z-index: -1;
   position: absolute;
   content: "";
-  background-image: url("mochiSpin3.png");
+  @include theme-aware("background-image", "mochi-guy");
   background-size: cover;
   background-position: center;
   animation-name: mochi-spin;

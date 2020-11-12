@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { SyntheticEvent } from 'react';
 import { connect } from 'react-redux';
 import { Form, Input, Label } from 'reactstrap';
+import { axiosInstance } from '../../util/axiosConfig';
 import "./loginStyling.scss";
 interface IProps {
   userId:number
@@ -13,9 +14,9 @@ const RegisterPage: React.FC<IProps> = (props:IProps) => {
   
         event.preventDefault();
         const username = event.currentTarget["username"].value;
-        const fName = event.currentTarget["firstName"].value;
-        const lName = event.currentTarget["lastName"].value;
-        const eMail = event.currentTarget["email"].value;
+        const firstname = event.currentTarget["firstName"].value;
+        const lastname = event.currentTarget["lastName"].value;
+        const email = event.currentTarget["email"].value;
         const password = event.currentTarget["password"].value;
         const current = event.currentTarget["confirm"].value;
     
@@ -26,16 +27,21 @@ const RegisterPage: React.FC<IProps> = (props:IProps) => {
         else
         {
           //definitely edit this to work with the backend
-          Axios.post("http://localhost:8080/api/users/create/"+
-           username+"+"+password+"+"+fName+"+"+lName+"+"+eMail)
-           //.then(()=>{
-              //window.location.href = "/";
-           //}
-            
-           .catch((error) => {
-             console.log(error);
-              alert("Register Error: Unable to register this user.")
+          axiosInstance.post("users/create/"+
+           {
+             username: username,
+             password: password,
+             firstname: firstname,
+             lastname: lastname,
+             email: email,
            })
+           .then(()=>{
+              window.location.href = "/";
+           })
+           .catch((error) => {
+            console.log(error);
+             alert("Register Error: Unable to register this user.");
+          })
         }
       }
 
@@ -93,8 +99,6 @@ const RegisterPage: React.FC<IProps> = (props:IProps) => {
                 <Input type='submit' value='Register' className="submit-btn" 
                 style={{padding:10,fontSize:20,fontWeight:"bolder"}}/>
             </div>
-            
-            
             
           </Form>
         </>

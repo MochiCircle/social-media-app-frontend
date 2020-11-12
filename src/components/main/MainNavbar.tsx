@@ -54,6 +54,7 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
           left: 0,
           right: 0,
           padding: 10,
+          marginBottom: 15
         }}
         className="nav justify-content-center"
       >

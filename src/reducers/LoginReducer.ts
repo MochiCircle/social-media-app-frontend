@@ -1,5 +1,4 @@
 import { ILoginState } from ".";
-import { LoginTypes } from "../components/login/LoginActionTypes";
 import { initialLoginState } from "../components/login/LoginInitialState";
 import axios from 'axios';
 import { setLoginState, SET_USER } from "../actions/LoginAction";

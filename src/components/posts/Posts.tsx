@@ -1,34 +1,101 @@
-import React from 'react';
-import Datetime from 'react-datetime';
+import React, { useState, useEffect } from "react";
+import { user } from "../../util/Models";
+import { axiosInstance } from "../../util/axiosConfig";
+import { connect } from "react-redux";
 import "./Posts.scss";
-import like from '../../assets/emptyheart.png'
 
-//todo implement datetime to display timestamp
-//todo implement youtube api
+import unliked from "../../assets/emptyheart.png";
+import liked from "../../assets/fullheart.png";
+import { Link } from "react-router-dom";
+
 interface IProps {
-    username:string,
-    image:string,
-    postText:string,
-    likes:number
-    //todo prop for datetime goes here
+  post_userid: number;
+  post_firstname: string;
+  post_lastname: string;
+  post_username: string;
+  post_picurl: string;
+  id: number;
+  post_text: string;
+  image: string;
+  likes: number;
 }
 
-const Post:React.FC<IProps> = (props:IProps) => {
-    return (
-        <div className="border">
-            <img src={props.image} className="pic"></img>
-            <div className="body">
-                <span className="username">{props.username}</span>
-                <div className="postText">{props.postText}</div>
-            </div>
-            <div className="postFooter">
-                <span>{props.likes} likes</span>
-                {/*datetime would go here*/}
-                {/* todo change like button when clicked and update server*/}
-                <input type="image" className="heart" src={like}/>
-            </div>
-        </div>
-    )
-}
+const Post: React.FC<any> = (props: any) => {
+  const [heart, setHeart] = useState(false);
+  const [likes, setLikes] = useState(0);
 
-export default Post;
+    const imagesPath = {
+        liked: liked,
+        unliked: unliked
+    }
+    
+    const toggleImage = (e:React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+        e.preventDefault();
+        setHeart(!heart); //toggle heart image
+        axiosInstance.get("/likes/update/" + heart + "+" + props.id + "+" + props.userId).then((response) => {
+        });
+    }
+
+  const getImageName = () => (heart ? "liked" : "unliked");
+
+  //triggers on load
+  useEffect(() => {
+    //get whether user has liked this post from the back-end
+    axiosInstance
+      .get("/likes/status/" + props.userId + "+" + props.id)
+      .then((response) => {
+        setHeart(response.data); //response.data is either 0 or 1, 0 if user hasn't
+        //liked post, 1 if user did like post
+      });
+    //Get amount of likes for this post from back-end
+    axiosInstance.get("/likes/find/" + props.id).then((response) => {
+      setLikes(response.data);
+    });
+  }, []);
+
+  return (
+    <div className="border">
+      <Link to={`/profile/${props.post_userid}`}>
+        <img src={props.post_picurl} className="pic"></img>
+      </Link>
+
+      <div className="body">
+        <span className="username">
+          <Link to={`/profile/${props.post_userid}`}>
+            {props.post_firstname} {props.post_lastname} (@{props.post_username}
+            )
+          </Link>
+        </span>
+        <div className="postText">{props.post_text}</div>
+        <img src={props.image} className="image"></img>
+      </div>
+      <div className="postFooter">
+        <span>{heart ? props.likes + 1 : props.likes} likes</span>
+        <input
+          type="image"
+          className="heart"
+          src={imagesPath[getImageName()]}
+          onClick={toggleImage}
+        />
+      </div>
+    </div>
+  );
+};
+
+const mapStateToProps = (appState: any, ownProps: any) => {
+  return {
+    userId: appState.loginState.id,
+    username: appState.loginState.username,
+    password: appState.loginState.password,
+    firstName: appState.loginState.firstname,
+    lastName: appState.loginState.lastname,
+    email: appState.loginState.email,
+    pic: appState.loginState.picUrl,
+    status: appState.loginState.status,
+    bio: appState.loginState.bio,
+    interests: appState.loginState.interests,
+    verified: appState.loginState.verified,
+  };
+};
+
+export default connect<user>(mapStateToProps)(Post);

@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import {user} from "../../util/Models";
+import { axiosInstance} from "../../util/axiosConfig";
+import {connect} from "react-redux";
 import "./Posts.scss";
 
-interface IProps {
-    userID: number
-}
-
-const PostCreate:React.FC<IProps> = (props:IProps) => {
+const PostCreate:React.FC<any> = (props:any) => {
     const [value, setValue] = useState(''); //value is state of text in textarea
     const [postText, setPostText] = useState('');
+    const [formData, setFormData] = useState(new FormData);
+    //const [imageFile, setImageFile] = useState();
 
     const initialRender = useRef(true); //keep track of when component is initially rendered
 
@@ -19,16 +20,17 @@ const PostCreate:React.FC<IProps> = (props:IProps) => {
 
     //Triggered everytime the user hits post
     const getText = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         setPostText(value);
+        console.log(value);
+        formData.append("userid", props.userId);
+        if(e.currentTarget["imageF"].files[0] !== undefined) {
+            formData.append("image", e.currentTarget["imageF"].files[0]);
+        }
     }
 
-    //Sends the post text and the userID to the endpoint to update the back-end
-    const postData = async () => {
-        fetch('endpoint-for-creating-posts', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({post: {postText}, userID: props.userID})
-        });
+    const postWithAxios = async (formData:FormData) => {
+        axiosInstance.post("/posts/updatePhoto/", formData);
     }
 
     //triggered when postText is updated (when user hits submit button)
@@ -36,20 +38,42 @@ const PostCreate:React.FC<IProps> = (props:IProps) => {
         if(initialRender.current) { //check whether component was just rendered
             initialRender.current = false;
         } else { //only submit post data when user presses submit button, not on initial render
-            postData();
+            formData.append("postText", postText);
+            postWithAxios(formData);
         }
     }, [postText]);
 
     return (
         <div className="postCreate" >
             <form className="postForm" onSubmit={getText}>
-                <textarea value={value} cols={50} rows={3} onChange={updateText} placeholder="What's on your mind?"/>
+                <textarea value={value} rows={3} onChange={updateText} placeholder="What's on your mind?"/>
+                <br></br>
+                <div>
+                <input type="file" className="imageUpload" name="imageF"/>
                 <button className="postButton" type="submit">
                     Post
                 </button>
+                </div>
             </form>
+            <br></br>
         </div>
     )
 }
 
-export default PostCreate;
+const mapStateToProps = (appState: any, ownProps: any) => {
+    return {
+        userId: appState.loginState.id,
+        username: appState.loginState.username,
+        password: appState.loginState.password,
+        firstName: appState.loginState.firstname,
+        lastName: appState.loginState.lastname,
+        email: appState.loginState.email,
+        pic: appState.loginState.picUrl,
+        status: appState.loginState.status,
+        bio: appState.loginState.bio,
+        interests: appState.loginState.interests,
+        verified: appState.loginState.verified,
+    };
+};
+
+export default connect<user>(mapStateToProps)(PostCreate);

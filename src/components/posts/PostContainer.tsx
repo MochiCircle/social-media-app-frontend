@@ -1,16 +1,24 @@
 import React, { useEffect } from 'react';
+import {connect} from "react-redux";
+import {user} from "../../util/Models";
 import Post from './Posts';
+import { axiosInstance} from "../../util/axiosConfig";
 
 interface Post {
-    username:string,
-    image:string,
-    postText:string,
-    likes:number
-    //todo prop for datetime goes here
+    post_firstname: string,
+    post_lastname: string,
+    post_username: string,
+    post_picurl: string,
+    id: number,
+    post_text:string,
+    image: string,
+    likes: number
 }
 
 interface IProps {
-    userID: string;
+    userId: number,
+    loadType: boolean //true loads all posts regardless of user 
+                      //false loads posts associated with userId
 }
 
 const PostContainer: React.FC<IProps> = (props: IProps) => {
@@ -24,20 +32,25 @@ const PostContainer: React.FC<IProps> = (props: IProps) => {
 
     const fetchItems = async () => {
         let url;
-        if(props.userID === "any") {
-            url = "url-with-endpoint fetching-all-posts"; //todo replace with actual endpoint
-        } else {
-            url = "url-with-endpoint-fetching-single-user-posts"; //todo replace with actual endpoint and do string interpolation
-        }                                                         
-        const res = await fetch(url);
-        const data = await res.json();
-        setPostArray(data);
+        if(props.loadType) { //if loadtype is true, load all posts
+            url = "/postview/";
+        } else {            //if loadtype is false, load posts associated with userid
+            url = "/postview/find/" + props.userId; 
+        }                                        
+
+        axiosInstance.get(url).then((response) => {
+            setPostArray(response.data);
+        });
+        
     }
 
     return (
         <div className="postContainer">
             {postArray.map(e => (
-              <Post username={e.username} image={e.image} postText={e.postText} likes={e.likes} />
+                <>
+                    <Post {...e}/>
+                    <br></br>
+                </>
           ))}
         </div>
     )

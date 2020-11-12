@@ -1,5 +1,10 @@
+@import "../../_mixin";
+
 .entry
 {
+    @include theme-aware("color", "secondary");
+    @include theme-aware("background", "settings-text-bg");
+    @include theme-aware("border", "settings-text-bg");
     transition: 0.4s;
     -webkit-transition: 0.4s;
     -moz-transition: 0.4s;
@@ -42,4 +47,59 @@
     transition: 0.4s;
     -webkit-transition: 0.4s;
     -moz-transition: 0.4s;
+}
+.prof-img
+{
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 10px;
+    content: ' ';
+    margin-right: 8px;
+    box-shadow: 1px 1px 8px rgba(0,0,0,0.4);
+}
+
+.welc-msg
+{
+    color: #fefefe;
+    text-shadow: 1px, 1px 8px rgba(0,0,0,0.1);
+    margin-right: 12px;
+}
+
+.log-btn
+{
+    color: #fefefe;
+    background-image: linear-gradient(122deg, #22aa22, #008800);
+    border-radius: 6px;
+    border: 3px #117711;
+    padding: 8px;
+    transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+}
+
+.log-btn:hover
+{
+    color: #000;
+    background-image: linear-gradient(122deg, #66c966, #88da88);
+    border-radius: 0px;
+    border: 0px;
+    transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+}
+
+.log-entry
+{
+    max-width: 120px;
+}
+
+.logo-vec
+{
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.nav
+{
+    @include theme-aware("background", "settings-boxes");
 }

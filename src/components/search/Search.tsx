@@ -60,7 +60,7 @@ export const Search: React.FC = () => {
           minWidth: "200px",
         }}
         options={options}
-        getOptionLabel={(option) => option.firstname + " " + option.lastname}
+        getOptionLabel={(option: { firstname: string; lastname: string; }) => option.firstname + " " + option.lastname}
         value={value}
         onChange={(event: any, newValue: option | null) => {
           setValue(newValue);
@@ -72,13 +72,13 @@ export const Search: React.FC = () => {
         onClose={() => {
           setOpen(false);
         }}
-        getOptionSelected={(option, value) =>
+        getOptionSelected={(option: any, value: any) =>
           option.firstname === value.firstname &&
           option.lastname === value.lastname
         }
         loading={loading}
         placeholder="Search Users"
-        renderInput={(params) => <TextField {...params} />}
+        renderInput={(params: any) => <TextField {...params} />}
       />
       <Button
         type="submit"

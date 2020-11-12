@@ -1,6 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Alert } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import "./alert.scss";
+import { removeAlert } from "../../actions/AlertAction";
 
 interface IAlert {
   id: string;
@@ -14,6 +18,7 @@ interface IProp {
 
 const AlertComp: React.FC<IProp> = (props: IProp) => {
   const { alerts } = props;
+  const dispatch = useDispatch();
   if (alerts !== null && alerts.length > 0) {
     return (
       <>
@@ -21,6 +26,13 @@ const AlertComp: React.FC<IProp> = (props: IProp) => {
           return (
             <Alert color={alert.alertType} key={alert.id}>
               {alert.msg}
+              <FontAwesomeIcon
+                icon={faTimes}
+                onClick={() => dispatch(removeAlert(alert.id))}
+                pull="right"
+                size="lg"
+                style={{ cursor: "pointer" }}
+              />
             </Alert>
           );
         })}

@@ -59,7 +59,7 @@ const ProfileInfo: React.FC<userCorrected> = (props: userCorrected) => {
     setStatusEditor(false);
   };
 
-  if (props.userId === 0) return <p>No User Found</p>;
+  if (props.id === 0) return <p>No User Found</p>;
   return (
     <div className="profile">
       {props.picUrl && (

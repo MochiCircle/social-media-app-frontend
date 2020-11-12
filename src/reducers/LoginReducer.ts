@@ -33,7 +33,7 @@ export const loadUser = (username: string, password: string) => async (
     })
     .then((response) => {
       if (response.data === "") {
-        dispatch(setAlert("Login Failed: Credentials Error.", "danger", 10000));
+        dispatch(setAlert("Login Failed: Credentials Error.", "danger", 5000));
         console.log(response);
         return null;
       } else {
@@ -44,7 +44,7 @@ export const loadUser = (username: string, password: string) => async (
               response.data.firstname +
               response.data.lastname,
             "success",
-            20000
+            5000
           )
         );
         return response.data;

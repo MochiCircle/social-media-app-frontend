@@ -27,10 +27,10 @@ export const Profile: React.FC<IProp> = (prop: IProp) => {
   });
   const ownProfile = prop.ownProfile;
 
-  if (!ownProfile) {
+  if (!ownProfile && !isLoaded) {
     axiosInstance.get("/users/find/" + prop.userId).then((response) => {
       setIsLoaded(true);
-      setProfile(response.data[0]);
+      setProfile(response.data);
     });
   }
 

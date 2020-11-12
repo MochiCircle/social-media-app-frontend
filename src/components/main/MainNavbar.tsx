@@ -8,6 +8,7 @@ import "../login/loginStyling.scss";
 import { setLoginState } from "../../actions/LoginAction";
 import { initialLoginState } from "../login/LoginInitialState";
 import ThemeToggle from "../theme/ThemeToggle";
+import { Search } from "../search/Search";
 
 interface IProps {
   userId: number;
@@ -59,18 +60,9 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
           </Button>
         </span>
 
-        {/*     Search Bar
-          <NavItem style={{ margin: 5 }}>
-            <span className="search-container">
-              <form action="/action_page.php">
-                <input type="text" placeholder="Search.." name="search" 
-                style={{ margin: 5 }}></input>
-                <button type="submit" className="fa fa-search"
-                style={{ margin: 5 }}>search</button>
-                </form>
-            </span>
-          </NavItem>
-         */}
+        <span>
+          <Search />
+        </span>
 
         <span>
           <Button

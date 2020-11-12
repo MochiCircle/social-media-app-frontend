@@ -9,11 +9,12 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  /*  */
+  /*       ( actual css property , our custom value )   */
   @include theme-aware("border", "border-1");
   @include theme-aware("background", "primary");
   @include theme-aware("color", "secondary");
   @include theme-aware("background-image", "mochi-guy");
+  @include theme-aware("background-color", "bg-image-op");
   > div {
     margin-bottom: 5px;
   }

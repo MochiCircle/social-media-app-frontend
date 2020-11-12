@@ -58,6 +58,7 @@ export const Search: React.FC = () => {
           display: "inline-block",
           backgroundColor: "white",
           minWidth: "200px",
+          margin: 5
         }}
         options={options}
         getOptionLabel={(option: { firstname: string; lastname: string; }) => option.firstname + " " + option.lastname}
@@ -83,7 +84,7 @@ export const Search: React.FC = () => {
       <Button
         type="submit"
         href={value && `/profile/${value.id}`}
-        style={{ display: "inline-block" }}
+        style={{ display: "inline-block", margin:5}}
       >
         Search
       </Button>

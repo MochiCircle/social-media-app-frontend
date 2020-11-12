@@ -9,6 +9,7 @@ import { setLoginState } from "../../actions/LoginAction";
 import { initialLoginState } from "../login/LoginInitialState";
 import ThemeToggle from "../theme/ThemeToggle";
 import { Search } from "../search/Search";
+import ForgotPassComp from "../login/ForgotPassComp";
 
 interface IProps {
   userId: number;
@@ -74,7 +75,7 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
             Logout
           </Button>
         </span>
-        <span>
+        <span style={{margin:5}}>
           <ThemeToggle />
         </span>
       </Navbar>
@@ -100,17 +101,22 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
         }}
         className="nav justify-content-center"
       >
-        <div className="row justify-content-between">
+        <div className=" row justify-content-between">
           <NavItem className="col-2">
             <NavLink href="/register">
-              <Button style={{ margin: 5 }}>Register</Button>
+              <Button className="btn" style={{ margin: 5 }}>Register</Button>
             </NavLink>
           </NavItem>
           <NavItem className="col-7">
             <LoginComp /> {/* What actually allows you to login */}
           </NavItem>
+          <NavItem >
+            <ForgotPassComp /> 
+          </NavItem>
         </div>
-        <ThemeToggle />
+        <span style={{margin:5}}>
+          <ThemeToggle />
+        </span>
       </Navbar>
     );
   }

@@ -2,8 +2,8 @@
 
 .mochi-guy::after {
   width: 100%;
-  max-width: 600px;
-  max-height: 600px;
+  max-width: 650px;
+  max-height: 650px;
   height: 100%;
   margin: auto;
   left: 50%;
@@ -14,6 +14,7 @@
   position: absolute;
   content: "";
   @include theme-aware("background-image", "mochi-guy");
+  @include theme-aware("opacity", "bg-opacity");
   background-size: cover;
   background-position: center;
   animation-name: mochi-spin;

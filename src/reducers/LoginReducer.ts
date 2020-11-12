@@ -22,8 +22,7 @@ export const loginReducer = (
 };
 
 export const loadUser = (username: string, password: string) => async (
-  dispatch: any,
-  getState: any
+  dispatch: any
 ) => {
   //gets the user from the backend using the passed in username and password
   const user = await axiosInstance
@@ -33,7 +32,7 @@ export const loadUser = (username: string, password: string) => async (
     })
     .then((response) => {
       if (response.data === "") {
-        dispatch(setAlert("Login Failed: Credentials Error.", "danger", 10000));
+        dispatch(setAlert("ERROR: Login Failed.", "danger", 10000));
         console.log(response);
         return null;
       } else {

@@ -75,12 +75,14 @@ const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
     console.log(json);
     if (json.username === usernameF) {
       props.setAlert("Info successfully updated!", "success", 10000);
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
     } else {
       props.setAlert(
         "Sorry, but it seems like that username is already taken!",
         "warning",
         10000
       );
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
   };
 

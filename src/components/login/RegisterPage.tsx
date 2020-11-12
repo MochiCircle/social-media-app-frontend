@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { SyntheticEvent } from 'react';
 import { connect } from 'react-redux';
 import { Form, Input, Label } from 'reactstrap';
+import { setAlert } from '../../actions/AlertAction';
 import { axiosInstance } from '../../util/axiosConfig';
 import "./loginStyling.scss";
 interface IProps {
@@ -26,22 +27,33 @@ const RegisterPage: React.FC<IProps> = (props:IProps) => {
         }
         else
         {
-          //definitely edit this to work with the backend
-          axiosInstance.post("users/create/"+
-           {
-             username: username,
-             password: password,
-             firstname: firstname,
-             lastname: lastname,
-             email: email,
-           })
-           .then(()=>{
-              window.location.href = "/";
-           })
-           .catch((error) => {
-            console.log(error);
-             alert("Register Error: Unable to register this user.");
-          })
+            axiosInstance.post("users/create/",
+            {
+              username: username,
+              password: password,
+              firstname: firstname,
+              lastname: lastname,
+              email: email,
+            })
+            .then(()=>{
+              setAlert(
+                "**SUCCESSFUL REGISTERY** as: " +
+                  firstname +
+                  lastname + "! Please verify your email.",
+                "success",
+                20000
+              )
+               window.location.href = "/";
+            })
+            .catch((error) => {
+             console.log(error);
+             setAlert(
+              "ERROR: Unable to register your account at the moment.",
+              "danger",
+              20000
+            )
+              alert("Register Error: Unable to register this user.");
+           })  
         }
       }
 

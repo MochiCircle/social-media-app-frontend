@@ -19,7 +19,6 @@ const ProfilePage: React.FC<IProp> = (props: IProp) => {
   if (userId === 0) {
     userId = props.id;
     ownProfile = true;
-    window.location.href="/spin";
   }
 
   return (

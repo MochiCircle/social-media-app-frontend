@@ -1,22 +1,7 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
 
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-  Form,
-  Button,
-} from "reactstrap";
+import { Navbar, NavItem, NavLink, Button } from "reactstrap";
 import LoginComp from "../login/LoginComp";
 import mochiLogo from "../../assets/mochiVectorLogo_smaller.svg";
 import "../login/loginStyling.scss";

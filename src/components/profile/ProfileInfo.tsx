@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Profile, user } from "../../util/Models";
+import { userCorrected } from "../../util/Models";
 import "./Profile.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,12 +8,11 @@ import {
   faSave as save,
 } from "@fortawesome/free-regular-svg-icons";
 import { Button, Form, Input } from "reactstrap";
-import axios from "axios";
 import { connect, useDispatch } from "react-redux";
 import { setLoginState } from "../../actions/LoginAction";
 import { axiosInstance } from "../../util/axiosConfig";
 
-const ProfileInfo: React.FC<user> = (props: user) => {
+const ProfileInfo: React.FC<userCorrected> = (props: userCorrected) => {
   const [statusEditor, setStatusEditor] = useState(false);
   const currentStatus = props.status;
   const [status, setStatus] = useState(currentStatus);
@@ -36,18 +35,18 @@ const ProfileInfo: React.FC<user> = (props: user) => {
     console.log(newStatus);
 
     const response = await axiosInstance.post("/users/status/", {
-      userId: props.userId,
+      userId: props.id,
       status: newStatus,
     });
 
-    const userObject: user = {
-      userId: props.userId,
+    const userObject: userCorrected = {
+      id: props.id,
       username: props.username,
       password: props.password,
-      firstName: props.firstName,
-      lastName: props.lastName,
+      firstname: props.firstname,
+      lastname: props.lastname,
       email: props.email,
-      pic: props.pic,
+      picUrl: props.picUrl,
       status: response.data,
       bio: props.bio,
       interests: props.interests,
@@ -63,13 +62,13 @@ const ProfileInfo: React.FC<user> = (props: user) => {
   if (!props) return <p>No User Found</p>;
   return (
     <div className="profile">
-      {props.pic && (
-        <img className="pic" src={props.pic} alt="Profile Pic"></img>
+      {props.picUrl && (
+        <img className="profile-pic" src={props.picUrl} alt="Profile Pic"></img>
       )}
       <div className="name">
         {" "}
         <FontAwesomeIcon icon={users} pull="left" />{" "}
-        {props.firstName + " " + props.lastName}
+        {props.firstname + " " + props.lastname}
       </div>
       <div className="status">
         {!statusEditor ? (
@@ -100,13 +99,13 @@ const ProfileInfo: React.FC<user> = (props: user) => {
 //recieves these values from the app's store
 const mapStateToProps = (appState: any) => {
   return {
-    userId: appState.loginState.id,
+    id: appState.loginState.id,
     username: appState.loginState.username,
     password: appState.loginState.password,
-    firstName: appState.loginState.firstname,
-    lastName: appState.loginState.lastname,
+    firstname: appState.loginState.firstname,
+    lastname: appState.loginState.lastname,
     email: appState.loginState.email,
-    pic: appState.loginState.picUrl,
+    picUrl: appState.loginState.picUrl,
     status: appState.loginState.status,
     bio: appState.loginState.bio,
     interests: appState.loginState.interests,
@@ -115,4 +114,4 @@ const mapStateToProps = (appState: any) => {
 };
 
 //HRO export right here
-export default connect<user>(mapStateToProps)(ProfileInfo);
+export default connect<userCorrected>(mapStateToProps)(ProfileInfo);

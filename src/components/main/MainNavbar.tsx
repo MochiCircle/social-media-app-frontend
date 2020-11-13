@@ -64,27 +64,14 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
         }}
         className="nav justify-content-center"
       >
-        <span>
-          <Button className="btn pull-left" href="/" style={{ margin: 5 }}>
-            <img className="logo-vec" src={mochiLogo} alt="MC" />
-          </Button>
-        </span>
-        <span>
-          <Button
-            className="btn pull-left"
-            href="/profile"
-            style={{ margin: 5 }}
-          >
-            <img src={props.picUrl} alt="Prof Pic" className="prof-img" />{" "}
-            {props.firstname}'s Profile
-          </Button>
-        </span>
 
+        {/* Settings button */}
         <span>
           <Button
             color="transparent"
             href="/settings"
             style={{
+              background: "#00000000",
               margin: "0px -5px 0px -10px",
             }}
           >
@@ -100,6 +87,26 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
           </Button>
         </span>
 
+        {/* Home button with logo */}
+        <span>
+          <Button className="btn pull-left" href="/" style={{ margin: 5 }}>
+            <img className="logo-vec" src={mochiLogo} alt="MC" />
+          </Button>
+        </span>
+
+        {/* Profile button */}
+        <span>
+          <Button
+            className="btn pull-left"
+            href="/profile"
+            style={{ margin: 5 }}
+          >
+            <img src={props.picUrl} alt="Prof Pic" className="prof-img" />{" "}
+            {props.firstname}'s Profile
+          </Button>
+        </span>
+
+        {/* Search bar */}
         <span>
           <Search />
         </span>
@@ -144,11 +151,12 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
         }}
         className="nav justify-content-center"
       >
-        <div className=" row justify-content-between">
-          <NavItem className="col-2">
+        <div className="row">
+
+          <NavItem >
             <Button onClick={toggleRegComp} className="btn" style={{ margin: 5 }}>Register</Button>
           </NavItem>
-          <NavItem className="col-7">
+          <NavItem >
             <LoginComp /> {/* What actually allows you to login */}
           </NavItem>
           <NavItem >

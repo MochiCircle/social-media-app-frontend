@@ -20,6 +20,7 @@ interface IProps {
   userId: number;
   loadType: boolean; //true loads all posts regardless of user
   //false loads posts associated with userId
+  loggedInUserId: number;
 }
 
 const PostContainer: React.FC<IProps> = (props: IProps) => {
@@ -43,7 +44,9 @@ const PostContainer: React.FC<IProps> = (props: IProps) => {
     let response = await axiosInstance.get(url);
     const postsCall: Post[] = response.data;
     console.log(postsCall);
-    response = await axiosInstance.get("/likes/findByUserId/" + props.userId);
+    response = await axiosInstance.get(
+      "/likes/findByUserId/" + props.loggedInUserId
+    );
     const likes: Number[] = response.data;
     const newPostsArray = postsCall.map((p) => {
       return { ...p, liked: likes.includes(p.id) };

@@ -60,7 +60,11 @@ const ProfilePage: React.FC<IProp> = (props: IProp) => {
       </Col>
       <Col md="8">
         {ownProfile && <PostCreate />}
-        <PostContainer loadType={false} userId={userId} />
+        <PostContainer
+          loadType={false}
+          userId={userId}
+          loggedInUserId={props.id}
+        />
       </Col>
     </Row>
   );

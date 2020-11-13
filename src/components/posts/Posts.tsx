@@ -7,7 +7,7 @@ import "./Posts.scss";
 import unliked from "../../assets/emptyheart.png";
 import liked from "../../assets/fullheart.png";
 import { Link } from "react-router-dom";
-import YouTube from "react-youtube";
+//import YouTube from "react-youtube";
 
 interface IProps {
   post_userid: number;
@@ -24,7 +24,7 @@ interface IProps {
 
 const Post: React.FC<any> = (props: any) => {
   const [heart, setHeart] = useState(props.liked);
-  const [likes, setLikes] = useState(0);
+  const [likes, setLikes] = useState(props.likes);
 
   const imagesPath = {
     liked: liked,
@@ -34,9 +34,10 @@ const Post: React.FC<any> = (props: any) => {
   const toggleImage = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.preventDefault();
     axiosInstance
-      .get("/likes/update/" + heart + "+" + props.id + "+" + props.userId)
+      .get("/likes/update/" + !heart + "+" + props.id + "+" + props.userId)
       .then((response) => {
         setHeart(!heart); //toggle heart image
+        setLikes(heart ? likes - 1 : likes + 1);
       });
   };
 
@@ -58,13 +59,13 @@ const Post: React.FC<any> = (props: any) => {
           </Link>
         </span>
         <div className="postText">{props.post_text}</div>
-        {props.post_text.match(youtubeRegex) && (
+        {/*props.post_text.match(youtubeRegex) && (
           <YouTube id={props.post_text.match(youtubeRegex)} />
-        )}
+        )*/}
         <img src={props.image} className="image"></img>
       </div>
       <div className="postFooter">
-        <span>{heart ? props.likes + 1 : props.likes} likes</span>
+        <span>{likes} likes</span>
         <input
           type="image"
           className="heart"

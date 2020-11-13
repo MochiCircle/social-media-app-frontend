@@ -7,7 +7,7 @@ import "./Posts.scss";
 import unliked from "../../assets/emptyheart.png";
 import liked from "../../assets/fullheart.png";
 import { Link } from "react-router-dom";
-//import YouTube from "react-youtube";
+import YouTube from "react-youtube";
 
 interface IProps {
   post_userid: number;
@@ -59,9 +59,9 @@ const Post: React.FC<any> = (props: any) => {
           </Link>
         </span>
         <div className="postText">{props.post_text}</div>
-        {/*props.post_text.match(youtubeRegex) && (
-          <YouTube id={props.post_text.match(youtubeRegex)} />
-        )*/}
+        {props.post_text.match(youtubeRegex) && (
+          <YouTube videoId={props.post_text.match(youtubeRegex)[1]} />
+        )}
         <img src={props.image} className="image"></img>
       </div>
       <div className="postFooter">

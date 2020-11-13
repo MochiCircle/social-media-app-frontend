@@ -7,6 +7,7 @@ import "./Posts.scss";
 import unliked from "../../assets/emptyheart.png";
 import liked from "../../assets/fullheart.png";
 import { Link } from "react-router-dom";
+import YouTube from "react-youtube";
 
 interface IProps {
   post_userid: number;
@@ -18,40 +19,31 @@ interface IProps {
   post_text: string;
   image: string;
   likes: number;
+  liked: boolean;
 }
 
 const Post: React.FC<any> = (props: any) => {
-  const [heart, setHeart] = useState(false);
-  const [likes, setLikes] = useState(0);
+  const [heart, setHeart] = useState(props.liked);
+  const [likes, setLikes] = useState(props.likes);
 
-    const imagesPath = {
-        liked: liked,
-        unliked: unliked
-    }
-    
-    const toggleImage = (e:React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        e.preventDefault();
+  const imagesPath = {
+    liked: liked,
+    unliked: unliked,
+  };
+
+  const toggleImage = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+    e.preventDefault();
+    axiosInstance
+      .get("/likes/update/" + !heart + "+" + props.id + "+" + props.userId)
+      .then((response) => {
         setHeart(!heart); //toggle heart image
-        axiosInstance.get("/likes/update/" + heart + "+" + props.id + "+" + props.userId).then((response) => {
-        });
-    }
+        setLikes(heart ? likes - 1 : likes + 1);
+      });
+  };
 
   const getImageName = () => (heart ? "liked" : "unliked");
 
-  //triggers on load
-  useEffect(() => {
-    //get whether user has liked this post from the back-end
-    axiosInstance
-      .get("/likes/status/" + props.userId + "+" + props.id)
-      .then((response) => {
-        setHeart(response.data); //response.data is either 0 or 1, 0 if user hasn't
-        //liked post, 1 if user did like post
-      });
-    //Get amount of likes for this post from back-end
-    axiosInstance.get("/likes/find/" + props.id).then((response) => {
-      setLikes(response.data);
-    });
-  }, []);
+  const youtubeRegex = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/;
 
   return (
     <div className="border">
@@ -67,10 +59,13 @@ const Post: React.FC<any> = (props: any) => {
           </Link>
         </span>
         <div className="postText">{props.post_text}</div>
+        {props.post_text.match(youtubeRegex) && (
+          <YouTube videoId={props.post_text.match(youtubeRegex)[1]} />
+        )}
         <img src={props.image} className="image"></img>
       </div>
       <div className="postFooter">
-        <span>{heart ? props.likes + 1 : props.likes} likes</span>
+        <span>{likes} likes</span>
         <input
           type="image"
           className="heart"

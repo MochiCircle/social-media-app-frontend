@@ -30,7 +30,7 @@ const PostCreate:React.FC<any> = (props:any) => {
     }
 
     const postWithAxios = async (formData:FormData) => {
-        axiosInstance.post("/posts/updatePhoto/", formData);
+        axiosInstance.post("/posts/updatePhoto/", formData).then(() => window.location.reload())
     }
 
     //triggered when postText is updated (when user hits submit button)

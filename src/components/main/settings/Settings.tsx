@@ -1,9 +1,16 @@
 import React from 'react';
 
-export const Settings: React.FC = () => {
+interface IProps {
+    id: number;
+}
+
+export const Settings: React.FC<IProps> = (props: IProps) => {
+
+    const fig:IProps = {
+        id: 1,
+    };
+
     return (
-        <div>
-            wow
-        </div>
+        <div>{props.id}</div>
     )
 }

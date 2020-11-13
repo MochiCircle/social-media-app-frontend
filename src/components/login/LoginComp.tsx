@@ -13,7 +13,6 @@ interface IProps{
 
 const LoginComp: React.FC<IProps> = (props:IProps) => 
 {
-    const [showForgot, setForgot] = useState(false);
     const [showSpinner, setSpinner] = useState(false);
     
     //You need to use this right inside the 
@@ -35,72 +34,15 @@ const LoginComp: React.FC<IProps> = (props:IProps) =>
         setSpinner(false);
     }
 
-    const toggleForgotPass = () => {
-        
-        if(showForgot == false){
-            setForgot(true);
-        }
-        else{
-            setForgot(false);
-        }
-    }
-
-    const sendEmail = (ev:SyntheticEvent<HTMLFormElement>) => {
-
-        ev.preventDefault();
-
-        setSpinner(true);
-        const email = ev.currentTarget["emailF"].value;
-        console.log(email);
-        axiosInstance.post("users/forgot/", {email:email})
-        .then((resp) => {
-            if (resp.data === "sent")
-            {
-                setSpinner(false);
-                dispatch(setAlert(
-                    "Sent a recovery email with new temporary password",
-                    "success",20000));
-            }
-            else
-            {
-                setSpinner(false);
-                dispatch(
-                    setAlert(
-                      "ERROR: Email failed to send",
-                      "danger",
-                      20000
-                    ));
-            }
-        })
-    }
-
     return (
     <span className="container">
-        {showForgot ? 
-            <Form onSubmit={handleSubmit} className="row">
-                {/* Shows the spinner */}
-                <h2>{showSpinner ? <Spinner color="primary" /> : <span />}</h2>
-                <input type="text" className="col-4" placeholder="username" name="username" style={{ margin: 5 }} maxLength={20}/>
-                <input type="password" className="col-4" placeholder="**********" name="password" style={{ margin: 5 }} maxLength={20} />
-                <input type="submit" name="log-btn" value="LOGIN" className="col-2 log-btn" style={{ margin: 5 }} />
-                <Button onClick={toggleForgotPass} id="fpass" className="col-2">Forgot Password?</Button>
-            </Form> 
-        : 
-        <>
-            <Form onSubmit={handleSubmit} className="row">
-                {/* Shows the spinner */}
-                <h2>{showSpinner ? <Spinner color="primary" /> : <span />}</h2>
-                <input type="text" className="col-4" placeholder="username" name="username" style={{ margin: 5 }} maxLength={20}/>
-                <input type="password" className="col-4" placeholder="**********" name="password" style={{ margin: 5 }} maxLength={20} />
-                <input type="submit" name="log-btn" value="LOGIN" className="col-2 log-btn" style={{ margin: 5 }} />
-                <Button onClick={toggleForgotPass} id="fpass" className="col-2">Forgot Password?</Button>
-            </Form>
-            <Form onSubmit={sendEmail}>
-            <input style={{margin:5}} type="email" name="emailF" placeholder="email"/>
-            <input style={{margin:5}} type="submit" className="" value="reset password" />
-            </Form>
-        </>
-                }
+        <Form onSubmit={handleSubmit} className="row">
+            {/* Shows the spinner */}
+            <h2>{showSpinner ? <Spinner color="primary" /> : <span />}</h2>
+            <input type="text" className="entry col-4" placeholder="username" name="username" style={{ margin: 5 }} maxLength={20}/>
+            <input type="password" className=" entry col-4" placeholder="**********" name="password" style={{ margin: 5 }} maxLength={20} />
+            <input type="submit" name="log-btn" value="LOGIN" className="col-2 log-btn" style={{ margin: 5 }} />
+        </Form>
     </span>
     )
 }

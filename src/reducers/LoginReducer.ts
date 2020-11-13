@@ -60,4 +60,31 @@ export const loadUser = (username: string, password: string) => async (
   }
 };
 
+export const refreshUser = (userId:number) => async (
+  dispatch: any
+) => {
+  //gets the user from the backend using the passed in username and password
+  const user = await axiosInstance
+    .post("/users/find/" + userId)
+    .then((response) => {
+      if (response.data === "") {
+        console.log(response);
+        return null;
+      } else {
+        console.log(response.data);
+        return response.data;
+      }
+    })
+    .catch((error) => {});
+
+  //if no user data was returned then revert back to initial unloggedin state
+  if (user != null) {
+    dispatch(setLoginState(user));
+  }
+  //if no user data was returned then revert back to initial unloggedin state
+  else {
+    dispatch(setLoginState(initialLoginState));
+  }
+};
+
 export default loginReducer;

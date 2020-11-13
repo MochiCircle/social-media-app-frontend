@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Form, Input, Label, Spinner } from "reactstrap";
 import { setLoginState } from "../../../../actions/LoginAction";
@@ -6,6 +6,7 @@ import { axiosInstance } from "../../../../util/axiosConfig";
 import { userCorrected } from "../../../../util/Models";
 import { setAlert, ISetAlert } from "../../../../actions/AlertAction";
 import "../settings.scss";
+import { refreshUser } from "../../../../reducers/LoginReducer";
 
 const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
   props: userCorrected & ISetAlert
@@ -17,6 +18,13 @@ const BasicInfoForm: React.FC<userCorrected & ISetAlert> = (
 
   const dispatch = useDispatch();
   // end
+
+  //refresh user
+  window.onbeforeunload = (eve:any) => { 
+    console.log(eve + props.id);
+    refreshUser(props.id);
+  }
+
 
   const [showSpinner, setSpinner] = useState(false);
   // const [isVerified, setVerified] = useState(true);

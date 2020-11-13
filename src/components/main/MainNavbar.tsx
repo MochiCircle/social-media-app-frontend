@@ -112,13 +112,13 @@ const MainNavbar: React.FC<IProps> = (props: IProps) => {
         </span>
 
         <span>
-          <Button
+          <button
             onClick={onLogout}
             style={{ height: 38, margin: 5 }}
-            className="btn pull-right"
+            className="logout-btn pull-right"
           >
-            Logout
-          </Button>
+            LOGOUT
+          </button>
         </span>
         <span style={{margin:5}}>
           <ThemeToggle />

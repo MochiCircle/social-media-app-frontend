@@ -1,16 +1,18 @@
 import Axios from 'axios';
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import { connect } from 'react-redux';
-import { Form, Input, Label } from 'reactstrap';
-import { setAlert } from '../../actions/AlertAction';
+import { Form, Input, Label, Spinner } from 'reactstrap';
+import { ISetAlert, setAlert } from '../../actions/AlertAction';
 import { axiosInstance } from '../../util/axiosConfig';
 import "./loginStyling.scss";
 interface IProps {
   userId:number
 }
 
-const RegisterPage: React.FC<IProps> = (props:IProps) => {
+const RegisterPage: React.FC<IProps & ISetAlert> = (props:IProps & ISetAlert) => {
 
+  const [showSpinner, setSpinner] = useState(false);
+  
     const handleSubmit = async (event:SyntheticEvent<HTMLFormElement>) => {
   
         event.preventDefault();
@@ -23,10 +25,15 @@ const RegisterPage: React.FC<IProps> = (props:IProps) => {
     
         if (password != current)
         {
-          alert("Uh oh. Those passwords don't match my guy. Try again.")
+          props.setAlert(
+            "ERROR: Passwords do not match",
+            "danger",
+            20000
+          );
         }
         else
         {
+          setSpinner(true);
             axiosInstance.post("users/create/",
             {
               username: username,
@@ -36,7 +43,8 @@ const RegisterPage: React.FC<IProps> = (props:IProps) => {
               email: email,
             })
             .then(()=>{
-              setAlert(
+              setSpinner(false);
+              props.setAlert(
                 "**SUCCESSFUL REGISTERY** as: " +
                   firstname +
                   lastname + "! Please verify your email.",
@@ -46,13 +54,14 @@ const RegisterPage: React.FC<IProps> = (props:IProps) => {
                window.location.href = "/";
             })
             .catch((error) => {
+              setSpinner(false);
              console.log(error);
-             setAlert(
+             props.setAlert(
               "ERROR: Unable to register your account at the moment.",
               "danger",
               20000
             )
-              alert("Register Error: Unable to register this user.");
+              //alert("Register Error: Unable to register this user.");
            })  
         }
       }
@@ -108,11 +117,17 @@ const RegisterPage: React.FC<IProps> = (props:IProps) => {
             </div>
             
             <div className="row justify-content-center" style={{margin:10}}>
-                <Input type='submit' value='Register' className="log-btn" 
+                <Input type='submit' value='REGISTER' className="log-btn" 
                 style={{padding:10,fontSize:20,fontWeight:"bolder"}}/>
             </div>
             
           </Form>
+          <div className="container">
+            <div className="row justify-content-center">
+              <h2>{showSpinner ? <Spinner color="primary" /> : <span />}</h2>
+            </div>
+          </div>
+          
         </>
     
       )
@@ -125,5 +140,9 @@ const mapStateToProps = (appState:any) => {
   }
 }
 
+const mapDispatchToProps = {
+  setAlert: setAlert,
+};
+
 //HOC export right here babyyy
-export default connect<IProps>(mapStateToProps)(RegisterPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);

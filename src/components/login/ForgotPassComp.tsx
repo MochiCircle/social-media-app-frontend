@@ -61,18 +61,18 @@ const ForgotPassComp: React.FC<IProps> = (props:IProps) =>
     <span className="container">
         {showForgot ? 
         <>
-            <h2>{showSpinner ? <Spinner color="primary" /> : <span />}</h2>
-            <span><button onClick={toggleForgotPass} id="fpass" className="btn">Forgot Password?</button></span>
+            <span><h2>{showSpinner ? <Spinner color="primary" /> : <span />}</h2></span>
+            <span><button onClick={toggleForgotPass} id="fpass" className="btn" style={{margin:5}}>Forgot Password?</button></span>
         </>
 
         : 
         <>
             <h2>{showSpinner ? <Spinner color="primary" /> : <span />}</h2>
-            <span><button onClick={toggleForgotPass} id="fpass" className="btn">Forgot Password?</button></span>
+            <span><button onClick={toggleForgotPass} id="fpass" className="btn" style={{margin:5}}>Forgot Password?</button></span>
             <span>
             <Form onSubmit={sendEmail}>
                 <input style={{margin:5}} type="email" className="entry" name="emailF" placeholder="email"/>
-                <input style={{margin:5}} type="submit" className="log-btn" value="reset password" />
+                <input style={{margin:5}} type="submit" className="log-btn" value="RESET" />
             </Form>
             </span>
         </>

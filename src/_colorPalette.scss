@@ -14,7 +14,7 @@ $themes: (
     btn-grad: linear-gradient(160deg, rgba(228, 253, 0, 0.762) 0%, rgba(253, 207, 0, 0.76) 100%),
     btn-grad-hover: linear-gradient(160deg, rgba(194, 185, 63, 0.762) 0%, rgba(194, 185, 63, 0.76) 100%),
     bg-opacity: 0.9,
-    bg-image-op: rgba(255,255,255, 0.9),
+    bg-image-op: rgba(255,255,255, 0.6),
   ),
   dark: (
     //primary: #2a2a2e,
@@ -26,12 +26,12 @@ $themes: (
     background-1: #2a2a2e,
     settings-boxes: linear-gradient(160deg, rgba(147,0,195,0.7623249983587185) 0%, rgba(0,65,182,0.7595238779105392) 100%),
     settings-text-bg: #303030,
-    border-1: 2px solid #3a444c,
+    border-1: 2px solid #999999,
     underline: 1px solid white,
     mochi-guy: url("./assets/mochiSpin3.png"),
     btn-grad: linear-gradient(225deg, #d6f76199 0%, #ffbc0599 100%),
     btn-grad-hover: linear-gradient(160deg, rgba(168, 166, 23, 0.762) 0%, rgba(168, 166, 23, 0.76) 100%),
     bg-opacity: 0.1,
-    bg-image-op: rgba(255,255,255, 0.1),
+    bg-image-op: rgba(255,255,255, 0.2),
   ),
 );

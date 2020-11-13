@@ -30,11 +30,11 @@ it("renders LoginComp when the Main Navbar is rendered", () => {
     verified: false
   })
 
-  const mainNav = () => {
-      return <Provider store={store} ><MainNavbar /></Provider>
-  }
-
-  const actualMainNav = mainNav();
+  //const mainNav = () => {
+      //return <Provider store={store} ><MainNavbar /></Provider>
+  //}
+  //const actualMainNav = mainNav();
+  
   const mainNavActual = shallow(<Provider store={store} ><MainNavbar /></Provider>);
   expect(mainNavActual.contains(<ForgotPassComp/>)).toEqual(false);
 });

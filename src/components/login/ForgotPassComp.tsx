@@ -12,7 +12,7 @@ interface IProps{
 
 const ForgotPassComp: React.FC<IProps> = (props:IProps) => 
 {
-    const [showForgot, setForgot] = useState(false);
+    const [showForgot, setForgot] = useState(true);
     const [showSpinner, setSpinner] = useState(false);
     
     //You need to use this right inside the 

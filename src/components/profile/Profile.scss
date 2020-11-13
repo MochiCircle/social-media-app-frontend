@@ -14,7 +14,7 @@
   @include theme-aware("background", "primary");
   @include theme-aware("color", "secondary");
   @include theme-aware("background-image", "mochi-guy");
-  @include theme-aware("background-color", "bg-image-op");
+  @include theme-aware("background", "bg-image-op");
   > div {
     margin-bottom: 5px;
   }

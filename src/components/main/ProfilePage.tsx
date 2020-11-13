@@ -9,32 +9,31 @@ import PostCreate from "../posts/PostCreate";
 import { setLoginState } from "../../actions/LoginAction";
 
 interface MatchParams {
-  id: string,
+  userId: string;
 }
 
 interface IProp extends RouteComponentProps<MatchParams>, userCorrected {
-  username: string,
-  password: string,
-  firstname: string,
-  lastname: string,
-  email: string,
-  picUrl: string,
-  status: string,
-  bio: string,
-  interests: string,
-  verified: boolean,
+  username: string;
+  password: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  picUrl: string;
+  status: string;
+  bio: string;
+  interests: string;
+  verified: boolean;
 }
 
 const ProfilePage: React.FC<IProp> = (props: IProp) => {
+  // Setting the state
+  const updateState = (user: any) => {
+    dispatch(setLoginState(user));
+  };
 
-    // Setting the state
-    const updateState = (user: any) => {
-      dispatch(setLoginState(user));
-    };
-  
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  let userId = parseInt(props.match.params.id || "0") || 0;
+  let userId = parseInt(props.match.params.userId || "0") || 0;
   let ownProfile: boolean = false;
   if (userId === 0) {
     userId = props.id;
@@ -53,7 +52,7 @@ const ProfilePage: React.FC<IProp> = (props: IProp) => {
     bio: props.bio,
     interests: props.interests,
     verified: props.verified,
-  })
+  });
   return (
     <Row>
       <Col md="4">

@@ -95,8 +95,7 @@
 
 .log-btn
 {
-    @include theme-aware("color", "secondary");
-    @include theme-aware("text-shadow", "text-shad");
+    color: #fefefe;
     background-image: linear-gradient(122deg, #22aa22, #008800);
     border-radius: 6px;
     border: 3px #117711;
@@ -108,8 +107,6 @@
 
 .log-btn:hover
 {
-    @include theme-aware("color", "secondary");
-    @include theme-aware("text-shadow", "text-shad");
     background-image: linear-gradient(122deg, #66c966, #88da88);
     border-radius: 0px;
     border: 0px;

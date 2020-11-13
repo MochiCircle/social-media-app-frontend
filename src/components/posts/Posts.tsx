@@ -47,10 +47,6 @@ const Post: React.FC<any> = (props: any) => {
         setHeart(response.data); //response.data is either 0 or 1, 0 if user hasn't
         //liked post, 1 if user did like post
       });
-    //Get amount of likes for this post from back-end
-    axiosInstance.get("/likes/find/" + props.id).then((response) => {
-      setLikes(response.data);
-    });
   }, []);
 
   return (

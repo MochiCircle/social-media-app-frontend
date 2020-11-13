@@ -32,7 +32,7 @@ const Post: React.FC<any> = (props: any) => {
     const toggleImage = (e:React.MouseEvent<HTMLInputElement, MouseEvent>) => {
         e.preventDefault();
         setHeart(!heart); //toggle heart image
-        axiosInstance.get("/likes/update/" + heart + "+" + props.id + "+" + props.userId).then((response) => {
+        axiosInstance.get("/likes/update/" + !heart + "+" + props.id + "+" + props.userId).then((response) => {
         });
     }
 

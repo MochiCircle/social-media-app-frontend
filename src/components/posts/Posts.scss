@@ -1,0 +1,80 @@
+@import "../../../src/_mixin.scss";
+
+.border {
+    border-radius: 25px;
+    background: #f2f2f2;
+    padding: 20px;
+    @include theme-aware("background", "primary");
+    @include theme-aware("border", "border-1")
+    //width:500px;
+}
+
+.pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 8px;
+    float: left;
+    @include theme-aware("border", "border-1")
+}
+
+.username {
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.postText {
+    font-family: "Helvetica Neue";
+    font-size: 18px;
+    white-space: pre-line;
+    overflow: hidden;
+}
+
+.heart {
+    float: right;
+    outline: none;
+}
+
+.postFooter {
+    font-family: "Helvetica Neue";
+    font-size: 18px;
+}
+
+.postButton {
+    background-color: #1DA1F2;
+    border-radius: 25px;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    font-family: "Helvetica Neue";
+    /*position: relative;
+    bottom: -10px;
+    left: 310px;*/
+    float: right;
+}
+
+.postForm {
+    background-color: #243447;
+    border-radius: 25px;
+    padding: 20px 20px;
+    //width: 430px;
+}
+
+.image{
+    max-width: 100%;
+}
+
+.imageUpload {
+
+}
+
+textarea {
+    background-color: white;
+    padding: 20px 20px;
+    //resize: none;
+    width: 100%;
+}

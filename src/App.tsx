@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import HomePage from "./components/main/HomePage";
+import MainNavbar from "./components/main/MainNavbar";
+import RegisterPage from "./components/login/RegisterPage";
+import ProfilePage from "./components/main/ProfilePage";
+import "./App.scss";
+import "./components/mochi/mochispin.scss";
+import SettingsContainer from "./components/main/settings/SettingsContainer";
+import SpinPage from "./components/login/SpinPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter basename="/">
+      <MainNavbar />
+      {/* Alert Component should go here*/}
+      {/* Spinny Mochi guy */}
+      <div className="mochi-guy" />
+      <div className="mainPage">
+        <Switch>
+          {<Route exact path="/" component={HomePage} />}
+          {
+            <Route
+              path="/profile/:userId"
+              //let's make a different page for other users if needed but I don't think it will
+              component={ProfilePage}
+            />
+          }
+          {<Route path="/profile" component={ProfilePage} />}
+          {<Route exact path="/settings" component={SettingsContainer} />}
+          <Route component={SpinPage} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 

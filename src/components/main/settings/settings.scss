@@ -1,0 +1,36 @@
+@import "../../../mixin";
+
+body {
+  background: #0000ff33;
+}
+
+.settingsBox {
+  background: #9500ff;
+  padding: 15px 20px 15px;
+  border-radius: 30px;
+  @include theme-aware("background", "settings-boxes");
+}
+
+.textEntry {
+  @include theme-aware("color", "secondary");
+  @include theme-aware("background", "settings-text-bg");
+  @include theme-aware("border", "settings-text-bg");
+}
+
+.whiteText {
+  color: white;
+}
+
+.redText {
+  color: #ff0000;
+}
+
+.greenText {
+  color: rgb(43, 177, 54);
+}
+
+.picView {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}

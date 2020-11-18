@@ -1,0 +1,45 @@
+@import "../../mixin";
+
+.profile {
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  /*       ( actual css property , our custom value )   */
+  @include theme-aware("border", "border-1");
+  @include theme-aware("background", "primary");
+  @include theme-aware("color", "secondary");
+  @include theme-aware("background-image", "mochi-guy");
+  @include theme-aware("background", "bg-image-op");
+  > div {
+    margin-bottom: 5px;
+  }
+}
+
+.category {
+  font-size: 1.25em;
+  line-height: 1;
+  @include theme-aware("border-bottom", "underline");
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: 10px;
+}
+
+.profile-username {
+  font-size: 1.25em;
+  line-height: 1;
+}

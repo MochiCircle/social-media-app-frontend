@@ -1,4 +1,5 @@
 ## Images...
+![mochi_screen1](./readme_images/mochiCircle1.jpg?raw=true)
 
 # Getting Started with Create React App
 

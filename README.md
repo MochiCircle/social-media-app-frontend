@@ -1,5 +1,5 @@
 ## Images...
-![mochi_screen1](./readme_images/mochiCircle1.jpg =100x40)
+![mochi_screen1](./readme_images/mochiCircle1.jpg =250x)
 
 # Getting Started with Create React App
 
